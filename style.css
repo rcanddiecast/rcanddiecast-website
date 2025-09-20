@@ -168,6 +168,8 @@ header a{
 .carousel .list .item:nth-child(1) .content .topic,
 .carousel .list .item:nth-child(1) .content .des,
 .carousel .list .item:nth-child(1) .content .buttons
+
+
 {
     transform: translateY(50px);
     filter: blur(20px);
@@ -294,6 +296,7 @@ header a{
 .carousel.prev .list .item:nth-child(2) .content .topic,
 .carousel.prev .list .item:nth-child(2) .content .des,
 .carousel.prev .list .item:nth-child(2) .content .buttons
+
 {
     animation: contentOut 1.5s linear 1 forwards!important;
 }
@@ -312,4 +315,12 @@ header a{
     .carousel .list .item .content .title{
         font-size: 30px;
     }
+}
+.order{
+    display: inline-block;
+    background-color: #f1683a;
+    color: #f1683a;
+    border: none;
+    font-weight: bold;
+    transition: background 0.3s ease;
 }
