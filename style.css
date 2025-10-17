@@ -349,9 +349,9 @@ header a {
     -webkit-transform 0.1s ease 0s, transform 0.1s ease 0s;
   background: linear-gradient(
     to right,
-    rgb(61, 5, 245) 0%,
-    rgb(6, 80, 218) 50%,
-    rgb(3, 27, 243) 100%
+    rgb(52, 211, 65) 0%,
+    rgb(10, 189, 25) 50%,
+    rgb(22, 179, 35) 100%
   );
   color: #fff;
 }
