@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RC and Diecast</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header>
+    <a href="/" class="logo-link">
+      <img src="image/logo.png" alt="logo" class="logo">
+    </a>
+    <nav>
+      <a href="/">Home</a>
+      <a href="https://www.instagram.com/rcanddiecast/">Contacts</a>
+      <!-- <a href="">Info</a> -->
+    </nav>
+  </header>
+
+  <div class="carousel">
+    <div class="list" id="wrap-items"></div>
+    <div class="thumbnail" id="wrap-thumbnails"></div>
+    <div class="arrows">
+      <button id="prev">
+        < </button>
+          <button id="next">></button>
+    </div>
+    <!-- time running -->
+    <div class="time"></div>
+  </div>
+
+
+  <script>
+    const post = [
+      {
+        id: 1,
+        item_author: "FMS",
+        item_title: "Rock Crawler",
+        item_topic: "Army Military",
+        item_description: "Experience high-speed drifting in seconds as everything is included such as battery and charger. Perfect for running multiple cars simultaneously with friends. The detailed retro-drift body shell and spoke wheels give it a classic look, while front LED lights illuminate your way as you zoom drift your way in the dark.",
+        item_insta_link: "https://www.instagram.com/rcanddiecast/",
+        item_yt_link: "https://youtube.com/@ebinumer_stories?si=v59mSfK0dBrOEJha",
+        item_image_location: "image/willys-fms.jpg",
+        thumbnail_image_location: "image/willys-fms.jpg",
+        thumbnail_content_title: "Rock Crawler",
+        thumbnail_description: "Army Military",
+        button_order_class: "order-buttons",
+        button_video_class: "review-buttons"
+      },
+      {
+        id: 2,
+        item_author: "ABC",
+        item_title: "Rock Crawler",
+        item_topic: "Army Military",
+        item_description: "Experience high-speed drifting...",
+        item_insta_link: "https://www.instagram.com/rcanddiecast/",
+        item_yt_link: "https://youtube.com/@ebinumer_stories?si=v59mSfK0dBrOEJha",
+        item_image_location: "image/img1.jpg",
+        thumbnail_image_location: "image/img1.jpg",
+        thumbnail_content_title: "Rock Crawler",
+        thumbnail_description: "Army Military",
+        button_order_class: "order-buttons",
+        button_video_class: "review-buttons"
+      },
+      {
+        id: 3,
+        item_author: "CDE",
+        item_title: "Rock Crawler",
+        item_topic: "Army Military",
+        item_description: "Experience high-speed drifting...",
+        item_insta_link: "https://www.instagram.com/rcanddiecast/",
+        item_yt_link: "https://youtube.com/@ebinumer_stories?si=v59mSfK0dBrOEJha",
+        item_image_location: "image/img2.jpg",
+        thumbnail_image_location: "image/img2.jpg",
+        thumbnail_content_title: "Rock Crawler",
+        thumbnail_description: "Army Military",
+        button_order_class: "order-buttons",
+        button_video_class: "review-buttons"
+      }
+    ];
+
+    const listContainer = document.getElementById("wrap-items");
+    const thumbContainer = document.getElementById("wrap-thumbnails");
+
+    // Main slider items
+    listContainer.innerHTML = post.map(item => `
+    <div class="item">
+        <img src="${item.item_image_location}">
+        <div class="content">
+            <div class="author">${item.item_author}</div>
+            <div class="title">${item.item_title}</div>
+            <div class="topic">${item.item_topic}</div>
+            <div class="des">${item.item_description || ""}</div>
+            <div class="buttons" >
+                <a href="${item.item_insta_link}" target="_blank"><button class="${item.button_order_class}">Start</button>
+</a>
+                <a href="${item.item_yt_link}" target="_blank"><button class="${item.button_video_class}">Video</button></a>
+            </div>
+        </div>
+    </div>
+`).join("");
+
+    // Thumbnail items
+    thumbContainer.innerHTML = post.map(item => `
+    <div class="item">
+        <img src="${item.thumbnail_image_location}">
+        <div class="content">
+            <div class="title">${item.thumbnail_content_title}</div>
+            <div class="description">${item.thumbnail_description}</div>
+        </div>
+    </div>
+`).join("");
+  </script>
+  <script src="app.js"></script>
+
+
+</body>
+
+</html>
