@@ -1,0 +1,37 @@
+[
+  {
+    "title": "Blog Post 1",
+    "desc": "Description for blog post 1.",
+    "img": "/image/brabus-gwagon.jpg"
+  },
+  {
+    "title": "Blog Post 2",
+    "desc": "Description for blog post 2.",
+    "img": "/image/bronco-wl-toys.jpg"
+  },
+  {
+    "title": "Blog Post 3",
+    "desc": "Description for blog post 3.",
+    "img": "/image/defender.png"
+  },
+  {
+    "title": "Blog Post 4",
+    "desc": "Description for blog post 4.",
+    "img": "/image/hb-toys-16-defender.jpg"
+  },
+  {
+    "title": "Blog Post 5",
+    "desc": "Description for blog post 5.",
+    "img": "/image/img1.jpg"
+  },
+  {
+    "title": "Blog Post 6",
+    "desc": "Description for blog post 6.",
+    "img": "/image/img4.jpg"
+  },
+  {
+    "title": "Blog Post 7",
+    "desc": "Description for blog post 7.",
+    "img": "/image/img3.jpg"
+  }
+]
