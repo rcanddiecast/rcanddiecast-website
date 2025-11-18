@@ -35,6 +35,13 @@
 </head>
 
 <body>
+
+    <!-- Loader Start -->
+    <div class="loader-wrapper">
+        <span class="loader"></span>
+    </div>
+    <!-- Loader End -->
+
     <header>
         <a href="/" class="logo-link">
             <img src="image/logo.png" alt="logo" class="logo">
@@ -581,7 +588,21 @@
         <div class="time"></div>
     </div>
 
+
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="app.js"></script>
+    <script>
+        $(window).on("load", function () {
+            setTimeout(function () {
+                $(".loader-wrapper").fadeOut("slow");
+            }, 2000);
+        });
+    </script>
 </body>
 
 </html>
