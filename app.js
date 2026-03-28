@@ -1,15 +1,12 @@
 document.addEventListener("DOMContentLoaded", () => {
     
-    // ======== Smooth Scrolling (Lenis) ======== //
+    // ======== Minimal Smooth Scrolling (Lenis) ======== //
     const lenis = new Lenis({
-        duration: 1.2,
+        duration: 1.5,
         easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
         direction: 'vertical',
-        gestureDirection: 'vertical',
         smooth: true,
-        mouseMultiplier: 1,
         smoothTouch: false,
-        touchMultiplier: 2,
     });
     
     function raf(time) {
@@ -21,226 +18,317 @@ document.addEventListener("DOMContentLoaded", () => {
     // ======== GSAP Registration ======== //
     gsap.registerPlugin(ScrollTrigger);
 
+    // ======== Custom Mouse Cursor & Magnetic Hover ======== //
+    const cursor = document.querySelector('.custom-cursor');
+    const follower = document.querySelector('.cursor-follower');
+    
+    if (cursor && follower && !('ontouchstart' in window)) {
+        let mouseX = 0, mouseY = 0;
+        let pX = 0, pY = 0;
+        
+        // Track mouse
+        window.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            
+            // Instantly move center dot
+            gsap.to(cursor, {
+                x: mouseX,
+                y: mouseY,
+                duration: 0.1,
+                ease: "power2.out"
+            });
+            // Lagging follower
+            gsap.to(follower, {
+                x: mouseX,
+                y: mouseY,
+                duration: 0.8,
+                ease: "power3.out"
+            });
+        });
+
+        // Hover expanding links
+        document.querySelectorAll('a, button, .link-hover').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.classList.add('active');
+            });
+            el.addEventListener('mouseleave', () => {
+                cursor.classList.remove('active');
+            });
+        });
+
+        // Magnetic Effect
+        document.querySelectorAll('.magnetic').forEach(elem => {
+            elem.addEventListener('mousemove', function(e) {
+                const rect = this.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                
+                gsap.to(this, {
+                    x: x * 0.4,
+                    y: y * 0.4,
+                    duration: 0.6,
+                    ease: "power2.out"
+                });
+            });
+            elem.addEventListener('mouseleave', function() {
+                gsap.to(this, {
+                    x: 0,
+                    y: 0,
+                    duration: 0.8,
+                    ease: "elastic.out(1, 0.3)"
+                });
+            });
+        });
+    }
+
     // ======== Mobile Menu ======== //
     const btn = document.getElementById('mobile-menu-btn');
     const menu = document.getElementById('mobile-menu');
+    let menuOpen = false;
     if(btn && menu) {
         btn.addEventListener('click', (e) => {
             e.preventDefault();
-            menu.classList.toggle('hidden');
-            menu.classList.toggle('flex');
+            menuOpen = !menuOpen;
+            if(menuOpen) {
+                btn.innerText = "CLOSE";
+                gsap.to(menu, { y: "0%", duration: 0.8, ease: "power4.inOut" });
+            } else {
+                btn.innerText = "MENU";
+                gsap.to(menu, { y: "-100%", duration: 0.8, ease: "power4.inOut" });
+            }
         });
 
         document.querySelectorAll('.mobile-link').forEach(link => {
             link.addEventListener('click', () => {
-                menu.classList.add('hidden');
-                menu.classList.remove('flex');
+                menuOpen = false;
+                btn.innerText = "MENU";
+                gsap.to(menu, { y: "-100%", duration: 0.8, ease: "power4.inOut" });
             });
         });
     }
 
-    // ======== Data Fetching & Rendering ======== //
+    // ======== Loader & Hero Sequences ======== //
+    function runIntroSequence() {
+        const tl = gsap.timeline();
+        
+        // Loader wrap fade out
+        tl.to(".loader-wrapper", {
+            delay: 1.5,
+            opacity: 0,
+            duration: 1.2,
+            ease: "power2.inOut",
+            onComplete: () => {
+                document.getElementById('loader').style.display = 'none';
+                ScrollTrigger.refresh();
+            }
+        })
+        .from(".hero-bg-text", {
+            y: 150,
+            opacity: 0,
+            duration: 1.5,
+            stagger: 0.2,
+            ease: "power3.out"
+        }, "-=0.8")
+        .from(".hero-img", {
+            scale: 1.5,
+            duration: 2,
+            ease: "power3.out"
+        }, "-=1.5")
+        .from(".hero-desc, .scroll-indicator", {
+            opacity: 0,
+            y: 30,
+            duration: 1,
+            stagger: 0.2,
+            ease: "power3.out"
+        }, "-=1");
+
+        // Header appearing immediately after loader
+        tl.from("#site-header", {
+            y: -100,
+            opacity: 0,
+            duration: 1,
+            ease: "power3.out"
+        }, "-=1.5");
+
+        // Set up Scroll Parallax
+        gsap.to(".hero-img-container", {
+            scrollTrigger: {
+                trigger: "#hero",
+                start: "top top",
+                end: "bottom top",
+                scrub: 1.5
+            },
+            y: 150,
+            opacity: 0
+        });
+        
+        gsap.to(".hero-bg-text", {
+            scrollTrigger: {
+                trigger: "#hero",
+                start: "top top",
+                end: "bottom top",
+                scrub: 2
+            },
+            y: -100,
+            x: 50
+        });
+
+        // Scroll-to-top logic
+        const scrollBtn = document.getElementById("scroll-to-top");
+        if(scrollBtn) {
+            gsap.to(scrollBtn, {
+                scrollTrigger: {
+                    trigger: "#showroom",
+                    start: "top center",
+                    toggleActions: "play none none reverse"
+                },
+                opacity: 1,
+                y: 0,
+                duration: 0.4,
+                ease: "back.out(1.7)"
+            });
+
+            scrollBtn.addEventListener('click', () => {
+                lenis.scrollTo(0, { duration: 1.2, ease: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+            });
+        }
+    }
+
+    // ======== API Fetch & Horizontal Showroom ======== //
     const API_URL = "https://script.google.com/macros/s/AKfycbxGi2nqIdiIz83Wi5vwERbQHsoKpDu7VVuny3EIegy4EU6KTta_TshEKqGaqFaOYamTYg/exec";
     
-    let allProducts = [];
-    const ITEMS_PER_PAGE = 8;
-    let currentPage = 1;
-    let loaded = false;
-
-    function hideLoader() {
-        if(loaded) return;
-        loaded = true;
-        const loader = document.getElementById("loader");
-        if(loader) {
-            gsap.to(loader, {
-                opacity: 0,
-                duration: 0.8,
-                onComplete: () => {
-                    loader.style.display = 'none';
-                    initHeroAnimations();
-                }
-            });
-        } else {
-            initHeroAnimations();
+    // Fallback trigger if load fails or takes too long (3 seconds)
+    const safetyTimer = setTimeout(() => {
+        if(document.getElementById('loader').style.display !== 'none') {
+            runIntroSequence();
+            initHorizontalScroll(); // init empty or failed state
         }
-    }
+    }, 3000);
 
-    // Fallback: hide loader after 3.5s no matter what
-    setTimeout(hideLoader, 3500);
-
-    async function fetchProducts() {
+    async function fetchData() {
         try {
-            const response = await fetch(API_URL);
-            const data = await response.json();
+            const resp = await fetch(API_URL);
+            const data = await resp.json();
             
-            // Filter by stock
-            allProducts = data.filter(item => item.stock === "stock");
-            hideLoader();
-            renderProducts();
-
-        } catch (error) {
-            console.error("Error fetching data:", error);
-            // Provide fallback or error state
-            const grid = document.getElementById('product-grid');
-            if(grid) {
-                grid.innerHTML = '<p class="text-brand-orange text-center col-span-full">Failed to load stock. Please try again later.</p>';
-            }
-            hideLoader();
+            clearTimeout(safetyTimer);
+            
+            // We load ALL data, without the stock filter, for massive gallery
+            renderHorizontalGallery(data);
+            
+        } catch (err) {
+            console.error(err);
+            clearTimeout(safetyTimer);
+            document.getElementById('api-gallery').innerHTML = `<h2 class="font-impact text-6xl text-white pl-20 uppercase">Data Stream Offline</h2>`;
+            runIntroSequence();
+            initHorizontalScroll();
         }
     }
 
-    function renderProducts() {
-        const grid = document.getElementById('product-grid');
-        grid.innerHTML = ''; // Clear out skeletons
-        
-        const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-        const endIndex = startIndex + ITEMS_PER_PAGE;
-        const currentItems = allProducts.slice(startIndex, endIndex);
+    function renderHorizontalGallery(items) {
+        const gallery = document.getElementById('api-gallery');
+        gallery.innerHTML = '';
 
-        currentItems.forEach((product, i) => {
-            grid.innerHTML += `
-                <div class="product-card glass rounded-2xl overflow-hidden hover:-translate-y-2 transition-transform duration-300 opacity-0 group">
-                    <div class="relative aspect-square overflow-hidden bg-dark-900 border-b border-white/10">
-                        <img src="${product.ImageURL}" alt="${product.modelName}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out" onerror="this.src='https://images.unsplash.com/photo-1594882645126-14020914d58d?q=80&w=1000'">
-                        <div class="absolute top-4 right-4 bg-brand-orange text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
-                            ${product.category}
-                        </div>
+        items.forEach((item, index) => {
+            const isEven = index % 2 === 0;
+            const alignClass = isEven ? 'justify-end pb-20' : 'justify-start pt-20';
+            
+            gallery.innerHTML += `
+                <div class="horizontal-item group">
+                    <!-- Massive Background Title per item -->
+                    <div class="absolute inset-0 flex items-center justify-center opacity-10 font-impact text-[20vw] whitespace-nowrap z-0 select-none text-white overflow-hidden pointer-events-none group-hover:text-brand-orange group-hover:opacity-20 transition-all duration-700">
+                        ${item.brandName}
                     </div>
-                    <div class="p-6 space-y-4">
-                        <div class="flex justify-between items-start gap-2">
-                            <div>
-                                <h3 class="font-bold text-xl leading-snug">${product.brandName}</h3>
-                                <p class="text-sm text-gray-400 mt-1">${product.modelName}</p>
-                            </div>
-                            <!-- Rating -->
-                            <div class="flex items-center gap-1 text-yellow-500 text-sm">
-                                <span>★</span>
-                                <span>${product.rating || 5}</span>
-                            </div>
+                    
+                    <div class="relative z-10 w-full md:w-4/5 ${alignClass} flex flex-col h-full mx-auto">
+                        <div class="aspect-[4/5] rounded-sm overflow-hidden glass-dark p-2 w-full max-w-[400px]">
+                             <img src="${item.ImageURL}" alt="${item.modelName}" class="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700 pointer-events-none" onerror="this.src='https://images.unsplash.com/photo-1594882645126-14020914d58d?q=80&w=1000'">
                         </div>
-                        <p class="text-brand-orange font-mono font-bold text-lg">₹${product.rate}</p>
-                        
-                        <!-- Actions -->
-                        <div class="pt-4 flex gap-3 border-t border-white/10">
-                            ${product.ytLink ? `<a href="${product.ytLink}" target="_blank" class="flex-1 bg-white/5 hover:bg-brand-orange hover:text-white transition-colors text-center py-3 rounded-xl text-sm font-semibold tracking-wide flex justify-center items-center gap-2"><svg class="w-4 h-4 text-red-500" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg> Review</a>` : ''}
-                            <a href="${product.instaLink || 'https://www.instagram.com/rcanddiecast/'}" target="_blank" class="flex-1 border border-brand-orange/30 text-brand-orange hover:bg-brand-orange hover:text-white transition-colors text-center py-3 rounded-xl text-sm font-semibold tracking-wide">Contact</a>
+                        <div class="mt-8">
+                            <h3 class="font-sans font-bold text-xs tracking-widest text-brand-orange uppercase">${item.category} • ${item.stock === 'stock' ? 'AVAILABLE' : 'ARCHIVED'}</h3>
+                            <h2 class="font-impact text-4xl md:text-6xl text-white tracking-tighter mt-2 leading-none">${item.modelName}</h2>
+                            <p class="font-sans text-xs text-gray-500 max-w-sm mt-4 tracking-wider uppercase">${item.brandName} // RATE ${item.rate} // RATING ${item.rating}/5</p>
+                            
+                            <div class="flex gap-4 mt-8">
+                                ${item.ytLink ? `<a href="${item.ytLink}" target="_blank" class="magnetic link-hover px-6 py-3 border border-white/20 text-white font-sans text-xs tracking-widest font-bold hover:bg-white hover:text-black transition-colors">WATCH FILM</a>` : ''}
+                                <a href="${item.instaLink || 'https://www.instagram.com/rcanddiecast/'}" target="_blank" class="magnetic link-hover px-6 py-3 bg-brand-orange text-white font-sans text-xs tracking-widest font-bold hover:bg-brand-hover transition-colors shadow-[0_0_30px_rgba(255,51,0,0.3)]">INQUIRE</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             `;
         });
 
-        renderPagination();
-
-        // Animate newly added cards
-        setTimeout(() => {
-            gsap.to(".product-card", {
-                opacity: 1,
-                y: 0,
-                stagger: 0.1,
-                duration: 0.6,
-                ease: "power2.out",
-                clearProps: "all"
-            });
-            ScrollTrigger.refresh();
-        }, 100);
-    }
-
-    function renderPagination() {
-        const totalPages = Math.ceil(allProducts.length / ITEMS_PER_PAGE);
-        const controls = document.getElementById('pagination-controls');
-        controls.innerHTML = '';
-
-        if (totalPages <= 1) return;
-
-        // Prev Button
-        const prevBtn = document.createElement('button');
-        prevBtn.innerText = '←';
-        prevBtn.className = `w-10 h-10 rounded-full flex items-center justify-center glass ${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : 'hover:bg-brand-orange hover:text-white'}`;
-        prevBtn.disabled = currentPage === 1;
-        prevBtn.onclick = () => { if(currentPage > 1) { currentPage--; window.location.hash = "collection"; renderProducts(); } };
-        controls.appendChild(prevBtn);
-
-        // Page Numbers
-        for(let i=1; i<=totalPages; i++) {
-            const pageBtn = document.createElement('button');
-            pageBtn.innerText = i;
-            pageBtn.className = `w-10 h-10 rounded-full flex items-center justify-center glass font-bold transition-colors ${i === currentPage ? 'bg-brand-orange text-white' : 'hover:bg-white/20'}`;
-            pageBtn.onclick = () => { currentPage = i; window.location.hash = "collection"; renderProducts(); };
-            controls.appendChild(pageBtn);
-        }
-
-        // Next Button
-        const nextBtn = document.createElement('button');
-        nextBtn.innerText = '→';
-        nextBtn.className = `w-10 h-10 rounded-full flex items-center justify-center glass ${currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : 'hover:bg-brand-orange hover:text-white'}`;
-        nextBtn.disabled = currentPage === totalPages;
-        nextBtn.onclick = () => { if(currentPage < totalPages) { currentPage++; window.location.hash = "collection"; renderProducts(); } };
-        controls.appendChild(nextBtn);
-    }
-
-    // ======== GSAP Animations ======== //
-    function initHeroAnimations() {
-        const tl = gsap.timeline();
+        // Intro and Scrolling triggers
+        runIntroSequence();
         
-        tl.from(".hero-content > *", {
-            y: 30,
-            opacity: 0,
-            duration: 0.8,
-            stagger: 0.15,
-            ease: "power3.out"
-        })
-        .from(".hero-image-inner", {
-            scale: 0.8,
-            rotationY: 15,
-            rotationX: 5,
-            opacity: 0,
-            duration: 1.2,
-            ease: "back.out(1.5)"
-        }, "-=0.8");
+        // Wait briefly for DOM to paint images before calculating widths
+        setTimeout(initHorizontalScroll, 100);
     }
 
-    // Scroll Animations
-    gsap.utils.toArray('.section-title').forEach(title => {
-        gsap.from(title, {
+    function initHorizontalScroll() {
+        const wrap = document.getElementById('api-gallery');
+        const items = gsap.utils.toArray('.horizontal-item');
+        
+        if(items.length === 0) return;
+
+        // Calculate total scroll distance
+        const totalWidth = wrap.scrollWidth - window.innerWidth;
+        
+        gsap.to(items, {
+            xPercent: -100 * (items.length - 1),
+            ease: "none",
             scrollTrigger: {
-                trigger: title,
-                start: "top 80%",
-            },
-            y: 50,
-            opacity: 0,
-            duration: 0.8,
-            ease: "power2.out"
+                trigger: ".pin-wrap-container",
+                pin: true,
+                scrub: 1,
+                // Make the scroll distance proportional to the number of items
+                end: () => "+=" + wrap.scrollWidth
+            }
         });
-    });
 
-    gsap.from(".service-img-container", {
-        scrollTrigger: {
-            trigger: "#services",
-            start: "top 70%",
-        },
-        x: -50,
-        opacity: 0,
-        duration: 1,
-        ease: "power2.out"
-    });
+        // Fade in title
+        gsap.to(".section-header", {
+            scrollTrigger: {
+                trigger: "#showroom",
+                start: "top 80%"
+            },
+            y: 0,
+            opacity: 1,
+            duration: 1,
+            ease: "power3.out"
+        });
 
-    gsap.from(".service-content > *", {
-        scrollTrigger: {
-            trigger: "#services",
-            start: "top 70%",
-        },
-        x: 50,
-        opacity: 0,
-        stagger: 0.2,
-        duration: 0.8,
-        ease: "power2.out"
-    });
+        // Setup Restoration Parallax Images
+        gsap.utils.toArray('.service-img-wrapper').forEach((img, i) => {
+            const speed = img.dataset.speed || 1;
+            gsap.from(img, {
+                scrollTrigger: {
+                    trigger: "#services",
+                    start: "top bottom",
+                    end: "bottom top",
+                    scrub: true
+                },
+                y: 100 * speed,
+                opacity: (i === 0) ? 0 : 0.8
+            });
+        });
 
-    // Start fetching
-    // Give loader minimal time to show before fetching, for wow effect
-    setTimeout(() => {
-        fetchProducts();
-    }, 1000);
+        gsap.to(".service-text", {
+             scrollTrigger: {
+                 trigger: "#services",
+                 start: "top 70%"
+             },
+             y: 0,
+             opacity: 1,
+             duration: 1.2,
+             ease: "power3.out"
+        });
+
+        ScrollTrigger.refresh();
+    }
+
+    // Fire Fetch!
+    fetchData();
 
 });
