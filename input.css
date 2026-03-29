@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-surface-950 text-white font-sans antialiased overflow-x-hidden;
+  }
+}
+
+@layer utilities {
+  .dynamic-island {
+    @apply backdrop-blur-2xl bg-surface-950/70 border border-white/10 shadow-[0_20px_40px_rgba(0,0,0,0.5)];
+  }
+  .bento-card {
+    @apply bg-surface-900 border border-white/5 rounded-[2rem] overflow-hidden hover:border-brand-orange/40 transition-colors duration-500 shadow-xl;
+  }
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  /* Slide specific utilities for Hero */
+  .hero-slide {
+    will-change: transform, opacity;
+  }
+}
+
+/* Luxury Spinner Loader */
+.loader-wrapper {
+  @apply fixed inset-0 bg-surface-900 z-[9999] flex flex-col justify-center items-center;
+  transition: opacity 0.8s ease-in-out, visibility 0.8s;
+}
+.loader-wrapper.hide-up {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.luxury-loader {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loader-logo {
+  position: absolute;
+  width: 60px;
+  animation: pulse-logo 2s ease-in-out infinite;
+  opacity: 0.8;
+}
+
+@keyframes pulse-logo {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.1); opacity: 1; }
+}
+
+.luxury-loader .ring {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 1px solid transparent;
+}
+
+.luxury-loader .ring:nth-child(1) {
+  border-top-color: theme('colors.brand.orange');
+  border-left-color: theme('colors.brand.orange');
+  animation: spin-ring 1.5s linear infinite;
+}
+
+.luxury-loader .ring:nth-child(2) {
+  width: 120px;
+  height: 120px;
+  border-bottom-color: #fff;
+  border-right-color: #fff;
+  animation: spin-ring 2s linear infinite reverse;
+}
+
+.luxury-loader .ring:nth-child(3) {
+  width: 90px;
+  height: 90px;
+  border-top-color: rgba(255, 61, 0, 0.4);
+  animation: spin-ring 3s linear infinite;
+}
+
+@keyframes spin-ring {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Smooth Scrolling Overrides */
+html.lenis, html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
