@@ -20,9 +20,11 @@ document.addEventListener("DOMContentLoaded", () => {
     gsap.ticker.add((time) => lenis.raf(time * 1000));
     gsap.ticker.lagSmoothing(0, 0);
 
-    // ======== Dynamic Island Scroll Logic ======== //
+    // ======== Dynamic Island & Scroll to Top Logic ======== //
     let lastScroll = 0;
     const island = document.querySelector('.dynamic-island');
+    const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+
     window.addEventListener('scroll', () => {
         const current = window.scrollY;
         
@@ -36,8 +38,24 @@ document.addEventListener("DOMContentLoaded", () => {
         if(window.innerWidth >= 768) {
              island.style.transform = current > 50 ? 'translate(-50%, -10px) scale(0.95)' : 'translate(-50%, 0) scale(1)';
         }
+
+        // Scroll to top button visibility
+        if(current > 800) {
+            scrollToTopBtn.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-8');
+            scrollToTopBtn.classList.add('opacity-100', 'translate-y-0');
+        } else {
+            scrollToTopBtn.classList.add('opacity-0', 'pointer-events-none', 'translate-y-8');
+            scrollToTopBtn.classList.remove('opacity-100', 'translate-y-0');
+        }
+        
         lastScroll = current;
     });
+
+    if(scrollToTopBtn) {
+        scrollToTopBtn.addEventListener('click', () => {
+            lenis.scrollTo(0, { duration: 1.5 });
+        });
+    }
 
     // ======== API Fetching & Data Splitting ======== //
     const API_URL = "https://script.google.com/macros/s/AKfycbxGi2nqIdiIz83Wi5vwERbQHsoKpDu7VVuny3EIegy4EU6KTta_TshEKqGaqFaOYamTYg/exec";
@@ -170,9 +188,17 @@ document.addEventListener("DOMContentLoaded", () => {
                         
                         <div class="overflow-hidden mt-6 w-full opacity-0 translate-y-8 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-[800ms] ease-out flex justify-between items-end">
                             <p class="text-white text-xl md:text-3xl font-light tracking-tight">₹${product.rate.toLocaleString()}</p>
-                            <a href="${product.instaLink || '#'}" target="_blank" class="w-12 h-12 bg-white rounded-full flex justify-center items-center hover:bg-brand-orange text-black hover:text-white transition-colors duration-300">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="rotate-45" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                            </a>
+                            
+                            <div class="flex gap-2 md:gap-3">
+                                ${product.ytLink ? `
+                                <a href="${product.ytLink}" target="_blank" class="w-12 h-12 rounded-[1.2rem] flex justify-center items-center bg-transparent border border-white/20 hover:bg-[#ff0000] hover:border-[#ff0000] text-white transition-colors duration-300 shadow-none hover:shadow-[0_0_15px_rgba(255,0,0,0.5)]">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="translate-x-[1px]" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                                </a>` : ''}
+                                
+                                <a href="${product.instaLink || '#'}" target="_blank" class="w-12 h-12 rounded-[1.2rem] flex justify-center items-center bg-white hover:bg-brand-orange text-black hover:text-white transition-colors duration-300 shadow-[0_0_15px_rgba(255,255,255,0.2)] hover:shadow-[0_0_15px_rgba(255,61,0,0.4)]">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="rotate-45" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
