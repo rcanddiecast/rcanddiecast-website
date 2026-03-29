@@ -701,6 +701,10 @@ body{
   grid-column: span 1 / span 1;
 }
 
+.col-span-full{
+  grid-column: 1 / -1;
+}
+
 .row-span-1{
   grid-row: span 1 / span 1;
 }
@@ -837,10 +841,6 @@ body{
 
 .h-full{
   height: 100%;
-}
-
-.h-screen{
-  height: 100vh;
 }
 
 .min-h-\[400px\]{
@@ -991,6 +991,12 @@ body{
 
 .animate-pulse{
   animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.select-none{
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
 }
 
 .grid-flow-row-dense{
@@ -1236,6 +1242,11 @@ body{
   padding-bottom: 0.5rem;
 }
 
+.py-20{
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
 .py-4{
   padding-top: 1rem;
   padding-bottom: 1rem;
@@ -1291,6 +1302,10 @@ body{
 
 .text-\[10px\]{
   font-size: 10px;
+}
+
+.text-\[4rem\]{
+  font-size: 4rem;
 }
 
 .text-\[5rem\]{
@@ -1431,19 +1446,17 @@ body{
   color: rgb(75 85 99 / var(--tw-text-opacity));
 }
 
-.text-surface-850{
-  --tw-text-opacity: 1;
-  color: rgb(10 10 10 / var(--tw-text-opacity));
-}
-
-.text-surface-900{
-  --tw-text-opacity: 1;
-  color: rgb(5 5 5 / var(--tw-text-opacity));
-}
-
 .text-white{
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.text-white\/10{
+  color: rgb(255 255 255 / 0.1);
+}
+
+.text-white\/20{
+  color: rgb(255 255 255 / 0.2);
 }
 
 .opacity-0{
@@ -1515,11 +1528,6 @@ body{
   --tw-shadow: var(--tw-shadow-colored);
 }
 
-.drop-shadow-\[0_0_10px_rgba\(255\2c 255\2c 255\2c 0\.05\)\]{
-  --tw-drop-shadow: drop-shadow(0 0 10px rgba(255,255,255,0.05));
-  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
-}
-
 .drop-shadow-md{
   --tw-drop-shadow: drop-shadow(0 4px 3px rgb(0 0 0 / 0.07)) drop-shadow(0 2px 2px rgb(0 0 0 / 0.06));
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
@@ -1538,6 +1546,14 @@ body{
   --tw-backdrop-blur: blur(12px);
   -webkit-backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
           backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
+}
+
+.transition{
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
 }
 
 .transition-all{
@@ -2025,6 +2041,10 @@ html.lenis, html.lenis body {
     line-height: 1;
   }
 
+  .md\:text-\[6rem\]{
+    font-size: 6rem;
+  }
+
   .md\:text-\[8rem\]{
     font-size: 8rem;
   }
@@ -2037,6 +2057,16 @@ html.lenis, html.lenis body {
   .md\:text-xl{
     font-size: 1.25rem;
     line-height: 1.75rem;
+  }
+
+  .md\:text-surface-850{
+    --tw-text-opacity: 1;
+    color: rgb(10 10 10 / var(--tw-text-opacity));
+  }
+
+  .md\:text-surface-900{
+    --tw-text-opacity: 1;
+    color: rgb(5 5 5 / var(--tw-text-opacity));
   }
 
   .md\:opacity-0{

@@ -301,10 +301,10 @@ document.addEventListener("DOMContentLoaded", () => {
         
         // Build the colossal typography string
         const brandString = uniqueBrands.map(b => `
-            <span class="text-[5rem] md:text-[8rem] lg:text-[12rem] font-extrabold tracking-tighter text-surface-900 mx-8 md:mx-16 uppercase hover:text-brand-orange transition-colors duration-[800ms] drop-shadow-[0_0_10px_rgba(255,255,255,0.05)] stroke-element">
+            <span class="text-[5rem] md:text-[8rem] lg:text-[12rem] font-extrabold tracking-tighter text-white/20 md:text-surface-900 mx-8 md:mx-16 uppercase hover:text-brand-orange transition-colors duration-[800ms] select-none">
                 ${b}
             </span>
-        `).join('<span class="text-[5rem] md:text-[8rem] font-light text-surface-850 mx-4">×</span>');
+        `).join('<span class="text-[4rem] md:text-[6rem] font-light text-white/10 md:text-surface-850 mx-4 select-none">×</span>');
         
         // Multiply massive string 4 times for infinite loop
         track.innerHTML = brandString + brandString + brandString + brandString;
