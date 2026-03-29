@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RC & Diecast | Kinetic App Experience</title>
     
     <meta name="description" content="Discover India's ultra-premium collection of 1/10 and 1/24 scale RC crawlers and diecast models.">
@@ -22,7 +22,7 @@
         }
     </style>
 </head>
-<body class="bg-surface-950 text-white selection:bg-brand-orange selection:text-white overscroll-none">
+<body class="bg-surface-950 text-white selection:bg-brand-orange selection:text-white">
 
     <!-- App Initializer -->
     <div id="loader" class="fixed inset-0 bg-surface-950 z-[9999] flex flex-col justify-center items-center transition-all duration-[1500ms]">
@@ -55,11 +55,11 @@
         </a>
     </nav>
 
-    <main id="smooth-wrapper" class="bg-surface-950">
+    <main id="smooth-wrapper" class="bg-surface-950 overflow-x-hidden w-full relative">
         <div id="smooth-content">
             
             <!-- 1. Kinetic Hero Slider -->
-            <section id="kinetic-hero" class="relative w-full h-[100vh] md:h-[100vh] bg-surface-950 overflow-hidden cursor-grab active:cursor-grabbing">
+            <section id="kinetic-hero" class="relative w-full bg-surface-950 overflow-hidden md:cursor-grab md:active:cursor-grabbing" style="height: 100svh; min-height: 100vh;">
                 <!-- Slides will be injected here -->
                 <div id="hero-slider-track" class="w-full h-full relative">
                     <!-- Skeletons temporarily -->
@@ -70,6 +70,14 @@
                 <div class="absolute bottom-[15vh] left-6 md:left-12 z-40 flex items-center gap-3" id="hero-controls">
                     <!-- Dots built via JS -->
                 </div>
+
+                <!-- Scroll Down App Indicator (Bouncing) -->
+                <a href="#bento-showroom" class="absolute bottom-24 md:bottom-12 right-6 md:right-12 z-50 flex flex-col items-center gap-3 animate-bounce hover:opacity-80 transition-opacity" id="scrollIndicator">
+                    <span class="text-[9px] text-white uppercase tracking-[0.4em] font-extrabold shadow-black drop-shadow-md">Explore</span>
+                    <div class="w-10 h-10 rounded-full border border-white/30 bg-surface-950/30 backdrop-blur-md flex justify-center items-center shadow-lg">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" class="text-white" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5V19M19 12l-7 7-7-7"/></svg>
+                    </div>
+                </a>
             </section>
 
             <!-- 2. Bento Box Showroom -->

@@ -8,6 +8,8 @@ document.addEventListener("DOMContentLoaded", () => {
         easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
         direction: 'vertical',
         smooth: true,
+        smoothTouch: false,  // Critical: let native touch scroll work on mobile
+        touchMultiplier: 2,
     });
     
     function raf(time) {
@@ -57,24 +59,59 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    // Wire all #hash anchor links to lenis.scrollTo() so they work with smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', (e) => {
+            e.preventDefault();
+            const target = document.querySelector(anchor.getAttribute('href'));
+            if (target) {
+                lenis.scrollTo(target, { duration: 1.5, offset: 0 });
+            }
+        });
+    });
+
     // ======== API Fetching & Data Splitting ======== //
-    const API_URL = "https://script.google.com/macros/s/AKfycbxGi2nqIdiIz83Wi5vwERbQHsoKpDu7VVuny3EIegy4EU6KTta_TshEKqGaqFaOYamTYg/exec";
+    const API_URL = "/data/products.json";
     
     async function initApp() {
+        // Safety net — dismiss loader after 12s max regardless of API state
+        const safetyTimer = setTimeout(() => {
+            const loader = document.getElementById('loader');
+            if (loader) {
+                loader.style.opacity = '0';
+                loader.style.transition = 'opacity 1s';
+                setTimeout(() => loader.remove(), 1000);
+            }
+            if (document.getElementById('bento-gallery')) {
+                document.getElementById('bento-gallery').innerHTML = `
+                    <div class="col-span-full py-20 text-center">
+                        <p class="text-white text-2xl font-bold tracking-tighter mb-2">API Timeout</p>
+                        <p class="text-gray-500 text-sm">Could not reach the garage. Please check your connection.</p>
+                    </div>
+                `;
+            }
+        }, 12000);
+
         try {
-            // Fake Loader Progress
+            // 10-second fetch timeout via AbortController
+            const controller = new AbortController();
+            const fetchTimeout = setTimeout(() => controller.abort(), 10000);
+
             gsap.to("#loader-bar", { width: "80%", duration: 1.5, ease: "power2.out" });
             
-            const resp = await fetch(API_URL);
+            const resp = await fetch(API_URL, { signal: controller.signal });
+            clearTimeout(fetchTimeout);
             const data = await resp.json();
             const products = data.filter(item => item.stock === 'stock');
             
+            clearTimeout(safetyTimer);
+
             // Finish loader
             gsap.to("#loader-bar", { width: "100%", duration: 0.5, onComplete: () => {
-                gsap.to("#loader", { opacity: 0, duration: 1, ease: "power2.inOut", onComplete: () => document.getElementById('loader').remove() });
+                gsap.to("#loader", { opacity: 0, duration: 1, ease: "power2.inOut", onComplete: () => document.getElementById('loader')?.remove() });
             }});
             
-            if(products.length === 0) return;
+            if (products.length === 0) return;
 
             // 1. Init Hero Slider (First 3)
             initHeroSlider(products);
@@ -89,8 +126,21 @@ document.addEventListener("DOMContentLoaded", () => {
             initParallax();
 
         } catch (err) {
-            console.error("API Error:", err);
-            document.body.innerHTML = `<div class="h-screen w-full flex items-center justify-center bg-surface-950 text-white font-bold text-2xl">Garage Offline. Connection Failed.</div>`;
+            clearTimeout(safetyTimer);
+            console.error("API Error:", err.name === 'AbortError' ? 'Request timed out after 10s' : err);
+            const loader = document.getElementById('loader');
+            if (loader) {
+                gsap.to(loader, { opacity: 0, duration: 0.8, onComplete: () => loader.remove() });
+            }
+            const gallery = document.getElementById('bento-gallery');
+            if (gallery) {
+                gallery.innerHTML = `
+                    <div class="col-span-full py-20 text-center">
+                        <p class="text-white text-2xl font-bold tracking-tighter mb-2">Garage Offline</p>
+                        <p class="text-gray-500 text-sm">Could not connect to the API. Please try again later.</p>
+                    </div>
+                `;
+            }
         }
     }
 
@@ -138,6 +188,26 @@ document.addEventListener("DOMContentLoaded", () => {
             { y: 0, opacity: 1, stagger: 0.15, duration: 1.5, ease: "power3.out", delay: 1.5 }
         );
         
+        // Touch swipe support for mobile
+        let touchStartX = 0;
+        let touchStartY = 0;
+        const heroSection = document.getElementById('kinetic-hero');
+
+        heroSection.addEventListener('touchstart', (e) => {
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+        }, { passive: true });
+
+        heroSection.addEventListener('touchend', (e) => {
+            const dx = e.changedTouches[0].clientX - touchStartX;
+            const dy = e.changedTouches[0].clientY - touchStartY;
+            // Only swipe slide if horizontal movement dominates and is significant
+            if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
+                if (dx < 0) goToSlide((currentSlide + 1) % heroSlides.length);
+                else goToSlide((currentSlide - 1 + heroSlides.length) % heroSlides.length);
+            }
+        }, { passive: true });
+
         autoPlayInterval = setInterval(() => {
             goToSlide((currentSlide + 1) % heroSlides.length);
         }, 6000);
@@ -186,7 +256,11 @@ document.addEventListener("DOMContentLoaded", () => {
                         
                         <h3 class="text-3xl lg:text-5xl font-extrabold tracking-tighter leading-[0.9] text-white">${product.modelName}</h3>
                         
-                        <div class="overflow-hidden mt-6 w-full opacity-0 translate-y-8 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-[800ms] ease-out flex justify-between items-end">
+                        <!-- Price + actions: always visible on mobile, reveal on hover on desktop -->
+                        <div class="mt-6 w-full flex justify-between items-end
+                                    opacity-100 translate-y-0
+                                    md:opacity-0 md:translate-y-8 md:group-hover:opacity-100 md:group-hover:translate-y-0
+                                    transition-all duration-[800ms] ease-out">
                             <p class="text-white text-xl md:text-3xl font-light tracking-tight">₹${product.rate.toLocaleString()}</p>
                             
                             <div class="flex gap-2 md:gap-3">
