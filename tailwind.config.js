@@ -3,25 +3,33 @@ module.exports = {
   content: ["./*.{html,js}"],
   theme: {
     extend: {
-      animation: { 'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite', },
       colors: {
-        dark: {
-          900: '#050505', // Vantablack deep
-          800: '#0a0a0a',
-          700: '#141414',
-        },
         brand: {
-          orange: '#ff3300', // Electric premium orange
-          hover: '#cc2900',
+          orange: '#ff3d00',
+          hover: '#e53700',
+        },
+        surface: {
+          950: '#000000',
+          900: '#050505',
+          850: '#0a0a0a',
+          800: '#111111',
         }
       },
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
-        display: ['Syncopate', 'sans-serif'], // Ultra-premium wide font
-        impact: ['Bebas Neue', 'sans-serif'], // Massive typography
+        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
       },
-      cursor: {
-        none: 'none',
+      backgroundImage: {
+        'hero-vignette': 'linear-gradient(to top, #000 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.8) 100%)',
+        'app-glass': 'linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%)',
+      },
+      animation: {
+        'marquee': 'marquee 25s linear infinite',
+      },
+      keyframes: {
+        marquee: {
+          '0%': { transform: 'translateX(0%)' },
+          '100%': { transform: 'translateX(-50%)' },
+        }
       }
     },
   },

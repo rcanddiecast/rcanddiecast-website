@@ -2,193 +2,123 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RC & Diecast | Precision Scale Models & Elite Restoration</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>RC & Diecast | Kinetic App Experience</title>
+    
+    <meta name="description" content="Discover India's ultra-premium collection of 1/10 and 1/24 scale RC crawlers and diecast models.">
+    <meta name="theme-color" content="#000000">
+    
     <link rel="icon" type="image/x-icon" href="/image/favicon.ico">
     <link href="/output.css" rel="stylesheet">
-</head>
-<body class="bg-dark-900 text-gray-200">
-    <!-- Custom Cursor -->
-    <div class="custom-cursor hidden md:block"></div>
-    <div class="cursor-follower hidden md:block"></div>
     
-    <!-- Film Grain Overlay -->
-    <div class="noise"></div>
+    <style>
+        /* Essential base loader and critical animations */
+        @keyframes liquidScale {
+            0% { transform: scale(0.95); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .animate-liquid {
+            animation: liquidScale 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+    </style>
+</head>
+<body class="bg-surface-950 text-white selection:bg-brand-orange selection:text-white overscroll-none">
 
-    <!-- Cinematic Loader -->
-    <div id="loader" class="loader-wrapper pointer-events-auto">
-        <div class="luxury-loader">
-            <div class="ring"></div>
-            <div class="ring"></div>
-            <div class="ring"></div>
-            <img src="/image/logo.png" class="loader-logo brightness-0 invert" alt="RC&Diecast">
+    <!-- App Initializer -->
+    <div id="loader" class="fixed inset-0 bg-surface-950 z-[9999] flex flex-col justify-center items-center transition-all duration-[1500ms]">
+        <h2 class="text-[10px] uppercase tracking-[0.5em] font-bold text-white mb-6">Connecting to Garage</h2>
+        <div class="w-48 h-1 bg-surface-900 rounded-full overflow-hidden">
+            <div id="loader-bar" class="h-full bg-brand-orange w-0 transition-all duration-[2000ms] ease-out"></div>
         </div>
-        <div class="loader-status mt-16 font-sans text-[10px] tracking-[0.4em] text-brand-orange uppercase animate-pulse">Engaging Drive Systems...</div>
     </div>
 
-    <!-- Minimalist Sticky Header -->
-    <header id="site-header" class="fixed top-0 w-full z-50 glass-dark py-6 px-10 flex justify-between items-center transition-all duration-500 hover:bg-dark-900/80 mix-blend-difference text-white">
-        <a href="#" class="magnetic group flex items-center gap-3">
-            <!-- PROMINENT LOGO IN MENU BAR -->
-            <img src="/image/logo.png" alt="RC&Diecast Logo" class="h-20 w-auto filter brightness-0 invert opacity-100 drop-shadow-md group-hover:scale-105 transition-transform">
+    <!-- The Dynamic Island (App Dock on Mobile) -->
+    <nav class="fixed bottom-6 md:bottom-auto md:top-8 left-1/2 -translate-x-1/2 z-50 w-auto px-2 py-2 dynamic-island rounded-[2rem] flex items-center gap-1 md:gap-4 transition-transform hover:scale-105 duration-300">
+        <!-- Home Icon -->
+        <a href="#kinetic-hero" class="w-12 h-12 md:w-14 md:h-14 rounded-full flex justify-center items-center hover:bg-white/10 transition-colors">
+            <svg class="w-5 h-5 md:w-6 md:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
         </a>
-        <nav class="hidden mt-4 md:flex gap-12 font-sans text-xs tracking-[0.2em] uppercase font-semibold">
-            <a href="#hero" class="magnetic link-hover">Home</a>
-            <a href="#showroom" class="magnetic link-hover">Showroom</a>
-            <a href="#services" class="magnetic link-hover">Restoration</a>
-            <a href="blog.html" class="magnetic link-hover">Journal</a>
-        </nav>
-        <a href="https://www.instagram.com/rcanddiecast/" target="_blank" class="magnetic hidden md:block border border-brand-orange px-8 py-3 rounded-full text-xs font-semibold tracking-widest bg-brand-orange text-white hover:bg-white hover:text-brand-orange hover:border-white transition-colors shadow-[0_0_15px_rgba(255,51,0,0.4)] mt-4">
-            CONTACT
+        
+        <div class="h-8 w-[1px] bg-white/10 mx-1"></div>
+        
+        <!-- Grid/Showroom Icon -->
+        <a href="#bento-showroom" class="w-12 h-12 md:w-14 md:h-14 rounded-full flex justify-center items-center hover:bg-white/10 transition-colors">
+            <svg class="w-5 h-5 md:w-6 md:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
         </a>
-        <button class="md:hidden text-brand-orange font-sans text-xs tracking-widest font-bold mt-4" id="mobile-menu-btn">MENU</button>
-    </header>
+        
+        <div class="h-8 w-[1px] bg-white/10 mx-1"></div>
+        
+        <!-- Connect / External -->
+        <a href="https://www.instagram.com/rcanddiecast/" target="_blank" class="w-12 h-12 md:w-auto md:px-6 rounded-[1.5rem] flex justify-center items-center bg-brand-orange hover:bg-brand-hover text-white transition-colors shadow-[0_0_20px_rgba(255,61,0,0.3)]">
+            <svg class="w-5 h-5 md:hidden text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path></svg>
+            <span class="hidden md:block text-[10px] uppercase tracking-[0.2em] font-extrabold text-white">Connect</span>
+        </a>
+    </nav>
 
-    <!-- Mobile Screen Menu -->
-    <div id="mobile-menu" class="fixed inset-0 bg-dark-900 z-40 translate-y-[-100%] transition-transform duration-700 ease-in-out flex flex-col justify-center items-center gap-8 font-display text-2xl uppercase tracking-[0.4em]">
-        <img src="/image/logo.png" class="h-24 mb-10 filter brightness-0 invert opacity-100 shadow-xl" alt="Logo">
-        <a href="#hero" class="mobile-link text-white hover:text-brand-orange transition-colors">Home</a>
-        <a href="#showroom" class="mobile-link text-white hover:text-brand-orange transition-colors">Showroom</a>
-        <a href="#services" class="mobile-link text-white hover:text-brand-orange transition-colors">Restoration</a>
-        <a href="blog.html" class="mobile-link text-white hover:text-brand-orange transition-colors">Journal</a>
-        <a href="https://www.instagram.com/rcanddiecast/" class="mobile-link text-brand-orange mt-12 text-sm border-b border-brand-orange pb-2">Connect</a>
-    </div>
-
-    <main id="smooth-wrapper">
+    <main id="smooth-wrapper" class="overflow-hidden bg-surface-950">
         <div id="smooth-content">
             
-            <!-- Cinematic Hero -->
-            <section id="hero" class="relative items-center h-screen flex flex-col justify-center px-6 md:px-20 overflow-hidden bg-dark-900">
-                <!-- Massive Background Typography restored -->
-                <div class="absolute inset-0 flex flex-col justify-center items-center pointer-events-none z-0 mt-20">
-                    <h1 class="font-impact text-[15vw] leading-[0.8] tracking-tighter text-outline opacity-40 select-none hero-bg-text">PRECISION</h1>
-                    <h1 class="font-impact text-[15vw] leading-[0.8] tracking-tighter text-outline opacity-40 select-none hero-bg-text ml-[10vw]">PERFORMANCE</h1>
+            <!-- 1. Kinetic Hero Slider -->
+            <section id="kinetic-hero" class="relative w-full h-[100vh] md:h-[100vh] bg-surface-950 overflow-hidden cursor-grab active:cursor-grabbing">
+                <!-- Slides will be injected here -->
+                <div id="hero-slider-track" class="w-full h-full relative">
+                    <!-- Skeletons temporarily -->
+                    <div class="absolute inset-0 bg-surface-900 animate-pulse"></div>
                 </div>
-
-                <!-- Hero Video/Image Background -->
-                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] md:w-[60vw] h-[60vh] md:h-[70vh] overflow-hidden z-10 hero-img-container clip-image-reveal mt-10">
-                    <!-- Adjusted opacity and brightness to make image stand out -->
-                    <img src="/image/img2.jpg" alt="Camel Trophy Land Rover" class="w-full h-full object-cover grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-1000 scale-110 hero-img" onerror="this.src='https://images.unsplash.com/photo-1594882645126-14020914d58d?q=80&w=1500'">
-                </div>
-
-                <!-- Foreground Text -->
-                <div class="absolute bottom-10 z-20 w-full flex justify-between items-end px-6 md:px-20">
-                    <div class="font-sans max-w-sm hero-desc">
-                        <p class="text-[10px] tracking-[0.3em] text-brand-orange font-bold mb-4 uppercase flex items-center gap-2">
-                            <span class="w-2 h-2 rounded-full bg-brand-orange animate-pulse"></span> Ultra Premium Models
-                        </p>
-                        <p class="text-xs md:text-sm text-gray-300 font-light leading-relaxed backdrop-blur-md bg-dark-900/40 p-4 rounded-xl border border-white/5">
-                            We curate, modify, and restore the world's most elite 1/10 to 1/24 scale models and RC crawlers. Built for the uncompromising enthusiast.
-                        </p>
-                    </div>
-                    <div class="scroll-indicator flex flex-col items-center gap-4 hidden md:flex">
-                        <span class="font-display text-[10px] tracking-[0.4em] rotate-90 mb-8 text-brand-orange">SCROLL</span>
-                        <div class="w-[1px] h-20 bg-gradient-to-b from-brand-orange to-transparent"></div>
-                    </div>
+                
+                <!-- Controls (Dots) -->
+                <div class="absolute bottom-[15vh] left-6 md:left-12 z-40 flex items-center gap-3" id="hero-controls">
+                    <!-- Dots built via JS -->
                 </div>
             </section>
 
-            <!-- Marquee Divider -->
-            <section class="marquee-container mt-32 md:mt-48 z-20 relative">
-                <div class="marquee-content">
-                    <span class="marquee-text">ULTRA PREMIUM</span>
-                    <span class="marquee-text">•</span>
-                    <span class="marquee-text">SCALE REALISM</span>
-                    <span class="marquee-text">•</span>
-                    <span class="marquee-text">DIECAST MASTERPIECES</span>
-                    <span class="marquee-text">•</span>
-                    <span class="marquee-text">CRAWLER MODIFICATIONS</span>
-                    <span class="marquee-text">•</span>
-                    <span class="marquee-text">ULTRA PREMIUM</span>
-                    <span class="marquee-text">•</span>
-                    <span class="marquee-text">SCALE REALISM</span>
-                    <span class="marquee-text">•</span>
-                </div>
-            </section>
-
-            <!-- Horizontal Scroll Showroom (API Data) -->
-            <section id="showroom" class="py-32 bg-dark-900 border-t border-white/5 relative z-10">
-                <div class="px-6 md:px-20 mb-20 section-header opacity-0 translate-y-10">
-                    <h2 class="font-impact text-6xl md:text-8xl tracking-tight text-white mb-4">THE SHOWROOM</h2>
-                    <p class="font-sans text-sm text-brand-orange font-semibold tracking-[0.2em] uppercase">Curated Collection From Data Core</p>
-                </div>
-
-                <!-- GSAP Pin Container for desktop -->
-                <div class="pin-wrap-container">
-                    <div class="pin-wrap" id="api-gallery">
-                        <!-- Products will be injected horizontally here by app.js -->
-                    </div>
-                </div>
-            </section>
-
-            <!-- High-End Services Architecture -->
-            <section id="services" class="py-32 px-6 md:px-20 relative z-10 bg-dark-800">
-                <div class="grid lg:grid-cols-12 gap-12 lg:gap-0 items-center">
-                    <div class="lg:col-span-5 relative z-20">
-                        <div class="sticky top-1/3 space-y-8 service-text opacity-0 translate-y-10">
-                            <h2 class="font-impact text-6xl md:text-8xl tracking-tighter text-white">EXPERT<br><span class="text-outline text-dark-900">RESTORATION</span></h2>
-                            <p class="font-sans text-gray-400 font-light leading-loose text-sm max-w-sm">
-                                Broken axles, fried ESCs, rusted diecast shells—our master technicians revive scale history. Over 15 years of surgical precision applied to every model.
-                            </p>
-                            <a href="https://www.instagram.com/rcanddiecast/" target="_blank" class="magnetic inline-block mt-8 pb-2 border-b-2 border-brand-orange font-display text-xs tracking-widest text-white hover:text-brand-orange transition-colors uppercase font-bold link-hover">
-                                Book Consultation
-                            </a>
-                        </div>
-                    </div>
+            <!-- 2. Bento Box Showroom -->
+            <section id="bento-showroom" class="pt-32 pb-24 bg-surface-950 relative z-20">
+                <div class="max-w-[1920px] mx-auto px-6 lg:px-12">
                     
-                    <div class="lg:col-span-7 flex flex-col gap-32 pt-20 lg:pt-0">
-                        <!-- Masonry style large images fading in -->
-                        <div class="w-full lg:w-4/5 ml-auto aspect-[4/5] overflow-hidden rounded-sm glass-dark p-2 service-img-wrapper" data-speed="0.8">
-                            <img src="/image/cxd-d12-mini.jpg" alt="Restoration Setup" class="w-full h-full object-cover grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-all duration-700" onerror="this.src='https://images.unsplash.com/photo-1544642899-f0d6e5f6ed6f?q=80&w=1500'">
-                        </div>
-                        <div class="w-full lg:w-3/4 aspect-[16/9] overflow-hidden rounded-sm glass-dark p-2 service-img-wrapper -ml-10 lg:-ml-20" data-speed="1.1">
-                            <img src="/image/hb-toys-16-defender.jpg" alt="RC Defender Mechanics" class="w-full h-full object-cover grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-all duration-700" onerror="this.src='https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1500'">
-                        </div>
+                    <div class="mb-20 text-center animate-liquid">
+                        <h2 class="text-[10px] md:text-sm text-brand-orange uppercase tracking-[0.5em] font-extrabold mb-4">Precision Grid</h2>
+                        <p class="text-4xl md:text-7xl font-extrabold tracking-tighter text-white">Curated Engineering.</p>
+                    </div>
+
+                    <!-- Asymmetric Auto-Flow Grid -->
+                    <div id="bento-gallery" class="grid grid-cols-1 md:grid-cols-12 gap-6 grid-flow-row-dense">
+                        <!-- Bento Cards Injected Here via API slice(3) -->
                     </div>
                 </div>
             </section>
 
-            <!-- Massive Footer -->
-            <footer class="bg-dark-900 pt-32 pb-10 px-6 md:px-20 relative z-10 overflow-hidden border-t border-white/5">
-                <!-- Giant background footer text -->
-                <h1 class="font-impact text-[22vw] leading-none absolute top-0 left-0 opacity-5 select-none text-white w-full text-center tracking-tighter mix-blend-overlay pointer-events-none mt-10">DIECAST</h1>
+            <!-- 3. Kinetic Marquee Footer -->
+            <footer id="kinetic-footer" class="pt-32 pb-48 md:pb-24 border-t border-white/5 bg-surface-950 overflow-hidden relative group">
+                <div class="absolute inset-0 bg-app-glass pointer-events-none group-hover:opacity-100 opacity-50 transition-opacity duration-1000"></div>
                 
-                <div class="grid md:grid-cols-2 gap-16 items-start relative z-10">
-                    <div>
-                        <p class="font-display font-medium text-xs tracking-[0.2em] text-brand-orange mb-8 uppercase">Let's create something</p>
-                        <a href="https://www.instagram.com/rcanddiecast/" target="_blank" class="font-impact text-7xl md:text-9xl text-white hover:text-brand-orange transition-colors magnetic link-hover leading-none tracking-tighter">
-                            LET'S TALK.
-                        </a>
-                    </div>
-                    <div class="flex flex-col gap-6 font-sans text-xs tracking-widest text-gray-500 uppercase justify-end items-start md:items-end mt-4">
-                        <a href="https://www.instagram.com/rcanddiecast/" target="_blank" class="hover:text-white transition-colors link-hover">Instagram</a>
-                        <a href="https://www.youtube.com/@ebinumer_stories" target="_blank" class="hover:text-white transition-colors link-hover">YouTube Channel</a>
-                        <a href="blog.html" class="hover:text-white transition-colors link-hover">Articles & Guides</a>
+                <div class="text-center relative z-10 animate-liquid">
+                    <p class="text-[9px] uppercase tracking-[0.4em] font-bold text-gray-500 mb-6">Partners & Projects</p>
+                </div>
+                
+                <!-- Continuous Marquee Container -->
+                <div class="w-full relative z-10 my-12 overflow-hidden" id="marquee-wrapper">
+                    <!-- CSS Marquee Track -->
+                    <div class="flex whitespace-nowrap w-max animate-marquee items-center" id="marquee-track">
+                        <!-- Brand Strings Injected Here by JS -->
                     </div>
                 </div>
                 
-                <div class="flex justify-between items-center border-t border-white/10 mt-32 pt-8 text-[10px] font-sans text-gray-500 tracking-[0.2em] font-medium uppercase relative z-10">
-                    <p>© 2026 RC AND DIECAST</p>
-                    <p class="flex items-center gap-2">Built for Performance <span class="w-2 h-2 rounded-full bg-brand-orange animate-pulse block"></span></p>
+                <!-- Ending Brand Logo -->
+                <div class="px-6 lg:px-12 max-w-[1920px] mx-auto pt-16 text-center relative z-10 flex flex-col items-center gap-6">
+                    <h3 class="text-4xl md:text-6xl font-extrabold tracking-tighter text-white">RC&D.</h3>
+                    <p class="text-[9px] uppercase tracking-[0.3em] font-bold text-gray-600">Pure Scale Automotives</p>
                 </div>
             </footer>
-            
+
         </div>
     </main>
 
-    <!-- Scroll to Top Button -->
-    <button id="scroll-to-top" class="fixed bottom-10 right-10 z-[100] w-12 h-12 bg-dark-900 border border-brand-orange text-brand-orange rounded-full flex justify-center items-center opacity-0 translate-y-10 transition-colors hover:bg-brand-orange hover:text-white cursor-pointer magnetic hidden md:flex">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />
-        </svg>
-    </button>
-
-    <!-- Dependencies: GSAP, ScrollTrigger, Lenis -->
+    <!-- App Dependencies -->
     <script src="https://unpkg.com/lenis@1.1.9/dist/lenis.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     
-    <!-- Application Logic -->
     <script src="/app.js"></script>
 </body>
 </html>

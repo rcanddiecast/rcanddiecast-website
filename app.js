@@ -1,12 +1,13 @@
 document.addEventListener("DOMContentLoaded", () => {
     
-    // ======== Minimal Smooth Scrolling (Lenis) ======== //
+    // ======== GSAP & Lenis Setup ======== //
+    gsap.registerPlugin(ScrollTrigger);
+
     const lenis = new Lenis({
         duration: 1.5,
         easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
         direction: 'vertical',
         smooth: true,
-        smoothTouch: false,
     });
     
     function raf(time) {
@@ -15,320 +16,215 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     requestAnimationFrame(raf);
 
-    // ======== GSAP Registration ======== //
-    gsap.registerPlugin(ScrollTrigger);
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add((time) => lenis.raf(time * 1000));
+    gsap.ticker.lagSmoothing(0, 0);
 
-    // ======== Custom Mouse Cursor & Magnetic Hover ======== //
-    const cursor = document.querySelector('.custom-cursor');
-    const follower = document.querySelector('.cursor-follower');
-    
-    if (cursor && follower && !('ontouchstart' in window)) {
-        let mouseX = 0, mouseY = 0;
-        let pX = 0, pY = 0;
+    // ======== Dynamic Island Scroll Logic ======== //
+    let lastScroll = 0;
+    const island = document.querySelector('.dynamic-island');
+    window.addEventListener('scroll', () => {
+        const current = window.scrollY;
         
-        // Track mouse
-        window.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-            
-            // Instantly move center dot
-            gsap.to(cursor, {
-                x: mouseX,
-                y: mouseY,
-                duration: 0.1,
-                ease: "power2.out"
-            });
-            // Lagging follower
-            gsap.to(follower, {
-                x: mouseX,
-                y: mouseY,
-                duration: 0.8,
-                ease: "power3.out"
-            });
-        });
-
-        // Hover expanding links
-        document.querySelectorAll('a, button, .link-hover').forEach(el => {
-            el.addEventListener('mouseenter', () => {
-                cursor.classList.add('active');
-            });
-            el.addEventListener('mouseleave', () => {
-                cursor.classList.remove('active');
-            });
-        });
-
-        // Magnetic Effect
-        document.querySelectorAll('.magnetic').forEach(elem => {
-            elem.addEventListener('mousemove', function(e) {
-                const rect = this.getBoundingClientRect();
-                const x = e.clientX - rect.left - rect.width / 2;
-                const y = e.clientY - rect.top - rect.height / 2;
-                
-                gsap.to(this, {
-                    x: x * 0.4,
-                    y: y * 0.4,
-                    duration: 0.6,
-                    ease: "power2.out"
-                });
-            });
-            elem.addEventListener('mouseleave', function() {
-                gsap.to(this, {
-                    x: 0,
-                    y: 0,
-                    duration: 0.8,
-                    ease: "elastic.out(1, 0.3)"
-                });
-            });
-        });
-    }
-
-    // ======== Mobile Menu ======== //
-    const btn = document.getElementById('mobile-menu-btn');
-    const menu = document.getElementById('mobile-menu');
-    let menuOpen = false;
-    if(btn && menu) {
-        btn.addEventListener('click', (e) => {
-            e.preventDefault();
-            menuOpen = !menuOpen;
-            if(menuOpen) {
-                btn.innerText = "CLOSE";
-                gsap.to(menu, { y: "0%", duration: 0.8, ease: "power4.inOut" });
-            } else {
-                btn.innerText = "MENU";
-                gsap.to(menu, { y: "-100%", duration: 0.8, ease: "power4.inOut" });
-            }
-        });
-
-        document.querySelectorAll('.mobile-link').forEach(link => {
-            link.addEventListener('click', () => {
-                menuOpen = false;
-                btn.innerText = "MENU";
-                gsap.to(menu, { y: "-100%", duration: 0.8, ease: "power4.inOut" });
-            });
-        });
-    }
-
-    // ======== Loader & Hero Sequences ======== //
-    function runIntroSequence() {
-        const tl = gsap.timeline();
-        
-        // Loader wrap fade out
-        tl.to(".loader-wrapper", {
-            delay: 1.5,
-            opacity: 0,
-            duration: 1.2,
-            ease: "power2.inOut",
-            onComplete: () => {
-                document.getElementById('loader').style.display = 'none';
-                ScrollTrigger.refresh();
-            }
-        })
-        .from(".hero-bg-text", {
-            y: 150,
-            opacity: 0,
-            duration: 1.5,
-            stagger: 0.2,
-            ease: "power3.out"
-        }, "-=0.8")
-        .from(".hero-img", {
-            scale: 1.5,
-            duration: 2,
-            ease: "power3.out"
-        }, "-=1.5")
-        .from(".hero-desc, .scroll-indicator", {
-            opacity: 0,
-            y: 30,
-            duration: 1,
-            stagger: 0.2,
-            ease: "power3.out"
-        }, "-=1");
-
-        // Header appearing immediately after loader
-        tl.from("#site-header", {
-            y: -100,
-            opacity: 0,
-            duration: 1,
-            ease: "power3.out"
-        }, "-=1.5");
-
-        // Set up Scroll Parallax
-        gsap.to(".hero-img-container", {
-            scrollTrigger: {
-                trigger: "#hero",
-                start: "top top",
-                end: "bottom top",
-                scrub: 1.5
-            },
-            y: 150,
-            opacity: 0
-        });
-        
-        gsap.to(".hero-bg-text", {
-            scrollTrigger: {
-                trigger: "#hero",
-                start: "top top",
-                end: "bottom top",
-                scrub: 2
-            },
-            y: -100,
-            x: 50
-        });
-
-        // Scroll-to-top logic
-        const scrollBtn = document.getElementById("scroll-to-top");
-        if(scrollBtn) {
-            gsap.to(scrollBtn, {
-                scrollTrigger: {
-                    trigger: "#showroom",
-                    start: "top center",
-                    toggleActions: "play none none reverse"
-                },
-                opacity: 1,
-                y: 0,
-                duration: 0.4,
-                ease: "back.out(1.7)"
-            });
-
-            scrollBtn.addEventListener('click', () => {
-                lenis.scrollTo(0, { duration: 1.2, ease: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
-            });
+        // Hide on scroll down, show on scroll up (app feel)
+        if(current > 200 && current > lastScroll && window.innerWidth < 768) {
+            island.style.transform = 'translate(-50%, 150%) scale(0.9)';
+        } else {
+            island.style.transform = 'translate(-50%, 0) scale(1)';
         }
-    }
+        
+        if(window.innerWidth >= 768) {
+             island.style.transform = current > 50 ? 'translate(-50%, -10px) scale(0.95)' : 'translate(-50%, 0) scale(1)';
+        }
+        lastScroll = current;
+    });
 
-    // ======== API Fetch & Horizontal Showroom ======== //
+    // ======== API Fetching & Data Splitting ======== //
     const API_URL = "https://script.google.com/macros/s/AKfycbxGi2nqIdiIz83Wi5vwERbQHsoKpDu7VVuny3EIegy4EU6KTta_TshEKqGaqFaOYamTYg/exec";
     
-    // Fallback trigger if load fails or takes too long (3 seconds)
-    const safetyTimer = setTimeout(() => {
-        if(document.getElementById('loader').style.display !== 'none') {
-            runIntroSequence();
-            initHorizontalScroll(); // init empty or failed state
-        }
-    }, 3000);
-
-    async function fetchData() {
+    async function initApp() {
         try {
+            // Fake Loader Progress
+            gsap.to("#loader-bar", { width: "80%", duration: 1.5, ease: "power2.out" });
+            
             const resp = await fetch(API_URL);
             const data = await resp.json();
+            const products = data.filter(item => item.stock === 'stock');
             
-            clearTimeout(safetyTimer);
+            // Finish loader
+            gsap.to("#loader-bar", { width: "100%", duration: 0.5, onComplete: () => {
+                gsap.to("#loader", { opacity: 0, duration: 1, ease: "power2.inOut", onComplete: () => document.getElementById('loader').remove() });
+            }});
             
-            // We load ALL data, without the stock filter, for massive gallery
-            renderHorizontalGallery(data);
+            if(products.length === 0) return;
+
+            // 1. Init Hero Slider (First 3)
+            initHeroSlider(products);
             
+            // 2. Init Bento Showroom (Remaining)
+            renderBentoGrid(products.slice(3));
+            
+            // 3. Init Kinetic Marquee
+            renderMarquee(products);
+            
+            // Parallax Images Initializer
+            initParallax();
+
         } catch (err) {
-            console.error(err);
-            clearTimeout(safetyTimer);
-            document.getElementById('api-gallery').innerHTML = `<h2 class="font-impact text-6xl text-white pl-20 uppercase">Data Stream Offline</h2>`;
-            runIntroSequence();
-            initHorizontalScroll();
+            console.error("API Error:", err);
+            document.body.innerHTML = `<div class="h-screen w-full flex items-center justify-center bg-surface-950 text-white font-bold text-2xl">Garage Offline. Connection Failed.</div>`;
         }
     }
 
-    function renderHorizontalGallery(items) {
-        const gallery = document.getElementById('api-gallery');
-        gallery.innerHTML = '';
+    // ======== 1. Hero Kinetic Slider ======== //
+    let currentSlide = 0;
+    let heroSlides = [];
+    let autoPlayInterval;
 
-        items.forEach((item, index) => {
-            const isEven = index % 2 === 0;
-            const alignClass = isEven ? 'justify-end pb-20' : 'justify-start pt-20';
-            
-            gallery.innerHTML += `
-                <div class="horizontal-item group">
-                    <!-- Massive Background Title per item -->
-                    <div class="absolute inset-0 flex items-center justify-center opacity-10 font-impact text-[20vw] whitespace-nowrap z-0 select-none text-white overflow-hidden pointer-events-none group-hover:text-brand-orange group-hover:opacity-20 transition-all duration-700">
-                        ${item.brandName}
-                    </div>
+    function initHeroSlider(products) {
+        heroSlides = products.slice(0, 3);
+        const track = document.getElementById('hero-slider-track');
+        const controls = document.getElementById('hero-controls');
+        
+        track.innerHTML = '';
+        controls.innerHTML = '';
+        
+        heroSlides.forEach((slide, i) => {
+            track.innerHTML += `
+                <div class="absolute inset-0 w-full h-full hero-slide" id="slide-${i}" style="opacity: ${i === 0 ? 1 : 0}; z-index: ${i === 0 ? 10 : 0};">
+                    <img src="${slide.ImageURL}" class="absolute inset-0 w-full h-[120%] object-cover grayscale opacity-80" data-speed="1.15" onerror="this.src='/image/trx4m.jpg'">
+                    <div class="absolute inset-0 bg-hero-vignette mix-blend-multiply"></div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-surface-950 via-transparent to-surface-950 opacity-90"></div>
                     
-                    <div class="relative z-10 w-full md:w-4/5 ${alignClass} flex flex-col h-full mx-auto">
-                        <div class="aspect-[4/5] rounded-sm overflow-hidden glass-dark p-2 w-full max-w-[400px]">
-                             <img src="${item.ImageURL}" alt="${item.modelName}" class="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700 pointer-events-none" onerror="this.src='https://images.unsplash.com/photo-1594882645126-14020914d58d?q=80&w=1000'">
+                    <div class="relative z-20 max-w-[1920px] mx-auto px-6 lg:px-12 w-full h-full flex flex-col justify-end pb-[25vh]">
+                        <div class="slide-text-${i} inline-flex items-center gap-4 mb-6">
+                            <span class="w-8 h-[2px] bg-brand-orange"></span>
+                            <span class="text-[10px] text-brand-orange uppercase tracking-[0.5em] font-extrabold">${slide.brandName} EXCLUSIVE</span>
                         </div>
-                        <div class="mt-8">
-                            <h3 class="font-sans font-bold text-xs tracking-widest text-brand-orange uppercase">${item.category} • ${item.stock === 'stock' ? 'AVAILABLE' : 'ARCHIVED'}</h3>
-                            <h2 class="font-impact text-4xl md:text-6xl text-white tracking-tighter mt-2 leading-none">${item.modelName}</h2>
-                            <p class="font-sans text-xs text-gray-500 max-w-sm mt-4 tracking-wider uppercase">${item.brandName} // RATE ${item.rate} // RATING ${item.rating}/5</p>
-                            
-                            <div class="flex gap-4 mt-8">
-                                ${item.ytLink ? `<a href="${item.ytLink}" target="_blank" class="magnetic link-hover px-6 py-3 border border-white/20 text-white font-sans text-xs tracking-widest font-bold hover:bg-white hover:text-black transition-colors">WATCH FILM</a>` : ''}
-                                <a href="${item.instaLink || 'https://www.instagram.com/rcanddiecast/'}" target="_blank" class="magnetic link-hover px-6 py-3 bg-brand-orange text-white font-sans text-xs tracking-widest font-bold hover:bg-brand-hover transition-colors shadow-[0_0_30px_rgba(255,51,0,0.3)]">INQUIRE</a>
-                            </div>
+                        <h1 class="text-6xl md:text-8xl lg:text-[10rem] font-extrabold tracking-tighter text-white leading-[0.85] slide-text-${i}">
+                            ${slide.modelName}
+                        </h1>
+                        <p class="text-gray-400 font-light mt-8 max-w-xl text-sm md:text-xl slide-text-${i} leading-relaxed">
+                            ${slide.productDec ? slide.productDec.substring(0, 140) + '...' : 'Ultimate engineering scaling down legends.'}
+                        </p>
+                    </div>
+                </div>
+            `;
+            
+            controls.innerHTML += `<button onclick="goToSlide(${i})" class="w-16 h-1 rounded-full transition-all duration-700 ${i === 0 ? 'bg-brand-orange' : 'bg-white/20 hover:bg-white/50'}" id="dot-${i}"></button>`;
+        });
+        
+        // Initial intro animation
+        gsap.fromTo(`.slide-text-0`, 
+            { y: 60, opacity: 0 }, 
+            { y: 0, opacity: 1, stagger: 0.15, duration: 1.5, ease: "power3.out", delay: 1.5 }
+        );
+        
+        autoPlayInterval = setInterval(() => {
+            goToSlide((currentSlide + 1) % heroSlides.length);
+        }, 6000);
+    }
+
+    window.goToSlide = function(index) {
+        if(index === currentSlide) return;
+        clearInterval(autoPlayInterval);
+        autoPlayInterval = setInterval(() => goToSlide((currentSlide + 1) % heroSlides.length), 6000);
+        
+        gsap.to(`#slide-${currentSlide}`, { opacity: 0, duration: 1.2, zIndex: 0, ease: "power2.inOut" });
+        document.getElementById(`dot-${currentSlide}`).classList.replace('bg-brand-orange', 'bg-white/20');
+        
+        gsap.fromTo(`#slide-${index}`, { opacity: 0 }, { opacity: 1, duration: 1.2, zIndex: 10, ease: "power2.inOut" });
+        gsap.fromTo(`.slide-text-${index}`, 
+            { y: 60, opacity: 0 }, 
+            { y: 0, opacity: 1, stagger: 0.15, duration: 1.5, ease: "power3.out", delay: 0.3 }
+        );
+        
+        document.getElementById(`dot-${index}`).classList.replace('bg-white/20', 'bg-brand-orange');
+        currentSlide = index;
+    }
+
+    // ======== 2. Bento Grid Showroom ======== //
+    function renderBentoGrid(products) {
+        const gallery = document.getElementById('bento-gallery');
+        let html = '';
+        
+        products.forEach((product, i) => {
+            // Asymmetric CSS Grid logic
+            let bentoClass = 'col-span-1 md:col-span-4 min-h-[400px]'; 
+            if (i % 5 === 0) bentoClass = 'col-span-1 md:col-span-8 min-h-[450px] md:min-h-[550px]';
+            if (i % 5 === 1) bentoClass = 'col-span-1 md:col-span-4 row-span-1 md:row-span-2 min-h-[400px] md:min-h-[800px]';
+            if (i % 5 === 2) bentoClass = 'col-span-1 md:col-span-4 min-h-[400px]';
+            if (i % 5 === 3) bentoClass = 'col-span-1 md:col-span-8 min-h-[450px] md:min-h-[550px]';
+            
+            html += `
+                <div class="${bentoClass} bento-card relative group flex flex-col justify-end">
+                    <img src="${product.ImageURL}" class="absolute inset-0 w-full h-[110%] object-cover parallax-img origin-center grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-[2000ms] ease-out" data-speed="1.05" loading="lazy" onerror="this.src='/image/trx4m.jpg'">
+                    <div class="absolute inset-0 bg-hero-vignette opacity-80 mix-blend-multiply transition-opacity duration-1000 group-hover:opacity-60"></div>
+                    
+                    <div class="relative z-10 p-8 flex flex-col items-start w-full">
+                        <span class="bg-brand-orange text-white text-[8px] px-3 py-1.5 rounded-full uppercase tracking-[0.2em] font-extrabold mb-4 shadow-[0_0_15px_rgba(255,61,0,0.5)]">
+                            ${product.brandName}
+                        </span>
+                        
+                        <h3 class="text-3xl lg:text-5xl font-extrabold tracking-tighter leading-[0.9] text-white">${product.modelName}</h3>
+                        
+                        <div class="overflow-hidden mt-6 w-full opacity-0 translate-y-8 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-[800ms] ease-out flex justify-between items-end">
+                            <p class="text-white text-xl md:text-3xl font-light tracking-tight">₹${product.rate.toLocaleString()}</p>
+                            <a href="${product.instaLink || '#'}" target="_blank" class="w-12 h-12 bg-white rounded-full flex justify-center items-center hover:bg-brand-orange text-black hover:text-white transition-colors duration-300">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="rotate-45" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                            </a>
                         </div>
                     </div>
                 </div>
             `;
         });
-
-        // Intro and Scrolling triggers
-        runIntroSequence();
         
-        // Wait briefly for DOM to paint images before calculating widths
-        setTimeout(initHorizontalScroll, 100);
-    }
-
-    function initHorizontalScroll() {
-        const wrap = document.getElementById('api-gallery');
-        const items = gsap.utils.toArray('.horizontal-item');
+        gallery.innerHTML = html;
         
-        if(items.length === 0) return;
-
-        // Calculate total scroll distance
-        const totalWidth = wrap.scrollWidth - window.innerWidth;
-        
-        gsap.to(items, {
-            xPercent: -100 * (items.length - 1),
-            ease: "none",
-            scrollTrigger: {
-                trigger: ".pin-wrap-container",
-                pin: true,
-                scrub: 1,
-                // Make the scroll distance proportional to the number of items
-                end: () => "+=" + wrap.scrollWidth
-            }
-        });
-
-        // Fade in title
-        gsap.to(".section-header", {
-            scrollTrigger: {
-                trigger: "#showroom",
-                start: "top 80%"
-            },
-            y: 0,
-            opacity: 1,
-            duration: 1,
+        // Stagger entrance on scroll
+        gsap.from(".bento-card", {
+            scrollTrigger: { trigger: "#bento-gallery", start: "top 85%" },
+            y: 100,
+            opacity: 0,
+            stagger: 0.15,
+            duration: 1.5,
             ease: "power3.out"
         });
+        
+        initParallax(); // Re-init parallax for new images
+    }
 
-        // Setup Restoration Parallax Images
-        gsap.utils.toArray('.service-img-wrapper').forEach((img, i) => {
-            const speed = img.dataset.speed || 1;
-            gsap.from(img, {
+    // ======== 3. Kinetic Marquee Footer ======== //
+    function renderMarquee(products) {
+        const uniqueBrands = [...new Set(products.map(p => p.brandName))];
+        const track = document.getElementById('marquee-track');
+        
+        // Build the colossal typography string
+        const brandString = uniqueBrands.map(b => `
+            <span class="text-[5rem] md:text-[8rem] lg:text-[12rem] font-extrabold tracking-tighter text-surface-900 mx-8 md:mx-16 uppercase hover:text-brand-orange transition-colors duration-[800ms] drop-shadow-[0_0_10px_rgba(255,255,255,0.05)] stroke-element">
+                ${b}
+            </span>
+        `).join('<span class="text-[5rem] md:text-[8rem] font-light text-surface-850 mx-4">×</span>');
+        
+        // Multiply massive string 4 times for infinite loop
+        track.innerHTML = brandString + brandString + brandString + brandString;
+    }
+
+    // ======== 4. Parallax Util ======== //
+    function initParallax() {
+        gsap.utils.toArray('.parallax-img').forEach(img => {
+            gsap.to(img, {
+                yPercent: 15, // Move image slightly upwards as scrolled
+                ease: "none",
                 scrollTrigger: {
-                    trigger: "#services",
+                    trigger: img.parentElement,
                     start: "top bottom",
                     end: "bottom top",
                     scrub: true
-                },
-                y: 100 * speed,
-                opacity: (i === 0) ? 0 : 0.8
+                }
             });
         });
-
-        gsap.to(".service-text", {
-             scrollTrigger: {
-                 trigger: "#services",
-                 start: "top 70%"
-             },
-             y: 0,
-             opacity: 1,
-             duration: 1.2,
-             ease: "power3.out"
-        });
-
-        ScrollTrigger.refresh();
     }
 
-    // Fire Fetch!
-    fetchData();
-
+    initApp();
 });
