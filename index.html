@@ -1,608 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- Primary SEO -->
-    <title>RC & Diecast Cars in India | Traxxas, Hot Wheels, WLtoys, Tamiya & More</title>
-    <meta name="description"
-        content="Buy the best RC and diecast cars in India! We’re the No.1 RC car sellers with 1000+ Instagram followers and 100+ happy customers across India. Explore RC cars, monster trucks, bikes, and diecast models from Traxxas, Hot Wheels, WLtoys, Tamiya, Toyan, and more. Watch our YouTube reviews before purchase and make the right move!">
-    <meta name="keywords"
-        content="RC car, RC cars, RC trucks, RC racing, RC drift cars, RC buggy, RC monster truck, hobby grade RC, nitro RC, petrol RC cars, remote control cars, toy cars, Hot Wheels, Traxxas, WLtoys, Tamiya, Toyan engines, best RC cars in India">
-    <meta name="robots" content="index, follow">
-    <meta name="author" content="RC & Diecast Store">
-
-    <!-- Favicon & Icons -->
-    <link rel="icon" href="https://rcanddiecast.com/image/favicon.png" type="image/png">
-    <link rel="apple-touch-icon" href="https://rcanddiecast.com/image/apple-touch-icon.png">
-
-    <!-- Open Graph / Social Preview -->
-    <meta property="og:title" content="RC & Diecast Cars in India | Traxxas, Hot Wheels & More">
-    <meta property="og:description"
-        content="India’s leading RC and diecast store — trusted by 1000+ customers. Explore top-selling RC cars and collectibles from Traxxas, WLtoys, Tamiya, Hot Wheels, Toyan, and more.">
-    <meta property="og:image" content="https://rcanddiecast.com/image/img1.jpg">
-    <meta property="og:url" content="https://rcanddiecast.com/">
-    <meta property="og:type" content="website">
-    <meta property="og:locale" content="en_IN">
-
-    <!-- Additional SEO -->
-    <meta name="google-site-verification" content="DUiHiwo9GH_iudS-hYQDXU8PnaS2RHYWylzgNXhnieI">
-
-    <!-- Stylesheet -->
-    <link rel="stylesheet" href="style.css">
+    <title>RC & Diecast | Kinetic App Experience</title>
+    
+    <meta name="description" content="Discover India's ultra-premium collection of 1/10 and 1/24 scale RC crawlers and diecast models.">
+    <meta name="theme-color" content="#000000">
+    
+    <link rel="icon" type="image/x-icon" href="/image/favicon.ico">
+    <link href="/output.css" rel="stylesheet">
+    
+    <style>
+        /* Essential base loader and critical animations */
+        @keyframes liquidScale {
+            0% { transform: scale(0.95); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .animate-liquid {
+            animation: liquidScale 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+    </style>
 </head>
+<body class="bg-surface-950 text-white selection:bg-brand-orange selection:text-white">
 
-<body>
-
-    <!-- Loader Start -->
-    <div class="loader-wrapper">
-        <span class="loader"></span>
+    <!-- App Initializer -->
+    <div id="loader" class="fixed inset-0 bg-surface-950 z-[9999] flex flex-col justify-center items-center transition-all duration-[1500ms]">
+        <h2 class="text-[10px] uppercase tracking-[0.5em] font-bold text-white mb-6">Connecting to Garage</h2>
+        <div class="w-48 h-1 bg-surface-900 rounded-full overflow-hidden">
+            <div id="loader-bar" class="h-full bg-brand-orange w-0 transition-all duration-[2000ms] ease-out"></div>
+        </div>
     </div>
-    <!-- Loader End -->
 
-    <header>
-        <a href="/" class="logo-link">
-            <img src="image/logo.png" alt="logo" class="logo">
+    <!-- The Dynamic Island (App Dock on Mobile) -->
+    <nav class="fixed bottom-6 md:bottom-auto md:top-8 left-1/2 -translate-x-1/2 z-50 w-auto px-2 py-2 dynamic-island rounded-[2rem] flex items-center gap-1 md:gap-4 transition-transform hover:scale-105 duration-300">
+        <!-- Home Icon -->
+        <a href="#kinetic-hero" class="w-12 h-12 md:w-14 md:h-14 rounded-full flex justify-center items-center hover:bg-white/10 transition-colors">
+            <svg class="w-5 h-5 md:w-6 md:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
         </a>
-        <nav>
-            <a href="/">Home</a>
-            <a href="https://www.instagram.com/rcanddiecast/">Contacts</a>
-            <!-- <a href="">Info</a> -->
-        </nav>
-    </header>
+        
+        <div class="h-8 w-[1px] bg-white/10 mx-1"></div>
+        
+        <!-- Grid/Showroom Icon -->
+        <a href="#bento-showroom" class="w-12 h-12 md:w-14 md:h-14 rounded-full flex justify-center items-center hover:bg-white/10 transition-colors">
+            <svg class="w-5 h-5 md:w-6 md:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+        </a>
+        
+        <div class="h-8 w-[1px] bg-white/10 mx-1"></div>
+        
+        <!-- Connect / External -->
+        <a href="https://www.instagram.com/rcanddiecast/" target="_blank" class="w-12 h-12 md:w-auto md:px-6 rounded-[1.5rem] flex justify-center items-center bg-brand-orange hover:bg-brand-hover text-white transition-colors shadow-[0_0_20px_rgba(255,61,0,0.3)]">
+            <svg class="w-5 h-5 md:hidden text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path></svg>
+            <span class="hidden md:block text-[10px] uppercase tracking-[0.2em] font-extrabold text-white">Connect</span>
+        </a>
+    </nav>
 
-    <!-- carousel -->
-    <div class="carousel">
-        <!-- list item -->
-        <div class="list">
-            <div class="item">
-                <img src="image/img1.jpg">
-                <div class="content">
-                    <div class="author">Retro</div>
-                    <div class="title"> BMW M3 E30 </div>
-                    <div class="topic">Drift RC Car </div>
-                    <div class="des">
-                        Experience high-speed drifting in seconds as everything is included such as battery and charger.
-                        Perfect for running
-                        multiple cars simultaneously with friends. The detailed retro-drift body shell and spoke wheels
-                        give it a classic look,
-                        while front LED lights illuminate your way as you zoom drift your way in the dark.
+    <main id="smooth-wrapper" class="bg-surface-950 overflow-x-hidden w-full relative">
+        <div id="smooth-content">
+            
+            <!-- 1. Kinetic Hero Slider -->
+            <section id="kinetic-hero" class="relative w-full bg-surface-950 overflow-hidden md:cursor-grab md:active:cursor-grabbing" style="height: 100svh; min-height: 100vh;">
+                <!-- Slides will be injected here -->
+                <div id="hero-slider-track" class="w-full h-full relative">
+                    <!-- Skeletons temporarily -->
+                    <div class="absolute inset-0 bg-surface-900 animate-pulse"></div>
+                </div>
+                
+                <!-- Controls (Dots) -->
+                <div class="absolute bottom-[15vh] left-6 md:left-12 z-40 flex items-center gap-3" id="hero-controls">
+                    <!-- Dots built via JS -->
+                </div>
+
+                <!-- Scroll Down App Indicator (Bouncing) -->
+                <a href="#bento-showroom" class="absolute bottom-24 md:bottom-12 right-6 md:right-12 z-50 flex flex-col items-center gap-3 animate-bounce hover:opacity-80 transition-opacity" id="scrollIndicator">
+                    <span class="text-[9px] text-white uppercase tracking-[0.4em] font-extrabold shadow-black drop-shadow-md">Explore</span>
+                    <div class="w-10 h-10 rounded-full border border-white/30 bg-surface-950/30 backdrop-blur-md flex justify-center items-center shadow-lg">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" class="text-white" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5V19M19 12l-7 7-7-7"/></svg>
                     </div>
-                    <div class="buttons">
-                        <a href="https://www.instagram.com/rcanddiecast/" class="buttons" target="_blank">
-                            <button class="order">Order</button>
-                        </a>
-                        <a href="https://youtube.com/@ebinumer_stories?si=v59mSfK0dBrOEJha" class="buttons"
-                            target="_blank">
-                            <button>Review</button>
-                        </a>
+                </a>
+            </section>
+
+            <!-- 2. Bento Box Showroom -->
+            <section id="bento-showroom" class="pt-32 pb-24 bg-surface-950 relative z-20">
+                <div class="max-w-[1920px] mx-auto px-6 lg:px-12">
+                    
+                    <div class="mb-20 text-center animate-liquid">
+                        <h2 class="text-[10px] md:text-sm text-brand-orange uppercase tracking-[0.5em] font-extrabold mb-4">Precision Grid</h2>
+                        <p class="text-4xl md:text-7xl font-extrabold tracking-tighter text-white">Curated Engineering.</p>
+                    </div>
+
+                    <!-- Asymmetric Auto-Flow Grid -->
+                    <div id="bento-gallery" class="grid grid-cols-1 md:grid-cols-12 gap-6 grid-flow-row-dense">
+                        <!-- Bento Cards Injected Here via API slice(3) -->
                     </div>
                 </div>
-            </div>
+            </section>
 
-            <div class="item">
-                <img src="image/trx4m.jpg">
-                <div class="content">
-                    <div class="author">Traxxas</div>
-                    <div class="title"> Trail Trucks </div>
-                    <div class="topic">TRX-4 & TRX-4M </div>
-                    <div class="des">
-                        The Traxxas TRX-4 and TRX-4m are two formidable tucks that define two categories of RC Rock
-                        Crawling, Standard and Mini.
-                        Traxxas introduced the 1/10 TRX-4 in 2017 with the iconic Land Rover body. Now, Traxxas has over
-                        20 variations of TRX-4
-                        and a whole line of mini, 1/18 TRX-4m models. Explore this article and find the perfect
-                        TRX-4/TRX-4m for you!
-                    </div>
-                    <div class="buttons">
-                        <a href="https://www.instagram.com/rcanddiecast/" class="buttons" target="_blank">
-                            <button class="order">Order</button>
-                        </a>
-                        <a href="https://youtube.com/@ebinumer_stories?si=v59mSfK0dBrOEJha" class="buttons"
-                            target="_blank">
-                            <button>Review</button>
-                        </a>
+            <!-- 3. Kinetic Marquee Footer -->
+            <footer id="kinetic-footer" class="pt-32 pb-48 md:pb-24 border-t border-white/5 bg-surface-950 overflow-hidden relative group">
+                <div class="absolute inset-0 bg-app-glass pointer-events-none group-hover:opacity-100 opacity-50 transition-opacity duration-1000"></div>
+                
+                <div class="text-center relative z-10 animate-liquid">
+                    <p class="text-[9px] uppercase tracking-[0.4em] font-bold text-gray-500 mb-6">Partners & Projects</p>
+                </div>
+                
+                <!-- Continuous Marquee Container -->
+                <div class="w-full relative z-10 my-12 overflow-hidden" id="marquee-wrapper">
+                    <!-- CSS Marquee Track -->
+                    <div class="flex whitespace-nowrap w-max animate-marquee items-center" id="marquee-track">
+                        <!-- Brand Strings Injected Here by JS -->
                     </div>
                 </div>
-            </div>
-
-            <div class="item">
-                <img src="image/img2.jpg">
-                <div class="content">
-                    <div class="author">FMS</div>
-                    <div class="title"> Land Rover </div>
-                    <div class="topic">Camel Trophy Edition RTR </div>
-                    <div class="des">
-                        The Camel Trophy was a vehicle-oriented adventure event held between 1980 and 2000. Unlike
-                        typical races, its focus
-                        wasn't on speed but on testing the endurance of participants and vehicles in extreme conditions.
-                        Emphasizing teamwork
-                        and resilience, it earned the nickname 'The Olympics of 4x4.' As the core sponsor, Land Rover
-                        featured vehicles like the
-                        Range Rover, Defender 90, Defender 110, and Discovery. These iconic Land Rovers, painted in
-                        distinctive yellow sand,
-                        navigated some of the world's most challenging terrains, creating legendary off-road stories.
-                        Let's revive the Camel
-                        Trophy spirit with the FCX24M Land Rover!
-
-                    </div>
-                    <div class="buttons">
-                        <a href="https://www.instagram.com/rcanddiecast/" class="buttons" target="_blank">
-                            <button class="order">Order</button>
-                        </a>
-                        <a href="https://youtube.com/@ebinumer_stories?si=v59mSfK0dBrOEJha" class="buttons"
-                            target="_blank">
-                            <button>Review</button>
-                        </a>
-                    </div>
+                
+                <!-- Ending Brand Logo -->
+                <div class="px-6 lg:px-12 max-w-[1920px] mx-auto pt-16 text-center relative z-10 flex flex-col items-center gap-6">
+                    <h3 class="text-4xl md:text-6xl font-extrabold tracking-tighter text-white">RC&D.</h3>
+                    <p class="text-[9px] uppercase tracking-[0.3em] font-bold text-gray-600">Pure Scale Automotives</p>
                 </div>
-            </div>
-
-            <div class="item">
-                <img src="image/img3.jpg">
-                <div class="content">
-                    <div class="author">FMS</div>
-                    <div class="title"> Land Cruiser </div>
-                    <div class="topic">V2 Toyota LC 80 RTR </div>
-                    <div class="des">
-                        New Licensed LC80 RC Crawler ]The Land Cruiser 80, an off-roading legend, and FMS’s 1/18 LC80 V2
-                        RC Rock Crawler have
-                        been cherished by RC enthusiasts. In 2023, with Toyota’s authorization once again, FMS presents
-                        an upgraded LC80 rc rock
-                        crawler 4×4 , featuring the new FCX18 chassis. Enhanced exteriors, and an even better off-road
-                        experience are in store.
-                        FMS’s commitment to detail perfection makes this 4WD rock crawler the top pick for RC off-road
-                        enthusiasts!
-
-                    </div>
-                    <div class="buttons">
-                        <a href="https://www.instagram.com/rcanddiecast/" class="buttons" target="_blank">
-                            <button class="order">Order</button>
-                        </a>
-                        <a href="https://youtube.com/@ebinumer_stories?si=v59mSfK0dBrOEJha" class="buttons"
-                            target="_blank">
-                            <button>Review</button>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="item">
-                <img src="image/img4.jpg">
-                <div class="content">
-                    <div class="author">FMS</div>
-                    <div class="title"> Land Cruiser </div>
-                    <div class="topic">V2 Toyota LC 80 RTR </div>
-                    <div class="des">
-                        New Licensed LC80 RC Crawler ]The Land Cruiser 80, an off-roading legend, and FMS’s 1/18 LC80 V2
-                        RC Rock Crawler have
-                        been cherished by RC enthusiasts. In 2023, with Toyota’s authorization once again, FMS presents
-                        an upgraded LC80 rc rock
-                        crawler 4×4 , featuring the new FCX18 chassis. Enhanced exteriors, and an even better off-road
-                        experience are in store.
-                        FMS’s commitment to detail perfection makes this 4WD rock crawler the top pick for RC off-road
-                        enthusiasts!
-
-                    </div>
-                    <div class="buttons">
-                        <a href="https://www.instagram.com/rcanddiecast/" class="buttons" target="_blank">
-                            <button class="order">Order</button>
-                        </a>
-                        <a href="https://youtube.com/@ebinumer_stories?si=v59mSfK0dBrOEJha" class="buttons"
-                            target="_blank">
-                            <button>Review</button>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="item">
-                <img src="image/traxxas-xmax.jpg">
-                <div class="content">
-                    <div class="author">Traxxas</div>
-                    <div class="title">Traxxas X-maxx </div>
-                    <div class="topic">Rock and Roll </div>
-                    <div class="des">
-                        The Traxxas X-Maxx 8S 4WD Brushless RTR Monster Truck brings the same unrelenting 4X4 power,
-                        mammoth size and
-                        award-winning innovation to the game that make X-Maxx the ultimate monster truck. When you add
-                        30+ volts of extreme 8s
-                        power, X-Maxx 8S defies physics, unleashing jaw-dropping acceleration and 50+mph speeds.
-                        Engineered to conquer the most
-                        extreme terrain and take brutal real-world punishment in stride, X-Maxx is the definition of
-                        Traxxas Tough™.
-
-                    </div>
-                    <div class="buttons">
-                        <a href="https://www.instagram.com/rcanddiecast/" class="buttons" target="_blank">
-                            <button class="order">Order</button>
-                        </a>
-                        <a href="https://youtube.com/@ebinumer_stories?si=v59mSfK0dBrOEJha" class="buttons"
-                            target="_blank">
-                            <button>Review</button>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="item">
-                <img src="image/hb-toys-16-defender.jpg">
-                <div class="content">
-                    <div class="author">HB Toys</div>
-                    <div class="title">APEX4 RTR </div>
-                    <div class="topic">R1601 </div>
-                    <div class="des">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat, veritatis consequatur. Beatae
-                        consequatur veritatis earum quam pariatur voluptatibus quisquam architecto voluptas officia
-                        expedita explicabo velit, voluptatum harum dolore fugit? Odio.
-
-                    </div>
-                    <div class="buttons">
-                        <a href="https://www.instagram.com/rcanddiecast/" class="buttons" target="_blank">
-                            <button class="order">Order</button>
-                        </a>
-                        <a href="https://youtube.com/@ebinumer_stories?si=v59mSfK0dBrOEJha" class="buttons"
-                            target="_blank">
-                            <button>Review</button>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="item">
-                <img src="image/cxd-d12-mini.jpg">
-                <div class="content">
-                    <div class="author">CXD</div>
-                    <div class="title">CDX Mini </div>
-                    <div class="topic">CXD D12 </div>
-                    <div class="des">
-                        - Brand : CXD
-                        - True 1/16 scale. Actual car is very small
-                        - Color : White(Creamy)
-                        - Proportional Steering and Throttle
-                        - 1s 14500 500mAh powered
-                        - 2.4Ghz Radio. Multiple users can play the same model at the same time
-                        - Product dimension of 11.5cm x 10.5cm x 21cm
-                        - Wheelbase 120mm~
-                        - 130 motor (rated at 23000rpm at 3.7V)
-                        - Working suspension
-                        - Realistic chassis
-                        - Low voltage & over current protection
-                        - Plastic ball join at steering knuckle
-                        - Working headlight
-                        - Rubber tires
-
-                    </div>
-                    <div class="buttons">
-                        <a href="https://www.instagram.com/rcanddiecast/" class="buttons" target="_blank">
-                            <button class="order">Order</button>
-                        </a>
-                        <a href="https://youtube.com/@ebinumer_stories?si=v59mSfK0dBrOEJha" class="buttons"
-                            target="_blank">
-                            <button>Review</button>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="item">
-                <img src="image/brabus-gwagon.jpg">
-                <div class="content">
-                    <div class="author">Bebbly</div>
-                    <div class="title">G550 4X4 Metal </div>
-                    <div class="topic">Diecast Car </div>
-                    <div class="des">
-                        The doors and the hood can be opened; And the press of lots of parts can make the car sound;
-                        Both the front and rear of
-                        the car are equipped with high brightness LED lights, just like a real super car,pull back to
-                        work, easy to operate, don't worry about it no working; Speed is not fast enough to prevent a
-                        child from
-                        falling
-
-                    </div>
-                    <div class="buttons">
-                        <a href="https://www.instagram.com/rcanddiecast/" class="buttons" target="_blank">
-                            <button class="order">Order</button>
-                        </a>
-                        <a href="https://youtube.com/@ebinumer_stories?si=v59mSfK0dBrOEJha" class="buttons"
-                            target="_blank">
-                            <button>Review</button>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="item">
-                <img src="image/willys-fms.jpg">
-                <div class="content">
-                    <div class="author">FMS</div>
-                    <div class="title">Rock Crawler</div>
-                    <div class="topic">Army Military</div>
-                    <div class="des">
-                        Superior Off-Road Performance: Built with a modern stepped chassis and hydraulic shock
-                        absorbers, this model offers
-                        unbeatable traction and stability on any terrain. It replicates the original’s steel plate
-                        springs but with an enhanced
-                        oil shock system for maximum axle flex.
-                    </div>
-                    <div class="buttons">
-                        <a href="https://www.instagram.com/rcanddiecast/" class="buttons" target="_blank">
-                            <button class="order">Order</button>
-                        </a>
-                        <a href="https://youtube.com/@ebinumer_stories?si=v59mSfK0dBrOEJha" class="buttons"
-                            target="_blank">
-                            <button>Review</button>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="item">
-                <img src="image/k5-blazer.jpg">
-                <div class="content">
-                    <div class="author">FMS</div>
-                    <div class="title">Chevrolet K5 </div>
-                    <div class="topic">Blazer</div>
-                    <div class="des">
-                        In 1969, Chevrolet's first-generation K5 Blazer came out. It was the representative of the
-                        famous Chevrolet C/K series
-                        and was the most compact full-size SUV on the market at the time. The vehicle is positioned as a
-                        full-size sport utility
-                        vehicle and is also GM's smallest full-size SUV. It combines Scout's excellent off-road
-                        capability with an automatic
-                        transmission, which reduces the difficulty of operation and enhances the pleasure of operation.
-                        Even people without
-                        off-road driving experience can easily drive this car. More people can experience the joy of
-                        adventure and long-distance
-                        travel to unknown destinations.
-                    </div>
-                    <div class="buttons">
-                        <a href="https://www.instagram.com/rcanddiecast/" class="buttons" target="_blank">
-                            <button class="order">Order</button>
-                        </a>
-                        <a href="https://youtube.com/@ebinumer_stories?si=v59mSfK0dBrOEJha" class="buttons"
-                            target="_blank">
-                            <button>Review</button>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="item">
-                <img src="image/defender.png">
-                <div class="content">
-                    <div class="author">HB Toys</div>
-                    <div class="title">Defender </div>
-                    <div class="topic">RC Offroad</div>
-                    <div class="des">
-                        HB Toys ZP1005 1/10 Scale 4WD RC Off-Road Car
-                    </div>
-                    <div class="buttons">
-                        <a href="https://www.instagram.com/rcanddiecast/" class="buttons" target="_blank">
-                            <button class="order">Order</button>
-                        </a>
-                        <a href="https://youtube.com/@ebinumer_stories?si=v59mSfK0dBrOEJha" class="buttons"
-                            target="_blank">
-                            <button>Review</button>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="item">
-                <img src="image/bronco-wl-toys.jpg">
-                <div class="content">
-                    <div class="author">WLTOYS</div>
-                    <div class="title">Rock Crawler </div>
-                    <div class="topic">4WD Off-Road RC</div>
-                    <div class="des">
-                        WLTOYS 104020 1/10 Scale Electric RC 4WD Rock Crawler is designed for both beginners and
-                        seasoned RC enthusiasts, this
-                        high-performance RC car offers a robust and realistic driving experience.
-                    </div>
-                    <div class="buttons">
-                        <a href="https://www.instagram.com/rcanddiecast/" class="buttons" target="_blank">
-                            <button class="order">Order</button>
-                        </a>
-                        <a href="https://youtube.com/@ebinumer_stories?si=v59mSfK0dBrOEJha" class="buttons"
-                            target="_blank">
-                            <button>Review</button>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-
-
-
-
-
-
+            </footer>
 
         </div>
-        <!-- list thumnail -->
-        <div class="thumbnail">
-            <div class="item">
-                <img src="image/img1.jpg">
-                <div class="content">
-                    <div class="title">
-                        BMW M3 E30
-                    </div>
-                    <div class="description">
-                        Drift RC Car
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <img src="image/trx4m.jpg">
-                <div class="content">
-                    <div class="title">
-                        Trail Trucks
-                    </div>
-                    <div class="description">
-                        TRX-4 & TRX-4M
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <img src="image/img2.jpg">
-                <div class="content">
-                    <div class="title">
-                        Land Rover
-                    </div>
-                    <div class="description">
-                        Camel Trophy Edition RTR
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <img src="image/img3.jpg">
-                <div class="content">
-                    <div class="title">
-                        Toyota Land Cruiser
-                    </div>
-                    <div class="description">
-                        V2 Toyota Land Cruiser 80 RTR
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <img src="image/img4.jpg">
-                <div class="content">
-                    <div class="title">
-                        Toyota Land Cruiser
-                    </div>
-                    <div class="description">
-                        V2 Toyota Land Cruiser 80 RTR
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <img src="image/traxxas-xmax.jpg">
-                <div class="content">
-                    <div class="title">
-                        Traxxas X-maxx
-                    </div>
-                    <div class="description">
-                        Rock and Roll
-                    </div>
-                </div>
-            </div>
+    </main>
 
-            <div class="item">
-                <img src="image/hb-toys-16-defender.jpg">
-                <div class="content">
-                    <div class="title">
-                        Traxxas X-maxx
-                    </div>
-                    <div class="description">
-                        Rock and Roll
-                    </div>
-                </div>
-            </div>
+    <!-- Scroll to Top App Button -->
+    <button id="scrollToTopBtn" aria-label="Scroll to top" class="fixed right-6 bottom-6 md:right-12 md:bottom-12 z-[100] w-12 h-12 dynamic-island rounded-full flex justify-center items-center hover:bg-white/10 transition-all duration-500 opacity-0 pointer-events-none translate-y-8 shadow-[0_4px_15px_rgba(0,0,0,0.8)]">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+    </button>
 
-            <div class="item">
-                <img src="image/cxd-d12-mini.jpg">
-                <div class="content">
-                    <div class="title">
-                        CXD Mini
-                    </div>
-                    <div class="description">
-                        CXD D12
-                    </div>
-                </div>
-            </div>
-
-            <div class="item">
-                <img src="image/brabus-gwagon.jpg">
-                <div class="content">
-                    <div class="title">
-                        Bebbly
-                    </div>
-                    <div class="description">
-                        Diecast Car
-                    </div>
-                </div>
-            </div>
-
-            <div class="item">
-                <img src="image/willys-fms.jpg">
-                <div class="content">
-                    <div class="title">
-                        Army Military Truck
-                    </div>
-                    <div class="description">
-                        Rock Crawler
-                    </div>
-                </div>
-            </div>
-
-            <div class="item">
-                <img src="image/k5-blazer.jpg">
-                <div class="content">
-                    <div class="title">
-                        Chevrolet K5
-                    </div>
-                    <div class="description">
-                        Blazer
-                    </div>
-                </div>
-            </div>
-
-            <div class="item">
-                <img src="image/defender.png">
-                <div class="content">
-                    <div class="title">
-                        Defender
-                    </div>
-                    <div class="description">
-                        RC Offroad
-                    </div>
-                </div>
-            </div>
-
-            <div class="item">
-                <img src="image/bronco-wl-toys.jpg">
-                <div class="content">
-                    <div class="title">
-                        Rock Crawler
-                    </div>
-                    <div class="description">
-                        4WD Off-Road RC
-                    </div>
-                </div>
-            </div>
-
-
-        </div>
-        <!-- next prev -->
-
-        <div class="arrows">
-            <button id="prev">
-                < </button>
-                    <button id="next">></button>
-        </div>
-        <!-- time running -->
-        <div class="time"></div>
-    </div>
-
-
-
-
-
-
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <script src="app.js"></script>
-    <script>
-        $(window).on("load", function () {
-            setTimeout(function () {
-                $(".loader-wrapper").fadeOut("slow");
-            }, 2000);
-        });
-    </script>
+    <!-- App Dependencies -->
+    <script src="https://unpkg.com/lenis@1.1.9/dist/lenis.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    
+    <script src="/app.js"></script>
 </body>
-
 </html>
