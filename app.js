@@ -102,7 +102,15 @@ document.addEventListener("DOMContentLoaded", () => {
             const resp = await fetch(API_URL, { signal: controller.signal });
             clearTimeout(fetchTimeout);
             const data = await resp.json();
-            const products = data.filter(item => item.stock === 'stock');
+
+            // Rule: Never show OOS products anywhere
+            const products = data.filter(item => item.stock !== 'OOS');
+
+            // Slider products: only those explicitly marked slider="yes"
+            const sliderProducts = products.filter(item => item.slider === 'yes');
+
+            // Product list: ALL in-stock products (including slider ones, so customers can purchase)
+            const listProducts = products;
             
             clearTimeout(safetyTimer);
 
@@ -113,14 +121,14 @@ document.addEventListener("DOMContentLoaded", () => {
             
             if (products.length === 0) return;
 
-            // 1. Init Hero Slider (First 3)
-            initHeroSlider(products);
+            // 1. Init Hero Slider — only slider="yes" products
+            initHeroSlider(sliderProducts);
             
-            // 2. Init Bento Showroom (Remaining)
-            renderBentoGrid(products.slice(3));
+            // 2. Init Bento Showroom — ALL in-stock products
+            renderBentoGrid(listProducts);
             
             // 3. Init Kinetic Marquee
-            renderMarquee(products);
+            renderMarquee(listProducts);
             
             // Parallax Images Initializer
             initParallax();
@@ -149,8 +157,10 @@ document.addEventListener("DOMContentLoaded", () => {
     let heroSlides = [];
     let autoPlayInterval;
 
-    function initHeroSlider(products) {
-        heroSlides = products.slice(0, 3);
+    function initHeroSlider(sliderProducts) {
+        // Only slider="yes" products are passed in; show up to first 5 slides
+        heroSlides = sliderProducts.slice(0, 5);
+        const products = heroSlides; // alias for the rest of the function
         const track = document.getElementById('hero-slider-track');
         const controls = document.getElementById('hero-controls');
         
