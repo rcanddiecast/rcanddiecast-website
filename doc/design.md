@@ -580,6 +580,18 @@ color: #ff3d00;
 }
 ```
 
+> **⚠️ Single-tick rule**: Wire Lenis into GSAP ticker ONLY. Do NOT also add a `requestAnimationFrame(raf)` loop — that double-ticks Lenis and causes scroll jank.
+```js
+// ✅ CORRECT
+gsap.ticker.add((time) => lenis.raf(time * 1000));
+gsap.ticker.lagSmoothing(0, 0);
+lenis.on('scroll', ScrollTrigger.update);
+
+// ❌ WRONG — do not add this:
+// function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+// requestAnimationFrame(raf);
+```
+
 ### Parallax
 Product images have a subtle upward parallax as the user scrolls:
 ```js
