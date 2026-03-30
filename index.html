@@ -20,6 +20,162 @@
         .animate-liquid {
             animation: liquidScale 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
+
+        /* ===== Search & Filter Bar ===== */
+        #filter-bar {
+            background: rgba(5,5,5,0.85);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 2rem;
+            transition: box-shadow 0.3s ease;
+        }
+        #filter-bar:focus-within {
+            box-shadow: 0 0 0 1px rgba(255,61,0,0.4), 0 20px 40px rgba(0,0,0,0.6);
+        }
+        .filter-input {
+            background: transparent;
+            color: #fff;
+            outline: none;
+            border: none;
+            font-family: inherit;
+        }
+        .filter-input::placeholder { color: rgba(255,255,255,0.3); }
+        .filter-select {
+            background: rgba(255,255,255,0.05);
+            color: #fff;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 1rem;
+            outline: none;
+            cursor: pointer;
+            font-family: inherit;
+            appearance: none;
+            -webkit-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.4)' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.75rem center;
+            padding-right: 2rem !important;
+        }
+        .filter-select option { background: #050505; color: #fff; }
+        .filter-divider {
+            width: 1px;
+            background: rgba(255,255,255,0.08);
+            align-self: stretch;
+            margin: 6px 0;
+        }
+        /* Range Slider */
+        .price-range-wrap { position: relative; }
+        input[type=range].price-slider {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 2px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 2px;
+            outline: none;
+            cursor: pointer;
+        }
+        input[type=range].price-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #ff3d00;
+            border: 2px solid #000;
+            box-shadow: 0 0 8px rgba(255,61,0,0.6);
+            cursor: pointer;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+        input[type=range].price-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.25);
+            box-shadow: 0 0 14px rgba(255,61,0,0.8);
+        }
+        input[type=range].price-slider::-moz-range-thumb {
+            width: 16px; height: 16px;
+            border-radius: 50%;
+            background: #ff3d00;
+            border: 2px solid #000;
+            cursor: pointer;
+        }
+        /* Active filter pill */
+        .filter-active-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255,61,0,0.15);
+            border: 1px solid rgba(255,61,0,0.35);
+            color: #ff3d00;
+            font-size: 10px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: 4px 10px;
+            border-radius: 99px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .filter-active-pill:hover { background: rgba(255,61,0,0.25); }
+        /* Mobile filter sheet */
+        #mobile-filter-sheet {
+            position: fixed;
+            inset: 0;
+            z-index: 9998;
+            pointer-events: none;
+        }
+        #mobile-filter-sheet.open { pointer-events: all; }
+        #mobile-filter-backdrop {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(4px);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        #mobile-filter-sheet.open #mobile-filter-backdrop { opacity: 1; }
+        #mobile-filter-panel {
+            position: absolute;
+            bottom: 0;
+            left: 0; right: 0;
+            background: #050505;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            border-radius: 2rem 2rem 0 0;
+            padding: 1.5rem 1.5rem 5rem;
+            transform: translateY(100%);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+        #mobile-filter-sheet.open #mobile-filter-panel { transform: translateY(0); }
+        .mobile-filter-label {
+            font-size: 9px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            color: rgba(255,255,255,0.35);
+            margin-bottom: 0.6rem;
+            display: block;
+        }
+        /* Result count badge */
+        #result-count {
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.35);
+            transition: color 0.3s;
+        }
+        #result-count.has-filter { color: #ff3d00; }
+        /* No results state */
+        .no-results-state {
+            grid-column: 1 / -1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 5rem 1rem;
+            gap: 1rem;
+        }
     </style>
 </head>
 <body class="bg-surface-950 text-white selection:bg-brand-orange selection:text-white">
@@ -84,14 +240,85 @@
             <section id="bento-showroom" class="pt-32 pb-24 bg-surface-950 relative z-20">
                 <div class="max-w-[1920px] mx-auto px-6 lg:px-12">
                     
-                    <div class="mb-20 text-center animate-liquid">
+                    <div class="mb-12 text-center animate-liquid">
                         <h2 class="text-[10px] md:text-sm text-brand-orange uppercase tracking-[0.5em] font-extrabold mb-4">Precision Grid</h2>
                         <p class="text-4xl md:text-7xl font-extrabold tracking-tighter text-white">Curated Engineering.</p>
                     </div>
 
+                    <!-- ===== Desktop Search & Filter Bar ===== -->
+                    <div id="filter-bar" class="hidden md:flex items-center gap-0 mb-10 px-2 py-2" role="search" aria-label="Search and filter products">
+                        <!-- Search Input -->
+                        <div class="flex items-center gap-3 flex-1 px-5 py-3">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                            <input id="search-input" type="search" placeholder="Search by name, brand, model…" class="filter-input flex-1 text-sm" autocomplete="off" aria-label="Search products">
+                            <button id="clear-search-btn" aria-label="Clear search" style="display:none; background:rgba(255,255,255,0.08); border:none; border-radius:50%; width:22px; height:22px; cursor:pointer; color:#fff; font-size:14px; line-height:1; align-items:center; justify-content:center;">×</button>
+                        </div>
+
+                        <div class="filter-divider"></div>
+
+                        <!-- Brand Filter -->
+                        <div class="px-4 py-3">
+                            <select id="brand-filter" class="filter-select text-xs font-bold px-4 py-2" aria-label="Filter by brand">
+                                <option value="">All Brands</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-divider"></div>
+
+                        <!-- Sort -->
+                        <div class="px-4 py-3">
+                            <select id="sort-filter" class="filter-select text-xs font-bold px-4 py-2" aria-label="Sort products">
+                                <option value="">Sort by</option>
+                                <option value="low">Price: Low → High</option>
+                                <option value="high">Price: High → Low</option>
+                                <option value="az">Name: A → Z</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-divider"></div>
+
+                        <!-- Price Range -->
+                        <div class="px-5 py-2" style="min-width:200px">
+                            <div class="flex justify-between items-center mb-2">
+                                <span style="font-size:9px; font-weight:800; text-transform:uppercase; letter-spacing:0.25em; color:rgba(255,255,255,0.35);">Price Range</span>
+                                <span id="price-display" style="font-size:10px; font-weight:700; color:#ff3d00;">₹0 – ₹10,000</span>
+                            </div>
+                            <div class="price-range-wrap">
+                                <input type="range" id="price-min" class="price-slider" min="0" max="10000" value="0" step="100" aria-label="Minimum price">
+                                <input type="range" id="price-max" class="price-slider mt-1" min="0" max="10000" value="10000" step="100" aria-label="Maximum price">
+                            </div>
+                        </div>
+
+                        <div class="filter-divider"></div>
+
+                        <!-- Clear All -->
+                        <div class="px-4 py-2">
+                            <button id="clear-all-btn" aria-label="Clear all filters" style="font-size:9px; font-weight:800; text-transform:uppercase; letter-spacing:0.2em; color:rgba(255,255,255,0.3); background:none; border:none; cursor:pointer; padding:0.6rem 0.5rem; white-space:nowrap; transition:color 0.2s;" onmouseover="this.style.color='#ff3d00'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">Clear All</button>
+                        </div>
+                    </div>
+
+                    <!-- Mobile: Search pill + filter trigger -->
+                    <div class="flex md:hidden items-center gap-3 mb-8">
+                        <!-- Compact search bar -->
+                        <div style="flex:1; background:rgba(5,5,5,0.85); border:1px solid rgba(255,255,255,0.08); border-radius:1.5rem; display:flex; align-items:center; gap:10px; padding:0 16px; height:48px; backdrop-filter:blur(24px);">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                            <input id="search-input-mobile" type="search" placeholder="Search…" class="filter-input text-sm flex-1" autocomplete="off" aria-label="Search products">
+                            <button id="clear-search-mobile-btn" aria-label="Clear search" style="display:none; background:rgba(255,255,255,0.08); border:none; border-radius:50%; width:20px; height:20px; cursor:pointer; color:#fff; font-size:13px; line-height:1; align-items:center; justify-content:center;">×</button>
+                        </div>
+                        <!-- Filter trigger -->
+                        <button id="open-mobile-filter" aria-label="Open filters" style="width:48px; height:48px; border-radius:1.5rem; background:rgba(5,5,5,0.85); border:1px solid rgba(255,255,255,0.08); backdrop-filter:blur(24px); display:flex; align-items:center; justify-content:center; cursor:pointer; flex-shrink:0; position:relative;" onclick="openMobileFilter()">
+                            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="11" y1="18" x2="13" y2="18"/></svg>
+                            <!-- Active dot indicator -->
+                            <span id="filter-active-dot" style="display:none; position:absolute; top:10px; right:10px; width:7px; height:7px; border-radius:50%; background:#ff3d00; border:1.5px solid #000;"></span>
+                        </button>
+                    </div>
+
+                    <!-- Active filters row + result count -->
+                    <div id="active-filters-row" class="flex flex-wrap items-center gap-2 mb-8" style="min-height:32px;"></div>
+
                     <!-- Asymmetric Auto-Flow Grid -->
                     <div id="bento-gallery" class="grid grid-cols-1 md:grid-cols-12 gap-6 grid-flow-row-dense">
-                        <!-- Bento Cards Injected Here via API slice(3) -->
+                        <!-- Bento Cards Injected Here via API -->
                     </div>
                 </div>
             </section>
@@ -101,7 +328,7 @@
                 <div class="absolute inset-0 bg-app-glass pointer-events-none group-hover:opacity-100 opacity-50 transition-opacity duration-1000"></div>
                 
                 <div class="text-center relative z-10 animate-liquid">
-                    <p class="text-[9px] uppercase tracking-[0.4em] font-bold text-gray-500 mb-6">Partners & Projects</p>
+                    <p class="text-[9px] uppercase tracking-[0.4em] font-bold text-gray-500 mb-6">Partners &amp; Projects</p>
                 </div>
                 
                 <!-- Continuous Marquee Container -->
@@ -114,13 +341,63 @@
                 
                 <!-- Ending Brand Logo -->
                 <div class="px-6 lg:px-12 max-w-[1920px] mx-auto pt-16 text-center relative z-10 flex flex-col items-center gap-6">
-                    <h3 class="text-4xl md:text-6xl font-extrabold tracking-tighter text-white">RC&D.</h3>
+                    <h3 class="text-4xl md:text-6xl font-extrabold tracking-tighter text-white">RC&amp;D.</h3>
                     <p class="text-[9px] uppercase tracking-[0.3em] font-bold text-gray-600">Pure Scale Automotives</p>
                 </div>
             </footer>
 
         </div>
     </main>
+
+    <!-- App Dependencies -->
+    <div id="mobile-filter-sheet" role="dialog" aria-modal="true" aria-label="Filter products">
+        <div id="mobile-filter-backdrop" onclick="closeMobileFilter()"></div>
+        <div id="mobile-filter-panel">
+            <!-- Handle bar -->
+            <div style="width:40px; height:4px; border-radius:2px; background:rgba(255,255,255,0.12); margin:0 auto 1.5rem;"></div>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem;">
+                <p style="font-size:0.9rem; font-weight:800; color:#fff; letter-spacing:-0.02em;">Filters</p>
+                <button onclick="closeMobileFilter()" style="background:rgba(255,255,255,0.08); border:none; border-radius:50%; width:30px; height:30px; cursor:pointer; color:rgba(255,255,255,0.6); font-size:18px; line-height:1; display:flex; align-items:center; justify-content:center;">×</button>
+            </div>
+
+            <!-- Brand -->
+            <div style="margin-bottom:1.5rem;">
+                <label class="mobile-filter-label">Brand</label>
+                <select id="brand-filter-mobile" class="filter-select text-sm font-bold" style="width:100%; padding:0.75rem 2.5rem 0.75rem 1rem;" aria-label="Filter by brand (mobile)">
+                    <option value="">All Brands</option>
+                </select>
+            </div>
+
+            <!-- Sort -->
+            <div style="margin-bottom:1.5rem;">
+                <label class="mobile-filter-label">Sort by</label>
+                <select id="sort-filter-mobile" class="filter-select text-sm font-bold" style="width:100%; padding:0.75rem 2.5rem 0.75rem 1rem;" aria-label="Sort products (mobile)">
+                    <option value="">Default</option>
+                    <option value="low">Price: Low → High</option>
+                    <option value="high">Price: High → Low</option>
+                    <option value="az">Name: A → Z</option>
+                </select>
+            </div>
+
+            <!-- Price Range -->
+            <div style="margin-bottom:2rem;">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
+                    <label class="mobile-filter-label" style="margin:0;">Price Range</label>
+                    <span id="price-display-mobile" style="font-size:11px; font-weight:700; color:#ff3d00;">₹0 – ₹10,000</span>
+                </div>
+                <div class="price-range-wrap">
+                    <input type="range" id="price-min-mobile" class="price-slider" min="0" max="10000" value="0" step="100" aria-label="Minimum price (mobile)">
+                    <input type="range" id="price-max-mobile" class="price-slider" style="margin-top:0.75rem;" min="0" max="10000" value="10000" step="100" aria-label="Maximum price (mobile)">
+                </div>
+            </div>
+
+            <!-- Apply + Clear -->
+            <div style="display:flex; gap:0.75rem;">
+                <button onclick="clearAllFilters(); closeMobileFilter();" style="flex:1; padding:0.9rem; border-radius:1rem; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); color:rgba(255,255,255,0.6); font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:0.15em; cursor:pointer;">Clear All</button>
+                <button onclick="applyMobileFilters(); closeMobileFilter();" style="flex:1; padding:0.9rem; border-radius:1rem; background:#ff3d00; border:none; color:#fff; font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:0.15em; cursor:pointer; box-shadow:0 0 20px rgba(255,61,0,0.4);">Apply Filters</button>
+            </div>
+        </div>
+    </div>
 
     <!-- Scroll to Top App Button -->
     <button id="scrollToTopBtn" aria-label="Scroll to top" class="fixed right-6 bottom-6 md:right-12 md:bottom-12 z-[100] w-12 h-12 dynamic-island rounded-full flex justify-center items-center hover:bg-white/10 transition-all duration-500 opacity-0 pointer-events-none translate-y-8 shadow-[0_4px_15px_rgba(0,0,0,0.8)]">

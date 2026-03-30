@@ -133,6 +133,9 @@ document.addEventListener("DOMContentLoaded", () => {
             // Parallax Images Initializer
             initParallax();
 
+            // 4. Init Search & Filter system
+            initFilterSystem(listProducts);
+
         } catch (err) {
             clearTimeout(safetyTimer);
             console.error("API Error:", err.name === 'AbortError' ? 'Request timed out after 10s' : err);
@@ -337,4 +340,396 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     initApp();
+
+    // ======== 5. Search & Filter System ======== //
+    let _allProducts = [];
+    let _filterState = {
+        query: '',
+        brand: '',
+        sort: '',
+        priceMin: 0,
+        priceMax: Infinity,
+    };
+    let _priceAbsMax = 10000;
+
+    function initFilterSystem(products) {
+        _allProducts = products;
+
+        // Compute actual price bounds from data
+        const prices = products.map(p => p.rate);
+        const absMin = Math.min(...prices);
+        const absMax = Math.max(...prices);
+        _priceAbsMax = absMax;
+        _filterState.priceMax = absMax;
+
+        // Set slider bounds based on real data
+        ['price-min', 'price-min-mobile'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) { el.min = absMin; el.max = absMax; el.value = absMin; el.step = Math.max(100, Math.floor((absMax - absMin) / 50) * 10); }
+        });
+        ['price-max', 'price-max-mobile'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) { el.min = absMin; el.max = absMax; el.value = absMax; el.step = Math.max(100, Math.floor((absMax - absMin) / 50) * 10); }
+        });
+        updatePriceDisplay();
+
+        // Populate brand dropdowns
+        const brands = [...new Set(products.map(p => p.brandName))].sort();
+        ['brand-filter', 'brand-filter-mobile'].forEach(id => {
+            const sel = document.getElementById(id);
+            if (!sel) return;
+            brands.forEach(b => {
+                const opt = document.createElement('option');
+                opt.value = b; opt.textContent = b;
+                sel.appendChild(opt);
+            });
+        });
+
+        // ---- Desktop event listeners ----
+        const searchInput = document.getElementById('search-input');
+        const clearSearchBtn = document.getElementById('clear-search-btn');
+        const brandFilter = document.getElementById('brand-filter');
+        const sortFilter = document.getElementById('sort-filter');
+        const priceMin = document.getElementById('price-min');
+        const priceMax = document.getElementById('price-max');
+        const clearAllBtn = document.getElementById('clear-all-btn');
+
+        if (searchInput) {
+            searchInput.addEventListener('input', () => {
+                _filterState.query = searchInput.value.trim();
+                clearSearchBtn.style.display = _filterState.query ? 'flex' : 'none';
+                applyFilters();
+            });
+        }
+        if (clearSearchBtn) {
+            clearSearchBtn.addEventListener('click', () => {
+                searchInput.value = '';
+                _filterState.query = '';
+                clearSearchBtn.style.display = 'none';
+                applyFilters();
+            });
+        }
+        if (brandFilter) {
+            brandFilter.addEventListener('change', () => {
+                _filterState.brand = brandFilter.value;
+                applyFilters();
+            });
+        }
+        if (sortFilter) {
+            sortFilter.addEventListener('change', () => {
+                _filterState.sort = sortFilter.value;
+                applyFilters();
+            });
+        }
+        if (priceMin) {
+            priceMin.addEventListener('input', () => {
+                let v = parseInt(priceMin.value);
+                if (v >= parseInt(priceMax.value)) v = parseInt(priceMax.value) - parseInt(priceMin.step || 100);
+                priceMin.value = v;
+                _filterState.priceMin = v;
+                updatePriceDisplay();
+                applyFilters();
+            });
+        }
+        if (priceMax) {
+            priceMax.addEventListener('input', () => {
+                let v = parseInt(priceMax.value);
+                if (v <= parseInt(priceMin.value)) v = parseInt(priceMin.value) + parseInt(priceMax.step || 100);
+                priceMax.value = v;
+                _filterState.priceMax = v;
+                updatePriceDisplay();
+                applyFilters();
+            });
+        }
+        if (clearAllBtn) {
+            clearAllBtn.addEventListener('click', () => clearAllFilters());
+        }
+
+        // ---- Mobile search (live) ----
+        const searchMobile = document.getElementById('search-input-mobile');
+        const clearSearchMobileBtn = document.getElementById('clear-search-mobile-btn');
+        if (searchMobile) {
+            searchMobile.addEventListener('input', () => {
+                _filterState.query = searchMobile.value.trim();
+                if (searchInput) searchInput.value = searchMobile.value;
+                clearSearchMobileBtn.style.display = _filterState.query ? 'flex' : 'none';
+                applyFilters();
+            });
+        }
+        if (clearSearchMobileBtn) {
+            clearSearchMobileBtn.addEventListener('click', () => {
+                if (searchMobile) searchMobile.value = '';
+                if (searchInput) searchInput.value = '';
+                _filterState.query = '';
+                clearSearchMobileBtn.style.display = 'none';
+                applyFilters();
+            });
+        }
+
+        // Mobile range sliders — live preview while sheet is open
+        const pmMin = document.getElementById('price-min-mobile');
+        const pmMax = document.getElementById('price-max-mobile');
+        if (pmMin) pmMin.addEventListener('input', () => updatePriceDisplay());
+        if (pmMax) pmMax.addEventListener('input', () => updatePriceDisplay());
+    }
+
+    function updatePriceDisplay() {
+        // Desktop
+        const pMin = document.getElementById('price-min');
+        const pMax = document.getElementById('price-max');
+        const disp = document.getElementById('price-display');
+        if (pMin && pMax && disp) {
+            disp.textContent = `₹${parseInt(pMin.value).toLocaleString()} – ₹${parseInt(pMax.value).toLocaleString()}`;
+        }
+        // Mobile
+        const pmMin = document.getElementById('price-min-mobile');
+        const pmMax = document.getElementById('price-max-mobile');
+        const dispM = document.getElementById('price-display-mobile');
+        if (pmMin && pmMax && dispM) {
+            dispM.textContent = `₹${parseInt(pmMin.value).toLocaleString()} – ₹${parseInt(pmMax.value).toLocaleString()}`;
+        }
+    }
+
+    function applyFilters() {
+        let results = [..._allProducts];
+
+        // 1. Text search (name, brand, model)
+        if (_filterState.query) {
+            const q = _filterState.query.toLowerCase();
+            results = results.filter(p =>
+                p.productName.toLowerCase().includes(q) ||
+                p.brandName.toLowerCase().includes(q) ||
+                p.modelName.toLowerCase().includes(q)
+            );
+        }
+
+        // 2. Brand filter
+        if (_filterState.brand) {
+            results = results.filter(p => p.brandName === _filterState.brand);
+        }
+
+        // 3. Price range
+        results = results.filter(p => p.rate >= _filterState.priceMin && p.rate <= _filterState.priceMax);
+
+        // 4. Sort
+        if (_filterState.sort === 'low') results.sort((a, b) => a.rate - b.rate);
+        else if (_filterState.sort === 'high') results.sort((a, b) => b.rate - a.rate);
+        else if (_filterState.sort === 'az') results.sort((a, b) => a.productName.localeCompare(b.productName));
+
+        renderBentoGridFiltered(results);
+        updateActiveFiltersRow(results.length);
+        updateFilterActiveDot();
+    }
+
+    function renderBentoGridFiltered(products) {
+        const gallery = document.getElementById('bento-gallery');
+        if (!gallery) return;
+
+        if (products.length === 0) {
+            gallery.innerHTML = `
+                <div class="no-results-state">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                    <p style="font-size:1.1rem; font-weight:800; color:rgba(255,255,255,0.7); letter-spacing:-0.02em;">No results found</p>
+                    <p style="font-size:0.75rem; color:rgba(255,255,255,0.25); text-align:center; max-width:240px;">Try a different search term or clear your filters.</p>
+                    <button onclick="clearAllFilters()" style="margin-top:0.5rem; padding:0.6rem 1.5rem; border-radius:99px; background:rgba(255,61,0,0.15); border:1px solid rgba(255,61,0,0.35); color:#ff3d00; font-size:10px; font-weight:800; text-transform:uppercase; letter-spacing:0.15em; cursor:pointer;">Clear Filters</button>
+                </div>
+            `;
+            return;
+        }
+
+        let html = '';
+        products.forEach((product, i) => {
+            let bentoClass = 'col-span-1 md:col-span-4 min-h-[400px]';
+            if (i % 5 === 0) bentoClass = 'col-span-1 md:col-span-8 min-h-[450px] md:min-h-[550px]';
+            if (i % 5 === 1) bentoClass = 'col-span-1 md:col-span-4 row-span-1 md:row-span-2 min-h-[400px] md:min-h-[800px]';
+            if (i % 5 === 2) bentoClass = 'col-span-1 md:col-span-4 min-h-[400px]';
+            if (i % 5 === 3) bentoClass = 'col-span-1 md:col-span-8 min-h-[450px] md:min-h-[550px]';
+
+            html += `
+                <div class="${bentoClass} bento-card relative group flex flex-col justify-end">
+                    <img src="${product.ImageURL}" class="absolute inset-0 w-full h-[110%] object-cover parallax-img origin-center grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-[2000ms] ease-out" data-speed="1.05" loading="lazy" onerror="this.src='/image/trx4m.jpg'">
+                    <div class="absolute inset-0 bg-hero-vignette opacity-80 mix-blend-multiply transition-opacity duration-1000 group-hover:opacity-60"></div>
+                    <div class="relative z-10 p-8 flex flex-col items-start w-full">
+                        <span class="bg-brand-orange text-white text-[8px] px-3 py-1.5 rounded-full uppercase tracking-[0.2em] font-extrabold mb-4 shadow-[0_0_15px_rgba(255,61,0,0.5)]">
+                            ${product.brandName}
+                        </span>
+                        <h3 class="text-3xl lg:text-5xl font-extrabold tracking-tighter leading-[0.9] text-white">${product.modelName}</h3>
+                        <div class="mt-6 w-full flex justify-between items-end
+                                    opacity-100 translate-y-0
+                                    md:opacity-0 md:translate-y-8 md:group-hover:opacity-100 md:group-hover:translate-y-0
+                                    transition-all duration-[800ms] ease-out">
+                            <p class="text-white text-xl md:text-3xl font-light tracking-tight">₹${product.rate.toLocaleString()}</p>
+                            <div class="flex gap-2 md:gap-3">
+                                ${product.ytLink ? `
+                                <a href="${product.ytLink}" target="_blank" class="w-12 h-12 rounded-[1.2rem] flex justify-center items-center bg-transparent border border-white/20 hover:bg-[#ff0000] hover:border-[#ff0000] text-white transition-colors duration-300 shadow-none hover:shadow-[0_0_15px_rgba(255,0,0,0.5)]">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="translate-x-[1px]" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                                </a>` : ''}
+                                <a href="${product.instaLink || '#'}" target="_blank" class="w-12 h-12 rounded-[1.2rem] flex justify-center items-center bg-white hover:bg-brand-orange text-black hover:text-white transition-colors duration-300 shadow-[0_0_15px_rgba(255,255,255,0.2)] hover:shadow-[0_0_15px_rgba(255,61,0,0.4)]">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="rotate-45" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+
+        gallery.innerHTML = html;
+
+        // Lightweight fade-in (no stagger GSAP since filter re-renders frequently)
+        gallery.style.opacity = '0';
+        requestAnimationFrame(() => {
+            gallery.style.transition = 'opacity 0.4s ease';
+            gallery.style.opacity = '1';
+        });
+
+        // Re-init parallax for new images
+        ScrollTrigger.getAll().forEach(st => st.kill());
+        initParallax();
+    }
+
+    function updateActiveFiltersRow(count) {
+        const row = document.getElementById('active-filters-row');
+        if (!row) return;
+        row.innerHTML = '';
+
+        const hasQuery = _filterState.query;
+        const hasBrand = _filterState.brand;
+        const hasSort = _filterState.sort;
+        const hasPriceMin = _filterState.priceMin > 0;
+        const hasPriceMax = _filterState.priceMax < _priceAbsMax;
+        const hasAnyFilter = hasQuery || hasBrand || hasSort || hasPriceMin || hasPriceMax;
+
+        // Result count
+        const countBadge = document.createElement('span');
+        countBadge.id = 'result-count';
+        countBadge.textContent = `${count} result${count !== 1 ? 's' : ''}`;
+        if (hasAnyFilter) countBadge.classList.add('has-filter');
+        row.appendChild(countBadge);
+
+        if (!hasAnyFilter) return;
+
+        const sep = document.createElement('span');
+        sep.style.cssText = 'width:1px; height:14px; background:rgba(255,255,255,0.1); align-self:center; margin:0 4px;';
+        row.appendChild(sep);
+
+        if (hasQuery) {
+            row.appendChild(makePill(`"${_filterState.query}"`, () => {
+                _filterState.query = '';
+                const si = document.getElementById('search-input');
+                const sm = document.getElementById('search-input-mobile');
+                if (si) si.value = '';
+                if (sm) sm.value = '';
+                document.getElementById('clear-search-btn').style.display = 'none';
+                document.getElementById('clear-search-mobile-btn').style.display = 'none';
+                applyFilters();
+            }));
+        }
+        if (hasBrand) {
+            row.appendChild(makePill(_filterState.brand, () => {
+                _filterState.brand = '';
+                const bf = document.getElementById('brand-filter');
+                const bfm = document.getElementById('brand-filter-mobile');
+                if (bf) bf.value = '';
+                if (bfm) bfm.value = '';
+                applyFilters();
+            }));
+        }
+        if (hasSort) {
+            const sortLabels = { low: 'Price: Low→High', high: 'Price: High→Low', az: 'A→Z' };
+            row.appendChild(makePill(sortLabels[_filterState.sort], () => {
+                _filterState.sort = '';
+                const sf = document.getElementById('sort-filter');
+                const sfm = document.getElementById('sort-filter-mobile');
+                if (sf) sf.value = '';
+                if (sfm) sfm.value = '';
+                applyFilters();
+            }));
+        }
+        if (hasPriceMin || hasPriceMax) {
+            row.appendChild(makePill(
+                `₹${_filterState.priceMin.toLocaleString()} – ₹${_filterState.priceMax.toLocaleString()}`,
+                () => {
+                    _filterState.priceMin = 0;
+                    _filterState.priceMax = _priceAbsMax;
+                    ['price-min', 'price-min-mobile'].forEach(id => { const el = document.getElementById(id); if(el) el.value = el.min; });
+                    ['price-max', 'price-max-mobile'].forEach(id => { const el = document.getElementById(id); if(el) el.value = el.max; });
+                    updatePriceDisplay();
+                    applyFilters();
+                }
+            ));
+        }
+    }
+
+    function makePill(label, onRemove) {
+        const pill = document.createElement('button');
+        pill.className = 'filter-active-pill';
+        pill.setAttribute('aria-label', `Remove filter: ${label}`);
+        pill.innerHTML = `${label} <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>`;
+        pill.addEventListener('click', onRemove);
+        return pill;
+    }
+
+    function updateFilterActiveDot() {
+        const dot = document.getElementById('filter-active-dot');
+        if (!dot) return;
+        const hasBrand = _filterState.brand;
+        const hasSort = _filterState.sort;
+        const hasPriceMin = _filterState.priceMin > 0;
+        const hasPriceMax = _filterState.priceMax < _priceAbsMax;
+        dot.style.display = (hasBrand || hasSort || hasPriceMin || hasPriceMax) ? 'block' : 'none';
+    }
+
+    // ---- Global functions for mobile sheet ----
+    window.openMobileFilter = function() {
+        document.getElementById('mobile-filter-sheet').classList.add('open');
+        document.body.style.overflow = 'hidden';
+    };
+
+    window.closeMobileFilter = function() {
+        document.getElementById('mobile-filter-sheet').classList.remove('open');
+        document.body.style.overflow = '';
+    };
+
+    window.applyMobileFilters = function() {
+        const bmf = document.getElementById('brand-filter-mobile');
+        const smf = document.getElementById('sort-filter-mobile');
+        const pmMin = document.getElementById('price-min-mobile');
+        const pmMax = document.getElementById('price-max-mobile');
+
+        if (bmf) {
+            _filterState.brand = bmf.value;
+            const bf = document.getElementById('brand-filter');
+            if (bf) bf.value = bmf.value;
+        }
+        if (smf) {
+            _filterState.sort = smf.value;
+            const sf = document.getElementById('sort-filter');
+            if (sf) sf.value = smf.value;
+        }
+        if (pmMin && pmMax) {
+            _filterState.priceMin = parseInt(pmMin.value);
+            _filterState.priceMax = parseInt(pmMax.value);
+            const pmin = document.getElementById('price-min');
+            const pmax = document.getElementById('price-max');
+            if (pmin) pmin.value = pmMin.value;
+            if (pmax) pmax.value = pmMax.value;
+            updatePriceDisplay();
+        }
+        applyFilters();
+    };
+
+    window.clearAllFilters = function() {
+        _filterState = { query: '', brand: '', sort: '', priceMin: 0, priceMax: _priceAbsMax };
+
+        ['search-input', 'search-input-mobile'].forEach(id => { const el = document.getElementById(id); if(el) el.value = ''; });
+        ['clear-search-btn', 'clear-search-mobile-btn'].forEach(id => { const el = document.getElementById(id); if(el) el.style.display = 'none'; });
+        ['brand-filter', 'brand-filter-mobile'].forEach(id => { const el = document.getElementById(id); if(el) el.value = ''; });
+        ['sort-filter', 'sort-filter-mobile'].forEach(id => { const el = document.getElementById(id); if(el) el.value = ''; });
+        ['price-min', 'price-min-mobile'].forEach(id => { const el = document.getElementById(id); if(el) el.value = el.min; });
+        ['price-max', 'price-max-mobile'].forEach(id => { const el = document.getElementById(id); if(el) el.value = el.max; });
+
+        updatePriceDisplay();
+        applyFilters();
+    };
 });
