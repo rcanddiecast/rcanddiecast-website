@@ -680,15 +680,22 @@ Source: `/data/products.json`
 
 ### Display Rules
 
-| Rule | Logic |
-|------|-------|
-| **OOS products** | `stock === "OOS"` → **hidden everywhere** (slider, grid, marquee) |
-| **Slider** | `slider === "yes"` AND `stock !== "OOS"` → shown in hero slider (up to 5 slides) |
-| **Product Grid** | ALL products where `stock !== "OOS"` → shown in bento grid |
-| **Marquee** | Unique `brandName` values from all in-stock products |
-| **Description truncation** | Hero slider shows first 140 characters + `...` |
-| **Price format** | `₹${rate.toLocaleString()}` (Indian locale with commas) |
-| **Image fallback** | `onerror="this.src='/image/trx4m.jpg'"` |
+Three layers are applied **in order**. All must pass for a product to appear in the grid:
+
+| Layer | Field | Rule | Effect |
+|-------|-------|------|--------|
+| **1 — OOS** | `stock` | `stock === "OOS"` | Hidden **everywhere** — slider, grid, marquee. Hard block. |
+| **2 — Slider** | `slider` | `slider === "yes"` | Shown in **hero slider** (non-OOS only, up to 5 slides) |
+| **3 — Show Product** | `showProdct` | `showProdct === "yes"` | Shown in **product grid** and search/filter |
+
+**Quick reference — how to control visibility:**
+
+| Scenario | `stock` | `showProdct` | Grid | Slider |
+|----------|---------|--------------|------|--------|
+| Normal product, visible everywhere | `stock` | `yes` | ✅ | if `slider:"yes"` |
+| Temporarily hide from grid only | `stock` | `no` | ❌ | if `slider:"yes"` |
+| Out of stock — hide everywhere | `OOS` | any | ❌ | ❌ |
+| Coming soon (slider only, not in grid) | `stock` | `no` + `slider:"yes"` | ❌ | ✅ |
 
 ---
 

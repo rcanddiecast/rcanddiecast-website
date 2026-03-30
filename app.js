@@ -104,14 +104,15 @@ document.addEventListener("DOMContentLoaded", () => {
             clearTimeout(fetchTimeout);
             const data = await resp.json();
 
-            // Rule: Never show OOS products anywhere
+            // ── Layer 1: OOS rule — never show OOS products ANYWHERE ──
             const products = data.filter(item => item.stock !== 'OOS');
 
-            // Slider products: only those explicitly marked slider="yes"
+            // ── Layer 2: Slider rule — only slider="yes" products go in the hero ──
             const sliderProducts = products.filter(item => item.slider === 'yes');
 
-            // Product list: ALL in-stock products (including slider ones, so customers can purchase)
-            const listProducts = products;
+            // ── Layer 3: showProdct rule — only showProdct="yes" products show in the grid ──
+            // (Set showProdct:"no" in products.json to hide a product without marking it OOS)
+            const listProducts = products.filter(item => item.showProdct === 'yes');
             
             clearTimeout(safetyTimer);
 
