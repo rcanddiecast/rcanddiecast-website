@@ -3,24 +3,22 @@ document.addEventListener("DOMContentLoaded", () => {
     // ======== GSAP & Lenis Setup ======== //
     gsap.registerPlugin(ScrollTrigger);
 
+    // Single Lenis tick via GSAP — the official Lenis+GSAP integration pattern.
+    // Do NOT also add a manual requestAnimationFrame loop; that would double-tick Lenis.
     const lenis = new Lenis({
         duration: 1.5,
         easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        direction: 'vertical',
         smooth: true,
         smoothTouch: false,  // Critical: let native touch scroll work on mobile
         touchMultiplier: 2,
     });
-    
-    function raf(time) {
-        lenis.raf(time);
-        requestAnimationFrame(raf);
-    }
-    requestAnimationFrame(raf);
 
-    lenis.on('scroll', ScrollTrigger.update);
+    // Wire Lenis into GSAP ticker (single source of truth for the animation loop)
     gsap.ticker.add((time) => lenis.raf(time * 1000));
     gsap.ticker.lagSmoothing(0, 0);
+
+    // Keep ScrollTrigger in sync with Lenis scroll position
+    lenis.on('scroll', ScrollTrigger.update);
 
     // ======== Dynamic Island & Scroll to Top Logic ======== //
     let lastScroll = 0;
@@ -31,23 +29,26 @@ document.addEventListener("DOMContentLoaded", () => {
         const current = window.scrollY;
         
         // Hide on scroll down, show on scroll up (app feel)
-        if(current > 200 && current > lastScroll && window.innerWidth < 768) {
-            island.style.transform = 'translate(-50%, 150%) scale(0.9)';
-        } else {
-            island.style.transform = 'translate(-50%, 0) scale(1)';
-        }
-        
-        if(window.innerWidth >= 768) {
-             island.style.transform = current > 50 ? 'translate(-50%, -10px) scale(0.95)' : 'translate(-50%, 0) scale(1)';
+        if (island) {
+            if (current > 200 && current > lastScroll && window.innerWidth < 768) {
+                island.style.transform = 'translate(-50%, 150%) scale(0.9)';
+            } else {
+                island.style.transform = 'translate(-50%, 0) scale(1)';
+            }
+            if (window.innerWidth >= 768) {
+                island.style.transform = current > 50 ? 'translate(-50%, -10px) scale(0.95)' : 'translate(-50%, 0) scale(1)';
+            }
         }
 
         // Scroll to top button visibility
-        if(current > 800) {
-            scrollToTopBtn.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-8');
-            scrollToTopBtn.classList.add('opacity-100', 'translate-y-0');
-        } else {
-            scrollToTopBtn.classList.add('opacity-0', 'pointer-events-none', 'translate-y-8');
-            scrollToTopBtn.classList.remove('opacity-100', 'translate-y-0');
+        if (scrollToTopBtn) {
+            if (current > 800) {
+                scrollToTopBtn.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-8');
+                scrollToTopBtn.classList.add('opacity-100', 'translate-y-0');
+            } else {
+                scrollToTopBtn.classList.add('opacity-0', 'pointer-events-none', 'translate-y-8');
+                scrollToTopBtn.classList.remove('opacity-100', 'translate-y-0');
+            }
         }
         
         lastScroll = current;
@@ -103,14 +104,15 @@ document.addEventListener("DOMContentLoaded", () => {
             clearTimeout(fetchTimeout);
             const data = await resp.json();
 
-            // Rule: Never show OOS products anywhere
+            // ── Layer 1: OOS rule — never show OOS products ANYWHERE ──
             const products = data.filter(item => item.stock !== 'OOS');
 
-            // Slider products: only those explicitly marked slider="yes"
+            // ── Layer 2: Slider rule — only slider="yes" products go in the hero ──
             const sliderProducts = products.filter(item => item.slider === 'yes');
 
-            // Product list: ALL in-stock products (including slider ones, so customers can purchase)
-            const listProducts = products;
+            // ── Layer 3: showProdct rule — only showProdct="yes" products show in the grid ──
+            // (Set showProdct:"no" in products.json to hide a product without marking it OOS)
+            const listProducts = products.filter(item => item.showProdct === 'yes');
             
             clearTimeout(safetyTimer);
 
