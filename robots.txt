@@ -1,4 +1,19 @@
+# robots.txt — RC & Diecast (rcanddiecast.com)
+# Last updated: 2026-03-31
+
 User-agent: *
 Allow: /
 
+# Block crawling of raw data, build artifacts, and internal tools
+Disallow: /node_modules/
+Disallow: /data/
+Disallow: /input.css
+Disallow: /checking.html
+Disallow: /checking.js
+Disallow: /.github/
+
+# Crawl-delay for bots that support it (optional, conservative value)
+Crawl-delay: 10
+
+# Sitemap location
 Sitemap: https://rcanddiecast.com/sitemap.xml
