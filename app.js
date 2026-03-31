@@ -267,7 +267,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     
                     ${isOOS ? `
                     <div class="absolute top-6 right-6 z-[100]">
-                        <button class="flex items-center justify-center gap-2 bg-gradient-to-r from-[#FFB800] to-[#E5A600] text-white [text-shadow:0_1px_2px_rgba(0,0,0,0.3)] text-[9px] md:text-[11px] px-4 md:px-5 py-2 md:py-2.5 uppercase tracking-[0.15em] font-extrabold shadow-[0_8px_16px_rgba(255,184,0,0.4)] rounded-full border border-white/30 backdrop-blur-md transition-all duration-300 hover:scale-105 hover:shadow-[0_12px_24px_rgba(255,184,0,0.6)] active:scale-95 cursor-pointer" onclick="window.open('${product.WAlink || product.instaLink || '#'}', '_blank')">
+                        <button class="flex items-center justify-center gap-2 bg-brand-orange text-white [text-shadow:0_1px_2px_rgba(0,0,0,0.3)] text-[9px] md:text-[11px] px-4 md:px-5 py-2 md:py-2.5 uppercase tracking-[0.15em] font-extrabold shadow-[0_8px_16px_rgba(255,61,0,0.4)] rounded-full border border-orange-500/50 backdrop-blur-md transition-all duration-300 hover:scale-105 hover:shadow-[0_12px_24px_rgba(255,61,0,0.6)] active:scale-95 cursor-pointer" onclick="window.open('${product.WAlink || product.instaLink || '#'}', '_blank')">
                             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="drop-shadow-sm"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
                             <span>Out of Stock</span>
                         </button>
@@ -565,7 +565,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     
                     ${isOOS ? `
                     <div class="absolute top-6 right-6 z-[100]">
-                        <button class="flex items-center justify-center gap-2 bg-gradient-to-r from-[#FFB800] to-[#E5A600] text-white [text-shadow:0_1px_2px_rgba(0,0,0,0.3)] text-[9px] md:text-[11px] px-4 md:px-5 py-2 md:py-2.5 uppercase tracking-[0.15em] font-extrabold shadow-[0_8px_16px_rgba(255,184,0,0.4)] rounded-full border border-white/30 backdrop-blur-md transition-all duration-300 hover:scale-105 hover:shadow-[0_12px_24px_rgba(255,184,0,0.6)] active:scale-95 cursor-pointer" onclick="window.open('${product.WAlink || product.instaLink || '#'}', '_blank')">
+                        <button class="flex items-center justify-center gap-2 bg-brand-orange text-white [text-shadow:0_1px_2px_rgba(0,0,0,0.3)] text-[9px] md:text-[11px] px-4 md:px-5 py-2 md:py-2.5 uppercase tracking-[0.15em] font-extrabold shadow-[0_8px_16px_rgba(255,61,0,0.4)] rounded-full border border-orange-500/50 backdrop-blur-md transition-all duration-300 hover:scale-105 hover:shadow-[0_12px_24px_rgba(255,61,0,0.6)] active:scale-95 cursor-pointer" onclick="window.open('${product.WAlink || product.instaLink || '#'}', '_blank')">
                             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="drop-shadow-sm"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
                             <span>Out of Stock</span>
                         </button>
