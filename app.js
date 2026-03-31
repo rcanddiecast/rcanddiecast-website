@@ -104,8 +104,8 @@ document.addEventListener("DOMContentLoaded", () => {
             clearTimeout(fetchTimeout);
             const data = await resp.json();
 
-            // ── Layer 1: OOS rule — never show OOS products ANYWHERE ──
-            const products = data.filter(item => item.stock !== 'OOS');
+            // ── Layer 1: OOS rule — optionally show them but label them OOS ──
+            const products = data;
 
             // ── Layer 2: Slider rule — only slider="yes" products go in the hero ──
             const sliderProducts = products.filter(item => item.slider === 'yes');
@@ -259,11 +259,21 @@ document.addEventListener("DOMContentLoaded", () => {
             if (i % 5 === 2) bentoClass = 'col-span-1 md:col-span-4 min-h-[400px]';
             if (i % 5 === 3) bentoClass = 'col-span-1 md:col-span-8 min-h-[450px] md:min-h-[550px]';
             
+            const isOOS = product.stock && product.stock.toUpperCase() === 'OOS';
             html += `
-                <div class="${bentoClass} bento-card relative group flex flex-col justify-end">
+                <div class="${bentoClass} bento-card relative group flex flex-col justify-end overflow-hidden">
                     <img src="${product.ImageURL}" class="absolute inset-0 w-full h-[110%] object-cover parallax-img origin-center grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-[2000ms] ease-out" data-speed="1.05" loading="lazy" onerror="this.src='/image/trx4m.jpg'">
                     <div class="absolute inset-0 bg-hero-vignette opacity-80 mix-blend-multiply transition-opacity duration-1000 group-hover:opacity-60"></div>
                     
+                    ${isOOS ? `
+                    <div class="absolute top-6 right-6 z-[100]">
+                        <button class="flex items-center justify-center gap-2 bg-brand-orange text-white [text-shadow:0_1px_2px_rgba(0,0,0,0.3)] text-[9px] md:text-[11px] px-4 md:px-5 py-2 md:py-2.5 uppercase tracking-[0.15em] font-extrabold shadow-[0_8px_16px_rgba(255,61,0,0.4)] rounded-full border border-orange-500/50 backdrop-blur-md transition-all duration-300 hover:scale-105 hover:shadow-[0_12px_24px_rgba(255,61,0,0.6)] active:scale-95 cursor-pointer" onclick="window.open('${product.WAlink || product.instaLink || '#'}', '_blank')">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="drop-shadow-sm"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                            <span>Out of Stock</span>
+                        </button>
+                    </div>
+                    ` : ''}
+
                     <div class="relative z-10 p-8 flex flex-col items-start w-full">
                         <span class="bg-brand-orange text-white text-[8px] px-3 py-1.5 rounded-full uppercase tracking-[0.2em] font-extrabold mb-4 shadow-[0_0_15px_rgba(255,61,0,0.5)]">
                             ${product.brandName}
@@ -547,10 +557,21 @@ document.addEventListener("DOMContentLoaded", () => {
             if (i % 5 === 2) bentoClass = 'col-span-1 md:col-span-4 min-h-[400px]';
             if (i % 5 === 3) bentoClass = 'col-span-1 md:col-span-8 min-h-[450px] md:min-h-[550px]';
 
+            const isOOS = product.stock && product.stock.toUpperCase() === 'OOS';
             html += `
-                <div class="${bentoClass} bento-card relative group flex flex-col justify-end">
+                <div class="${bentoClass} bento-card relative group flex flex-col justify-end overflow-hidden">
                     <img src="${product.ImageURL}" class="absolute inset-0 w-full h-[110%] object-cover parallax-img origin-center grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-[2000ms] ease-out" data-speed="1.05" loading="lazy" onerror="this.src='/image/trx4m.jpg'">
                     <div class="absolute inset-0 bg-hero-vignette opacity-80 mix-blend-multiply transition-opacity duration-1000 group-hover:opacity-60"></div>
+                    
+                    ${isOOS ? `
+                    <div class="absolute top-6 right-6 z-[100]">
+                        <button class="flex items-center justify-center gap-2 bg-brand-orange text-white [text-shadow:0_1px_2px_rgba(0,0,0,0.3)] text-[9px] md:text-[11px] px-4 md:px-5 py-2 md:py-2.5 uppercase tracking-[0.15em] font-extrabold shadow-[0_8px_16px_rgba(255,61,0,0.4)] rounded-full border border-orange-500/50 backdrop-blur-md transition-all duration-300 hover:scale-105 hover:shadow-[0_12px_24px_rgba(255,61,0,0.6)] active:scale-95 cursor-pointer" onclick="window.open('${product.WAlink || product.instaLink || '#'}', '_blank')">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="drop-shadow-sm"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                            <span>Out of Stock</span>
+                        </button>
+                    </div>
+                    ` : ''}
+
                     <div class="relative z-10 p-8 flex flex-col items-start w-full">
                         <span class="bg-brand-orange text-white text-[8px] px-3 py-1.5 rounded-full uppercase tracking-[0.2em] font-extrabold mb-4 shadow-[0_0_15px_rgba(255,61,0,0.5)]">
                             ${product.brandName}
