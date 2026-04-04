@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- ===== Primary SEO Meta Tags ===== -->
+  <title>RC & Diecast Blog | RC Car Tips, Reviews & Guides India</title>
+  <meta name="description" content="Explore expert RC car reviews, buying guides, maintenance tips and diecast model insights from India's premier RC hobby community. Traxxas, FMS, WL Toys & more.">
+  <meta name="keywords" content="RC car blog India, RC crawler review, diecast model blog, Traxxas review India, FMS RC car guide, RC hobby tips India, RC car maintenance, best RC cars India 2025">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="RC & Diecast">
+  <meta name="theme-color" content="#000000">
+
+  <!-- ===== Canonical URL ===== -->
+  <link rel="canonical" href="https://rcanddiecast.com/blog/">
+
+  <!-- ===== Open Graph ===== -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://rcanddiecast.com/blog/">
+  <meta property="og:title" content="RC & Diecast Blog | RC Car Tips, Reviews & Guides India">
+  <meta property="og:description" content="Expert RC car reviews, buyer's guides, maintenance tips and diecast insights from India's premier RC hobby community.">
+  <meta property="og:image" content="https://rcanddiecast.com/image/og-banner.jpg">
+  <meta property="og:site_name" content="RC & Diecast">
+  <meta property="og:locale" content="en_IN">
+
+  <!-- ===== Twitter Card ===== -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@rcanddiecast">
+  <meta name="twitter:title" content="RC & Diecast Blog | RC Car Tips, Reviews & Guides India">
+  <meta name="twitter:description" content="Expert RC car reviews, buyer's guides and maintenance tips from India's premier RC hobby community.">
+  <meta name="twitter:image" content="https://rcanddiecast.com/image/og-banner.jpg">
+
+  <!-- ===== JSON-LD Structured Data ===== -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "@id": "https://rcanddiecast.com/blog/#blog",
+    "name": "RC & Diecast Blog",
+    "url": "https://rcanddiecast.com/blog/",
+    "description": "Expert RC car reviews, buyer's guides and maintenance tips from India's premier RC hobby community.",
+    "publisher": {
+      "@type": "Organization",
+      "name": "RC & Diecast",
+      "url": "https://rcanddiecast.com",
+      "logo": "https://rcanddiecast.com/image/logo.png"
+    }
+  }
+  </script>
+
+  <!-- ===== Google Analytics ===== -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-VWQMTBLVDL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-VWQMTBLVDL');
+  </script>
+
+  <link rel="icon" type="image/x-icon" href="/image/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;700;800&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" as="script">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --brand-orange: #ff3d00;
+      --brand-hover: #e53700;
+      --surface-950: #000000;
+      --surface-900: #050505;
+      --surface-850: #0a0a0a;
+      --surface-800: #111111;
+    }
+
+    html { background: var(--surface-950); }
+    body {
+      background: var(--surface-950);
+      color: #fff;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ===== Loader ===== */
+    #blog-loader {
+      position: fixed;
+      inset: 0;
+      background: var(--surface-950);
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transition: opacity 1s ease;
+    }
+    #blog-loader h2 {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.5em;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 24px;
+    }
+    #loader-track {
+      width: 192px;
+      height: 4px;
+      background: var(--surface-800);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    #loader-bar {
+      height: 100%;
+      width: 0%;
+      background: var(--brand-orange);
+      border-radius: 99px;
+      transition: width 0.3s ease;
+    }
+
+    /* ===== Dynamic Island Nav ===== */
+    .dynamic-island {
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      background: rgba(0,0,0,0.70);
+      border: 1px solid rgba(255,255,255,0.10);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    }
+    nav.site-nav {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 50;
+      padding: 8px;
+      border-radius: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      width: auto;
+    }
+    @media (min-width: 768px) {
+      nav.site-nav {
+        bottom: auto;
+        top: 32px;
+        gap: 16px;
+      }
+    }
+    .nav-icon-btn {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #fff;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .nav-icon-btn:hover { background: rgba(255,255,255,0.1); }
+    @media (min-width: 768px) {
+      .nav-icon-btn { width: 56px; height: 56px; }
+    }
+    .nav-divider { width: 1px; height: 32px; background: rgba(255,255,255,0.1); margin: 0 4px; }
+    .nav-cta {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: var(--brand-orange);
+      border: none;
+      border-radius: 1.5rem;
+      color: #fff;
+      text-decoration: none;
+      box-shadow: 0 0 20px rgba(255,61,0,0.3);
+      transition: background 0.2s;
+      width: 48px;
+      height: 48px;
+    }
+    .nav-cta:hover { background: var(--brand-hover); }
+    @media (min-width: 768px) {
+      .nav-cta { width: auto; padding: 0 24px; height: 56px; }
+      .nav-cta-text { display: block !important; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.2em; }
+      .nav-cta svg { display: none; }
+    }
+    .nav-cta-text { display: none; }
+
+    /* Active nav item */
+    .nav-icon-btn.active { background: rgba(255,61,0,0.15); }
+    .nav-icon-btn.active svg { stroke: var(--brand-orange); }
+
+    /* ===== Page Header ===== */
+    .blog-header {
+      padding: 160px 24px 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    @media (min-width: 1024px) { .blog-header { padding: 180px 48px 100px; } }
+    .blog-header::before {
+      content: '';
+      position: absolute;
+      top: -200px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(255,61,0,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .blog-eyebrow {
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5em;
+      color: var(--brand-orange);
+      margin-bottom: 16px;
+    }
+    .blog-header h1 {
+      font-size: clamp(2.5rem, 8vw, 6rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 0.9;
+      color: #fff;
+      margin-bottom: 24px;
+    }
+    .blog-header p {
+      font-size: clamp(0.875rem, 2vw, 1.125rem);
+      color: rgba(255,255,255,0.4);
+      font-weight: 300;
+      max-width: 480px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* ===== Blog Grid ===== */
+    .blog-section {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 24px 120px;
+    }
+    @media (min-width: 1024px) { .blog-section { padding: 0 48px 120px; } }
+
+    #blog-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+    @media (min-width: 768px) {
+      #blog-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (min-width: 1200px) {
+      #blog-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    /* Featured post - full width on lg */
+    .blog-card.featured {
+      grid-column: 1 / -1;
+    }
+    @media (min-width: 1200px) {
+      .blog-card.featured { grid-column: span 2; }
+    }
+
+    /* ===== Blog Card ===== */
+    .blog-card {
+      background: var(--surface-900);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 2rem;
+      overflow: hidden;
+      transition: border-color 500ms ease, transform 300ms ease;
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      color: inherit;
+      position: relative;
+    }
+    .blog-card:hover {
+      border-color: rgba(255,61,0,0.4);
+      transform: translateY(-4px);
+    }
+    .blog-card-img-wrap {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 16/9;
+      background: var(--surface-800);
+    }
+    .blog-card.featured .blog-card-img-wrap {
+      aspect-ratio: 21/9;
+    }
+    .blog-card-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(1);
+      opacity: 0.7;
+      transition: filter 2000ms ease, opacity 2000ms ease, transform 2000ms ease;
+    }
+    .blog-card:hover .blog-card-img {
+      filter: grayscale(0);
+      opacity: 1;
+      transform: scale(1.05);
+    }
+    .blog-card-img-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(5,5,5,0.8) 0%, transparent 50%);
+    }
+    .blog-card-body {
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      gap: 12px;
+    }
+    .blog-card-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .blog-category-badge {
+      background: var(--brand-orange);
+      color: #fff;
+      font-size: 8px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      padding: 4px 12px;
+      border-radius: 99px;
+      box-shadow: 0 0 15px rgba(255,61,0,0.5);
+      flex-shrink: 0;
+    }
+    .blog-meta-label {
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.25em;
+      color: rgba(255,255,255,0.3);
+    }
+    .blog-meta-sep {
+      width: 3px;
+      height: 3px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 50%;
+    }
+    .blog-card h2 {
+      font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      color: #fff;
+      transition: color 0.3s;
+      flex: 1;
+    }
+    .blog-card.featured h2 {
+      font-size: clamp(1.5rem, 3vw, 2.25rem);
+    }
+    .blog-card:hover h2 { color: rgba(255,255,255,0.85); }
+    .blog-card-excerpt {
+      font-size: 0.875rem;
+      color: rgba(255,255,255,0.4);
+      font-weight: 300;
+      line-height: 1.7;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .blog-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: auto;
+      padding-top: 16px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+    .blog-read-cta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--brand-orange);
+      transition: gap 0.3s;
+    }
+    .blog-card:hover .blog-read-cta { gap: 12px; }
+    .blog-read-cta svg { transition: transform 0.3s; }
+    .blog-card:hover .blog-read-cta svg { transform: translateX(4px); }
+
+    /* ===== Skeleton Cards ===== */
+    .skeleton-card {
+      background: var(--surface-900);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 2rem;
+      overflow: hidden;
+      animation: skeleton-pulse 1.5s ease-in-out infinite;
+    }
+    .skeleton-img { height: 220px; background: var(--surface-800); }
+    .skeleton-body { padding: 28px; display: flex; flex-direction: column; gap: 12px; }
+    .skeleton-line {
+      height: 12px;
+      border-radius: 6px;
+      background: rgba(255,255,255,0.05);
+    }
+    .skeleton-line.w-1-3 { width: 33%; }
+    .skeleton-line.w-2-3 { width: 67%; }
+    .skeleton-line.w-full { width: 100%; }
+    .skeleton-line.h-lg { height: 24px; }
+    @keyframes skeleton-pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    /* ===== Pagination ===== */
+    .pagination-wrap {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      margin-top: 64px;
+    }
+    .page-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      height: 48px;
+      padding: 0 24px;
+      border-radius: 99px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(5,5,5,0.85);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      color: rgba(255,255,255,0.6);
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .page-btn:hover:not(:disabled) {
+      border-color: rgba(255,61,0,0.4);
+      color: #fff;
+    }
+    .page-btn:disabled {
+      opacity: 0.2;
+      cursor: not-allowed;
+    }
+    .page-btn.active {
+      background: var(--brand-orange);
+      border-color: var(--brand-orange);
+      color: #fff;
+      box-shadow: 0 0 20px rgba(255,61,0,0.4);
+    }
+    .page-counter {
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.25em;
+      color: rgba(255,255,255,0.25);
+      padding: 0 8px;
+    }
+
+    /* ===== Empty State ===== */
+    .empty-state {
+      grid-column: 1 / -1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 80px 24px;
+      gap: 16px;
+      text-align: center;
+    }
+    .empty-state p { color: rgba(255,255,255,0.4); font-size: 0.875rem; }
+
+    /* ===== Footer ===== */
+    footer.site-footer {
+      border-top: 1px solid rgba(255,255,255,0.05);
+      padding: 80px 24px 160px;
+      background: var(--surface-950);
+      position: relative;
+      overflow: hidden;
+    }
+    @media (min-width: 768px) { footer.site-footer { padding: 80px 48px 96px; } }
+    .footer-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 32px;
+      text-align: center;
+    }
+    .footer-brand {
+      font-size: clamp(2.5rem, 8vw, 4rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      color: #fff;
+    }
+    .footer-tagline {
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      color: rgba(255,255,255,0.25);
+    }
+    .footer-links {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .footer-links a {
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.25em;
+      color: rgba(255,255,255,0.3);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .footer-links a:hover, .footer-links a.active { color: var(--brand-orange); }
+
+    /* ===== Scroll to Top ===== */
+    #scrollToTopBtn {
+      position: fixed;
+      right: 24px;
+      bottom: 100px;
+      z-index: 100;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(32px);
+      transition: opacity 0.5s, transform 0.5s;
+    }
+    #scrollToTopBtn.visible {
+      opacity: 1;
+      pointer-events: all;
+      transform: translateY(0);
+    }
+    @media (min-width: 768px) { #scrollToTopBtn { right: 48px; bottom: 48px; } }
+
+    /* ===== Animate In ===== */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up {
+      animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ===== Page Loader ===== -->
+  <div id="blog-loader">
+    <h2>Loading the Garage Journal</h2>
+    <div id="loader-track">
+      <div id="loader-bar"></div>
+    </div>
+  </div>
+
+  <!-- ===== Dynamic Island Nav ===== -->
+  <nav class="site-nav dynamic-island" id="site-nav" aria-label="Main navigation">
+    <!-- Home -->
+    <a href="/" class="nav-icon-btn" aria-label="Home" id="nav-home">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+        <path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+      </svg>
+    </a>
+
+    <div class="nav-divider"></div>
+
+    <!-- Showroom -->
+    <a href="/#bento-showroom" class="nav-icon-btn" aria-label="Showroom" id="nav-showroom">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+        <path d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/>
+      </svg>
+    </a>
+
+    <div class="nav-divider"></div>
+
+    <!-- Blog (Active) -->
+    <a href="/blog/" class="nav-icon-btn active" aria-label="Blog" id="nav-blog" aria-current="page">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+        <path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/>
+      </svg>
+    </a>
+
+    <div class="nav-divider"></div>
+
+    <!-- Connect CTA -->
+    <a href="https://www.instagram.com/rcanddiecast/" target="_blank" rel="noopener noreferrer" class="nav-cta" aria-label="Connect on Instagram" id="nav-connect">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" class="md:hidden">
+        <path d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/>
+      </svg>
+      <span class="nav-cta-text">Connect</span>
+    </a>
+  </nav>
+
+  <!-- ===== Page Header ===== -->
+  <header class="blog-header" id="blog-top">
+    <p class="blog-eyebrow">The Garage Journal</p>
+    <h1>RC & Diecast Blog</h1>
+    <p>Expert reviews, buyer's guides, maintenance tips and deep-dives into India's RC & diecast hobby world.</p>
+  </header>
+
+  <!-- ===== Blog Listing ===== -->
+  <main>
+    <section class="blog-section" aria-label="Blog posts">
+      <!-- Skeleton placeholders while loading -->
+      <div id="blog-grid" aria-live="polite" aria-label="Blog posts grid">
+        <div class="skeleton-card">
+          <div class="skeleton-img"></div>
+          <div class="skeleton-body">
+            <div class="skeleton-line w-1-3"></div>
+            <div class="skeleton-line w-2-3 h-lg"></div>
+            <div class="skeleton-line w-full"></div>
+            <div class="skeleton-line w-2-3"></div>
+          </div>
+        </div>
+        <div class="skeleton-card">
+          <div class="skeleton-img"></div>
+          <div class="skeleton-body">
+            <div class="skeleton-line w-1-3"></div>
+            <div class="skeleton-line w-2-3 h-lg"></div>
+            <div class="skeleton-line w-full"></div>
+            <div class="skeleton-line w-2-3"></div>
+          </div>
+        </div>
+        <div class="skeleton-card">
+          <div class="skeleton-img"></div>
+          <div class="skeleton-body">
+            <div class="skeleton-line w-1-3"></div>
+            <div class="skeleton-line w-2-3 h-lg"></div>
+            <div class="skeleton-line w-full"></div>
+            <div class="skeleton-line w-2-3"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pagination -->
+      <nav class="pagination-wrap" id="pagination-wrap" aria-label="Blog pagination" style="display:none"></nav>
+    </section>
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="site-footer" aria-label="Site footer">
+    <div class="footer-inner">
+      <div>
+        <p class="footer-brand">RC&D.</p>
+        <p class="footer-tagline">Pure Scale Automotives</p>
+      </div>
+      <nav class="footer-links" aria-label="Footer links">
+        <a href="/">Home</a>
+        <a href="/#bento-showroom">Showroom</a>
+        <a href="/blog/" class="active">Blog</a>
+        <a href="https://www.instagram.com/rcanddiecast/" target="_blank" rel="noopener">Instagram</a>
+      </nav>
+      <p style="font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:0.3em; color:rgba(255,255,255,0.15);">
+        © 2026 RC & Diecast. All rights reserved.
+      </p>
+    </div>
+  </footer>
+
+  <!-- ===== Scroll to Top ===== -->
+  <button id="scrollToTopBtn" class="dynamic-island" aria-label="Scroll to top">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 19V5M5 12l7-7 7 7"/>
+    </svg>
+  </button>
+
+  <!-- ===== Scripts ===== -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script>
+    const POSTS_PER_PAGE = 6;
+    let allPosts = [];
+    let currentPage = 1;
+
+    // ---- Loader helpers ----
+    function animateLoader(targetPct) {
+      document.getElementById('loader-bar').style.width = targetPct + '%';
+    }
+    function hideLoader() {
+      const loader = document.getElementById('blog-loader');
+      loader.style.opacity = '0';
+      setTimeout(() => loader.remove(), 1000);
+    }
+
+    // ---- Format helpers ----
+    function formatDate(iso) {
+      const d = new Date(iso);
+      return d.toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
+    }
+
+    // ---- Render a page of posts ----
+    function renderPage(posts, page) {
+      const grid = document.getElementById('blog-grid');
+      const start = (page - 1) * POSTS_PER_PAGE;
+      const pageItems = posts.slice(start, start + POSTS_PER_PAGE);
+
+      if (pageItems.length === 0) {
+        grid.innerHTML = `<div class="empty-state"><p>No blog posts found.</p></div>`;
+        return;
+      }
+
+      grid.innerHTML = pageItems.map((post, i) => {
+        const isFeatured = post.featured && page === 1 && i === 0;
+        return `
+          <a href="/blog/${post.slug}.html" class="blog-card${isFeatured ? ' featured' : ''}" 
+             style="animation-delay: ${i * 0.1}s"
+             aria-label="Read: ${post.title}">
+            <div class="blog-card-img-wrap">
+              <img src="${post.featuredImage}" 
+                   class="blog-card-img" 
+                   loading="lazy" 
+                   alt="${post.title}"
+                   onerror="this.src='/image/trx4m.jpg'">
+              <div class="blog-card-img-overlay"></div>
+            </div>
+            <div class="blog-card-body">
+              <div class="blog-card-meta">
+                <span class="blog-category-badge">${post.category}</span>
+                <span class="blog-meta-label">${post.readingTime} min read</span>
+                <span class="blog-meta-sep"></span>
+                <span class="blog-meta-label">${formatDate(post.publishedDate)}</span>
+              </div>
+              <h2>${post.title}</h2>
+              <p class="blog-card-excerpt">${post.excerpt}</p>
+              <div class="blog-card-footer">
+                <span class="blog-meta-label">${post.author}</span>
+                <span class="blog-read-cta">
+                  Read Article
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                  </svg>
+                </span>
+              </div>
+            </div>
+          </a>
+        `;
+      }).join('');
+
+      // Animate cards in
+      const cards = grid.querySelectorAll('.blog-card');
+      cards.forEach((card, i) => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(40px)';
+        setTimeout(() => {
+          card.style.transition = 'opacity 0.6s ease, transform 0.6s ease, border-color 500ms ease, transform 300ms ease';
+          card.style.opacity = '1';
+          card.style.transform = 'translateY(0)';
+        }, i * 80);
+      });
+    }
+
+    // ---- Render pagination ----
+    function renderPagination(totalPosts) {
+      const totalPages = Math.ceil(totalPosts / POSTS_PER_PAGE);
+      const wrap = document.getElementById('pagination-wrap');
+
+      if (totalPages <= 1) { wrap.style.display = 'none'; return; }
+      wrap.style.display = 'flex';
+
+      wrap.innerHTML = `
+        <button class="page-btn" id="prev-btn" aria-label="Previous page" ${currentPage === 1 ? 'disabled' : ''}>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          Prev
+        </button>
+        <span class="page-counter">${currentPage} / ${totalPages}</span>
+        <button class="page-btn" id="next-btn" aria-label="Next page" ${currentPage === totalPages ? 'disabled' : ''}>
+          Next
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      `;
+
+      document.getElementById('prev-btn').addEventListener('click', () => {
+        if (currentPage > 1) {
+          currentPage--;
+          renderPage(allPosts, currentPage);
+          renderPagination(allPosts.length);
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      });
+      document.getElementById('next-btn').addEventListener('click', () => {
+        if (currentPage < totalPages) {
+          currentPage++;
+          renderPage(allPosts, currentPage);
+          renderPagination(allPosts.length);
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      });
+    }
+
+    // ---- Fetch & init ----
+    async function initBlog() {
+      animateLoader(40);
+      try {
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), 8000);
+        const resp = await fetch('/data/blogs.json', { signal: controller.signal });
+        clearTimeout(timeout);
+        allPosts = await resp.json();
+        // Sort by date descending
+        allPosts.sort((a, b) => new Date(b.publishedDate) - new Date(a.publishedDate));
+        animateLoader(100);
+        setTimeout(() => {
+          hideLoader();
+          renderPage(allPosts, currentPage);
+          renderPagination(allPosts.length);
+        }, 400);
+      } catch (err) {
+        console.error('Blog load error:', err);
+        animateLoader(100);
+        setTimeout(() => {
+          hideLoader();
+          document.getElementById('blog-grid').innerHTML = `<div class="empty-state"><p>Could not load posts. Please try again later.</p></div>`;
+        }, 400);
+      }
+    }
+
+    // ---- Scroll to top ----
+    const scrollBtn = document.getElementById('scrollToTopBtn');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 600) scrollBtn.classList.add('visible');
+      else scrollBtn.classList.remove('visible');
+    });
+    scrollBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    // ---- Nav hide/show on mobile scroll ----
+    let lastScroll = 0;
+    const nav = document.getElementById('site-nav');
+    window.addEventListener('scroll', () => {
+      const current = window.scrollY;
+      if (window.innerWidth < 768) {
+        if (current > 200 && current > lastScroll) {
+          nav.style.transform = 'translateX(-50%) translateY(150%) scale(0.9)';
+        } else {
+          nav.style.transform = 'translateX(-50%) translateY(0) scale(1)';
+        }
+      } else {
+        nav.style.transform = current > 50
+          ? 'translateX(-50%) translateY(-10px) scale(0.95)'
+          : 'translateX(-50%) translateY(0) scale(1)';
+      }
+      lastScroll = current;
+    });
+
+    document.addEventListener('DOMContentLoaded', initBlog);
+  </script>
+
+</body>
+</html>
