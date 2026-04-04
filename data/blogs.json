@@ -1,0 +1,41 @@
+[
+  {
+    "id": 1,
+    "slug": "best-rc-rock-crawlers-india-2025",
+    "title": "Best RC Rock Crawlers in India 2025: Complete Buyer's Guide",
+    "excerpt": "From Traxxas TRX-4M to FMS Land Cruiser, we've tested the top RC rock crawlers available in India. Here's our definitive guide for every budget.",
+    "author": "RC & Diecast Team",
+    "publishedDate": "2025-03-15",
+    "readingTime": 5,
+    "category": "Buyer's Guide",
+    "tags": ["RC Cars", "Rock Crawler", "Traxxas", "FMS", "India", "Buyer's Guide"],
+    "featuredImage": "https://rcanddiecast.com/image/itrx4m.jpg",
+    "featured": true
+  },
+  {
+    "id": 2,
+    "slug": "traxxas-trx4m-review-india",
+    "title": "Traxxas TRX-4M Review India: Mini Crawler That Punches Above Its Weight",
+    "excerpt": "The Traxxas TRX-4M is the most talked-about mini RC rock crawler in India's hobbyist community. We put it through its paces on Indian terrain.",
+    "author": "RC & Diecast Team",
+    "publishedDate": "2025-02-20",
+    "readingTime": 4,
+    "category": "Review",
+    "tags": ["Traxxas", "TRX-4M", "RC Review", "Mini Crawler", "India"],
+    "featuredImage": "https://rcanddiecast.com/image/itrx4m.jpg",
+    "featured": false
+  },
+  {
+    "id": 3,
+    "slug": "rc-car-maintenance-tips",
+    "title": "5 Essential RC Car Maintenance Tips Every Hobbyist Should Know",
+    "excerpt": "Keep your RC car running at peak performance. From battery care to drivetrain maintenance, these expert tips will extend the life of your RC vehicle.",
+    "author": "RC & Diecast Team",
+    "publishedDate": "2025-01-10",
+    "readingTime": 3,
+    "category": "Maintenance",
+    "tags": ["RC Maintenance", "RC Tips", "Battery Care", "RC Hobby", "India"],
+    "featuredImage": "https://rcanddiecast.com/image/willys-fms.jpg",
+    "featured": false
+  }
+]
