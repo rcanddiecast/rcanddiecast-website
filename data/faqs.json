@@ -1,0 +1,57 @@
+[
+  {
+    "id": "faq-001",
+    "category": "Purchasing",
+    "categoryMl": "വാങ്ങൽ",
+    "icon": "cart",
+    "question": "How do I purchase a product?",
+    "questionMl": "ഒരു ഉൽപ്പന്നം എങ്ങനെ വാങ്ങാം?",
+    "answer": "It's super easy! Just reach out to us on WhatsApp or any of our social media channels. Our friendly team will walk you through everything — product selection, pricing, and delivery — step by step.",
+    "answerMl": "വളരെ എളുപ്പമാണ്! WhatsApp-ലോ ഞങ്ങളുടെ ഏതെങ്കിലും സോഷ്യൽ മീഡിയ ചാനലിലോ ഞങ്ങളെ സമ്പർക്കിക്കൂ. ഞങ്ങളുടെ ടീം ഉൽപ്പന്ന തിരഞ്ഞെടുപ്പ്, വില, ഡെലിവറി — എല്ലാം ഘട്ടം ഘട്ടമായി നിങ്ങളെ നയിക്കും.",
+    "keywords": ["purchase", "buy", "order", "WhatsApp", "social media", "how to buy RC car India"]
+  },
+  {
+    "id": "faq-002",
+    "category": "Returns",
+    "categoryMl": "റിട്ടേൺ നയം",
+    "icon": "return",
+    "question": "What is the return policy?",
+    "questionMl": "റിട്ടേൺ നയം എന്താണ്?",
+    "answer": "We accept returns only if you have a clear, unedited, unpaused video of you opening the box immediately upon delivery. No pauses, no edits — a raw, continuous recording is required. Without this video, we are unable to process any complaint or return. We strongly recommend every customer record an unboxing video to protect themselves. Claims made after opening without a video cannot be accepted.",
+    "answerMl": "ഡെലിവറി ലഭിച്ചതിനു ശേഷം ഉടൻ തന്നെ ബോക്സ് തുറക്കുന്ന ഒരു വ്യക്തമായ, എഡിറ്റ് ചെയ്യാത്ത, നിർത്തലില്ലാത്ത വീഡിയോ ഉണ്ടെങ്കിൽ മാത്രമേ ഞങ്ങൾ റിട്ടേൺ സ്വീകരിക്കൂ. ഒരു റോ, തടസ്സമില്ലാത്ത റെക്കോർഡിംഗ് ആവശ്യമാണ്. ഈ വീഡിയോ ഇല്ലാതെ, ഒരു പരാതിയോ റിട്ടേണോ പ്രോസസ്സ് ചെയ്യാൻ ഞങ്ങൾക്ക് കഴിയില്ല. എല്ലാ ഉപഭോക്താക്കളും അൺബോക്സിംഗ് വീഡിയോ റെക്കോർഡ് ചെയ്യണമെന്ന് ഞങ്ങൾ ശക്തമായി ശുപാർശ ചെയ്യുന്നു.",
+    "keywords": ["return", "refund", "exchange", "unboxing video", "return policy RC car India", "damaged product"]
+  },
+  {
+    "id": "faq-003",
+    "category": "Support",
+    "categoryMl": "സഹായം",
+    "icon": "support",
+    "question": "What kind of customer support is available?",
+    "questionMl": "എന്ത് തരത്തിലുള്ള ഉപഭോക്തൃ പിന്തുണ ലഭ്യമാണ്?",
+    "answer": "Our team is available during all business hours and is dedicated to helping you. If you don't get an instant reply, please be patient — we will reach back to you as soon as possible. No message goes unanswered!",
+    "answerMl": "ഞങ്ങളുടെ ടീം എല്ലാ ബിസിനസ്സ് മണിക്കൂറുകളിലും ലഭ്യമാണ്, നിങ്ങളെ സഹായിക്കാൻ പ്രതിജ്ഞാബദ്ധമാണ്. ഒരു ഉടനടി മറുപടി ലഭിക്കുന്നില്ലെങ്കിൽ, ക്ഷമയോടെ കാത്തിരിക്കൂ — ഞങ്ങൾ കഴിയുന്നത്ര വേഗം നിങ്ങളെ ബന്ധപ്പെടും. ഒരു സന്ദേശവും അനുത്തരിതമാകില്ല!",
+    "keywords": ["support", "help", "contact", "customer service RC India", "business hours", "WhatsApp support"]
+  },
+  {
+    "id": "faq-004",
+    "category": "Spare Parts",
+    "categoryMl": "സ്പെയർ പാർട്ടുകൾ",
+    "icon": "parts",
+    "question": "Can I get spare parts for my RC car?",
+    "questionMl": "എന്റെ RC കാറിന്റെ സ്പെയർ പാർട്ടുകൾ ലഭ്യമാണോ?",
+    "answer": "Yes! We can help you source spare parts for select RC models. Our team will check availability and guide you. Just contact us with your model name and the part you need.",
+    "answerMl": "അതെ! ചില RC മോഡലുകൾക്കുള്ള സ്പെയർ പാർട്ടുകൾ ലഭ്യമാക്കാൻ ഞങ്ങൾക്ക് കഴിയും. ഞങ്ങളുടെ ടീം ലഭ്യത പരിശോധിക്കുകയും നിങ്ങളെ വഴിനടത്തുകയും ചെയ്യും. നിങ്ങളുടെ മോഡൽ നാമവും ആവശ്യമായ ഭാഗവും സഹിതം ഞങ്ങളെ ബന്ധപ്പെടൂ.",
+    "keywords": ["spare parts", "RC car parts India", "replacement parts", "accessories", "Traxxas parts India", "FMS parts"]
+  },
+  {
+    "id": "faq-005",
+    "category": "Pricing",
+    "categoryMl": "വില",
+    "icon": "price",
+    "question": "Are the prices listed the final price?",
+    "questionMl": "ലിസ്റ്റ് ചെയ്ത വിലകൾ അന്തിമ വിലകളാണോ?",
+    "answer": "Yes, the prices shown are our final, fixed rates. However, please note that a separate shipping fee applies depending on your delivery location. Our team will give you the exact shipping cost when you place your order.",
+    "answerMl": "അതെ, കാണിക്കുന്ന വിലകൾ ഞങ്ങളുടെ അന്തിമ, നിശ്ചിത നിരക്കുകളാണ്. എന്നിരുന്നാലും, നിങ്ങളുടെ ഡെലിവറി ലൊക്കേഷൻ അനുസരിച്ച് ഒരു പ്രത്യേക ഷിപ്പിംഗ് ഫീ ബാധകമാണ്. നിങ്ങൾ ഓർഡർ നൽകുമ്പോൾ ഞങ്ങളുടെ ടീം കൃത്യമായ ഷിപ്പിംഗ് ചെലവ് നൽകും.",
+    "keywords": ["price", "cost", "rate", "final price", "shipping fee", "RC car price India", "delivery charge", "how much does RC car cost"]
+  }
+]
