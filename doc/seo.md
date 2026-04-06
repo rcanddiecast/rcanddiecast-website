@@ -163,7 +163,7 @@ Added `Disallow` rules for:
 | Task | File | Notes |
 |------|------|-------|
 | **Add `<h1>` to homepage** | `index.html` | The hero section uses `<h1>` inside JS-injected slides — Google may not always render JS. Add a visible or screen-reader-only `<h1>` in static HTML. |
-| **Create OG banner image** (`og-banner.jpg`) | `/image/og-banner.jpg` | 1200×630px. Used for all page previews on WhatsApp, Facebook, LinkedIn, Twitter shares. Design it to be recognizable. |
+| **Create OG banner image** (`og-banner.jpeg`) | `/image/og-banner.jpeg` | 1200×630px. Used for all page previews on WhatsApp, Facebook, LinkedIn, Twitter shares. Design it to be recognizable. |
 | **Activate Google Analytics** | All HTML files | See [Section 8](#8-google-analytics-setup-guide) for step-by-step |
 | **Add alt text to JS-injected product images** | `app.js` | In `renderBentoGrid` and `renderBentoGridFiltered`, add `alt="${product.brandName} ${product.modelName} RC Car"` to the `<img>` tag |
 | **Submit sitemap to Google Search Console** | Google Search Console | Go to GSC → Sitemaps → Submit `https://rcanddiecast.com/sitemap.xml` |
@@ -709,7 +709,7 @@ Run this checklist every month to keep SEO healthy.
 
 ## Appendix A — Open Graph Image Requirements
 
-The file `https://rcanddiecast.com/image/og-banner.jpg` needs to be created.
+The file `https://rcanddiecast.com/image/og-banner.jpeg` needs to be created.
 
 **Specs:**
 - Size: **1200 × 630px** (Facebook/WhatsApp standard)
