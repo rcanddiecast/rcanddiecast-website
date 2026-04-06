@@ -297,6 +297,11 @@ document.addEventListener("DOMContentLoaded", () => {
                                 <a href="${product.instaLink || '#'}" target="_blank" class="w-12 h-12 rounded-[1.2rem] flex justify-center items-center bg-white hover:bg-brand-orange text-black hover:text-white transition-colors duration-300 shadow-[0_0_15px_rgba(255,255,255,0.2)] hover:shadow-[0_0_15px_rgba(255,61,0,0.4)]">
                                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="rotate-45" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                                 </a>
+                                
+                                <a href="${product.WAlink || 'https://wa.me/918606447311?text=Hello%2C%20I%20would%20like%20to%20know%20more%20details'}" target="_blank" class="h-12 px-4 md:px-5 rounded-[1.2rem] flex justify-center items-center gap-2 bg-[#25D366] hover:bg-[#1ebe57] text-white transition-all duration-300 shadow-[0_0_15px_rgba(37,211,102,0.2)] hover:shadow-[0_0_25px_rgba(37,211,102,0.6)] hover:-translate-y-1 hover:scale-105 active:scale-95 group/btn">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover/btn:scale-110"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                                    <span class="font-extrabold text-[10px] md:text-xs tracking-[0.2em] uppercase">Order</span>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -589,6 +594,10 @@ document.addEventListener("DOMContentLoaded", () => {
                                 </a>` : ''}
                                 <a href="${product.instaLink || '#'}" target="_blank" class="w-12 h-12 rounded-[1.2rem] flex justify-center items-center bg-white hover:bg-brand-orange text-black hover:text-white transition-colors duration-300 shadow-[0_0_15px_rgba(255,255,255,0.2)] hover:shadow-[0_0_15px_rgba(255,61,0,0.4)]">
                                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="rotate-45" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                                </a>
+                                <a href="${product.WAlink || 'https://wa.me/918606447311?text=Hello%2C%20I%20would%20like%20to%20know%20more%20details'}" target="_blank" class="h-12 px-4 md:px-5 rounded-[1.2rem] flex justify-center items-center gap-2 bg-[#25D366] hover:bg-[#1ebe57] text-white transition-all duration-300 shadow-[0_0_15px_rgba(37,211,102,0.2)] hover:shadow-[0_0_25px_rgba(37,211,102,0.6)] hover:-translate-y-1 hover:scale-105 active:scale-95 group/btn">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover/btn:scale-110"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                                    <span class="font-extrabold text-[10px] md:text-xs tracking-[0.2em] uppercase">Order</span>
                                 </a>
                             </div>
                         </div>
