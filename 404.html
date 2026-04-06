@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>404 - Lost in the Garage | RC & Diecast</title>
+    <meta name="robots" content="noindex, follow">
+    <meta name="theme-color" content="#050505">
+
+    <link rel="icon" type="image/x-icon" href="/image/favicon.ico">
+    <link href="/output.css" rel="stylesheet">
+    
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" as="script">
+
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100svh;
+            width: 100%;
+            background-color: #050505;
+            overflow: hidden; /* No scrollbars as requested */
+        }
+        
+        /* 2026 Creative Glitch & Float Animations */
+        .anim-float {
+            animation: floating 6s ease-in-out infinite;
+        }
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .wheel-twitch {
+            animation: twitch 4s infinite;
+            transform-box: fill-box;
+            transform-origin: center;
+        }
+        @keyframes twitch {
+            0%, 100%, 30% { transform: rotate(0deg); }
+            5% { transform: rotate(25deg); }
+            10% { transform: rotate(-10deg); }
+            15% { transform: rotate(15deg); }
+            20% { transform: rotate(0deg); }
+        }
+
+        .smoke-anim {
+            animation: smokeFloat 4s infinite ease-out;
+            transform-box: fill-box;
+            transform-origin: bottom;
+        }
+        .smoke-anim.delay-1 { animation-delay: 0.5s; }
+        .smoke-anim.delay-2 { animation-delay: 1.5s; }
+        .smoke-anim.delay-3 { animation-delay: 2.5s; }
+
+        @keyframes smokeFloat {
+            0% { transform: translateY(0) scale(0.8); opacity: 0; }
+            20% { opacity: 0.8; }
+            100% { transform: translateY(60px) scale(2.5); opacity: 0; }
+        }
+        
+        .pulse-text {
+            animation: pulseOpacity 2s infinite alternate;
+        }
+        @keyframes pulseOpacity {
+            from { opacity: 0.5; }
+            to { opacity: 1; text-shadow: 0 0 20px rgba(255, 61, 0, 0.4); }
+        }
+        
+        .bg-grid {
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            mask-image: radial-gradient(circle at center, black 10%, transparent 80%);
+            -webkit-mask-image: radial-gradient(circle at center, black 10%, transparent 80%);
+        }
+    </style>
+</head>
+
+<body class="text-white selection:bg-brand-orange selection:text-white flex flex-col justify-center items-center relative select-none">
+
+    <!-- 2026 Background Aesthetics -->
+    <div class="absolute inset-0 bg-grid z-0 w-full h-full pointer-events-none"></div>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] md:w-[40vw] md:h-[40vw] bg-brand-orange/10 rounded-full blur-[120px] pointer-events-none z-0"></div>
+
+    <!-- Minimal Header -->
+    <nav class="absolute top-6 left-6 md:top-10 md:left-10 z-50">
+        <a href="/" class="text-2xl font-extrabold tracking-tighter text-white hover:text-brand-orange transition-colors duration-300">RC&amp;D.</a>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="z-10 flex flex-col items-center text-center px-6 w-full max-w-4xl relative">
+        
+        <!-- Animated Upside-Down Buggy SVG -->
+        <div class="relative w-56 h-56 md:w-72 md:h-72 mb-4 anim-float" id="funny-image">
+            <svg viewBox="0 -10 200 160" fill="none" class="w-full h-full drop-shadow-[0_15px_30px_rgba(255,61,0,0.25)]">
+                <!-- Smoke rising downwards because the car is upside down -->
+                <circle cx="50" cy="110" r="10" fill="rgba(255,61,0,0.2)" class="smoke-anim delay-1" />
+                <circle cx="65" cy="100" r="15" fill="rgba(100,100,100,0.2)" class="smoke-anim delay-2" />
+                <circle cx="35" cy="120" r="8" fill="rgba(200,200,200,0.15)" class="smoke-anim delay-3" />
+                
+                <!-- Broken Antenna -->
+                <path d="M150 85 Q 170 120 180 140" fill="none" stroke="#ff3d00" stroke-width="4" stroke-linecap="round" />
+                <!-- Spark at end of antenna -->
+                <circle cx="180" cy="140" r="4" fill="#fff" class="pulse-text" />
+
+                <!-- RC Car Chassis (Upside down) -->
+                <path d="M40 70 L160 70 C165 70 170 65 170 60 L160 40 C155 35 145 35 140 35 L60 35 C55 35 45 35 40 40 L30 60 C30 65 35 70 40 70 Z" fill="#111" stroke="#333" stroke-width="3" stroke-linejoin="round"/>
+                
+                <!-- Underbody Details -->
+                <rect x="50" y="70" width="100" height="15" rx="4" fill="#222" stroke="#444" stroke-width="2" />
+                
+                <!-- Twitching Wheels (Suspended in air) -->
+                <!-- Back wheel -->
+                <g class="wheel-twitch">
+                    <circle cx="60" cy="50" r="24" fill="#0a0a0a" stroke="#ff3d00" stroke-width="6" />
+                    <!-- Spokes -->
+                    <path d="M60 26 L60 74 M36 50 L84 50 M43 33 L77 67 M43 67 L77 33" stroke="#333" stroke-width="3" stroke-linecap="round"/>
+                </g>
+
+                <!-- Front wheel -->
+                <g class="wheel-twitch" style="animation-delay: 0.2s;">
+                    <circle cx="140" cy="50" r="24" fill="#0a0a0a" stroke="#ffffff" stroke-width="6" />
+                    <!-- Spokes -->
+                    <path d="M140 26 L140 74 M116 50 L164 50 M123 33 L157 67 M123 67 L157 33" stroke="#333" stroke-width="3" stroke-linecap="round"/>
+                </g>
+            </svg>
+            
+            <div class="absolute -top-2 -right-4 md:-right-8 bg-brand-orange text-white text-[9px] md:text-[11px] font-extrabold uppercase tracking-[0.1em] px-4 py-2 rounded-full rotate-12 shadow-[0_5px_15px_rgba(255,61,0,0.6)] backdrop-blur-md border border-orange-400/50">
+                TOTALLED!
+            </div>
+        </div>
+
+        <h1 class="text-[5rem] md:text-[8rem] font-extrabold tracking-tighter leading-[0.8] mb-4 text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-600" id="title-404">
+            404
+        </h1>
+        <h2 class="text-xl md:text-3xl font-light tracking-tight text-white mb-4" id="subtitle">Oops! Wrong Turn.</h2>
+        <p class="text-xs md:text-base text-gray-400 mb-10 max-w-lg mx-auto font-light leading-relaxed" id="description">
+            Looks like this link did a barrel roll and lost connection. The page you are looking for has been towed or doesn't exist in our garage.
+        </p>
+
+        <!-- Home Action Button -->
+        <a href="/" id="home-btn" class="group relative inline-flex items-center justify-center gap-3 bg-brand-orange text-white px-8 md:px-10 py-4 md:py-5 rounded-full font-extrabold uppercase tracking-[0.2em] text-[10px] md:text-xs transition-transform duration-300 hover:scale-105 active:scale-95 shadow-[0_8px_20px_rgba(255,61,0,0.4)] hover:shadow-[0_12px_30px_rgba(255,61,0,0.6)] border border-orange-500/50">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" class="group-hover:-translate-x-1 transition-transform" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="19" y1="12" x2="5" y2="12"></line>
+                <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+            Return to Showcase
+        </a>
+    </main>
+
+    <!-- Interactive Cursor Glow -->
+    <div id="cursor-glow" class="hidden md:block fixed w-64 h-64 bg-brand-orange/15 rounded-full blur-[80px] pointer-events-none -translate-x-1/2 -translate-y-1/2 z-0 mix-blend-screen opacity-0 transition-opacity duration-300"></div>
+
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Elegant entrance animations
+            const tl = gsap.timeline();
+
+            tl.from("#funny-image", {
+                y: -60,
+                scale: 0.8,
+                opacity: 0,
+                duration: 1.2,
+                ease: "elastic.out(1, 0.5)"
+            })
+            .from("#title-404", {
+                y: 30,
+                opacity: 0,
+                duration: 0.8,
+                ease: "power3.out"
+            }, "-=0.8")
+            .from("#subtitle", {
+                y: 20,
+                opacity: 0,
+                duration: 0.8,
+                ease: "power3.out"
+            }, "-=0.6")
+            .from("#description", {
+                y: 20,
+                opacity: 0,
+                duration: 0.8,
+                ease: "power3.out"
+            }, "-=0.6")
+            .from("#home-btn", {
+                y: 20,
+                scale: 0.9,
+                opacity: 0,
+                duration: 0.6,
+                ease: "back.out(1.5)"
+            }, "-=0.5");
+
+            // Interactive Cursor Logic
+            const cursor = document.getElementById("cursor-glow");
+            if (window.innerWidth >= 768) {
+                setTimeout(() => cursor.classList.remove('opacity-0'), 1000);
+                window.addEventListener("mousemove", (e) => {
+                    gsap.to(cursor, {
+                        x: e.clientX,
+                        y: e.clientY,
+                        duration: 0.4,
+                        ease: "power2.out"
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+</html>
