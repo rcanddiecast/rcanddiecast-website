@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    
+
     // ======== GSAP & Lenis Setup ======== //
     gsap.registerPlugin(ScrollTrigger);
 
@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     window.addEventListener('scroll', () => {
         const current = window.scrollY;
-        
+
         // Hide on scroll down, show on scroll up (app feel)
         if (island) {
             if (current > 200 && current > lastScroll && window.innerWidth < 768) {
@@ -50,11 +50,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 scrollToTopBtn.classList.remove('opacity-100', 'translate-y-0');
             }
         }
-        
+
         lastScroll = current;
     });
 
-    if(scrollToTopBtn) {
+    if (scrollToTopBtn) {
         scrollToTopBtn.addEventListener('click', () => {
             lenis.scrollTo(0, { duration: 1.5 });
         });
@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // ======== API Fetching & Data Splitting ======== //
     const API_URL = "/data/products.json";
-    
+
     async function initApp() {
         // Safety net — dismiss loader after 12s max regardless of API state
         const safetyTimer = setTimeout(() => {
@@ -99,7 +99,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const fetchTimeout = setTimeout(() => controller.abort(), 10000);
 
             gsap.to("#loader-bar", { width: "80%", duration: 1.5, ease: "power2.out" });
-            
+
             const resp = await fetch(API_URL, { signal: controller.signal });
             clearTimeout(fetchTimeout);
             const data = await resp.json();
@@ -113,25 +113,27 @@ document.addEventListener("DOMContentLoaded", () => {
             // ── Layer 3: showProdct rule — only showProdct="yes" products show in the grid ──
             // (Set showProdct:"no" in products.json to hide a product without marking it OOS)
             const listProducts = products.filter(item => item.showProdct === 'yes');
-            
+
             clearTimeout(safetyTimer);
 
             // Finish loader
-            gsap.to("#loader-bar", { width: "100%", duration: 0.5, onComplete: () => {
-                gsap.to("#loader", { opacity: 0, duration: 1, ease: "power2.inOut", onComplete: () => document.getElementById('loader')?.remove() });
-            }});
-            
+            gsap.to("#loader-bar", {
+                width: "100%", duration: 0.5, onComplete: () => {
+                    gsap.to("#loader", { opacity: 0, duration: 1, ease: "power2.inOut", onComplete: () => document.getElementById('loader')?.remove() });
+                }
+            });
+
             if (products.length === 0) return;
 
             // 1. Init Hero Slider — only slider="yes" products
             initHeroSlider(sliderProducts);
-            
+
             // 2. Init Bento Showroom — ALL in-stock products
             renderBentoGrid(listProducts);
-            
+
             // 3. Init Kinetic Marquee
             renderMarquee(listProducts);
-            
+
             // Parallax Images Initializer
             initParallax();
 
@@ -168,10 +170,10 @@ document.addEventListener("DOMContentLoaded", () => {
         const products = heroSlides; // alias for the rest of the function
         const track = document.getElementById('hero-slider-track');
         const controls = document.getElementById('hero-controls');
-        
+
         track.innerHTML = '';
         controls.innerHTML = '';
-        
+
         heroSlides.forEach((slide, i) => {
             track.innerHTML += `
                 <div class="absolute inset-0 w-full h-full hero-slide" id="slide-${i}" style="opacity: ${i === 0 ? 1 : 0}; z-index: ${i === 0 ? 10 : 0};">
@@ -193,16 +195,16 @@ document.addEventListener("DOMContentLoaded", () => {
                     </div>
                 </div>
             `;
-            
+
             controls.innerHTML += `<button onclick="goToSlide(${i})" class="w-16 h-1 rounded-full transition-all duration-700 ${i === 0 ? 'bg-brand-orange' : 'bg-white/20 hover:bg-white/50'}" id="dot-${i}"></button>`;
         });
-        
+
         // Initial intro animation
-        gsap.fromTo(`.slide-text-0`, 
-            { y: 60, opacity: 0 }, 
+        gsap.fromTo(`.slide-text-0`,
+            { y: 60, opacity: 0 },
             { y: 0, opacity: 1, stagger: 0.15, duration: 1.5, ease: "power3.out", delay: 1.5 }
         );
-        
+
         // Touch swipe support for mobile
         let touchStartX = 0;
         let touchStartY = 0;
@@ -228,20 +230,20 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 6000);
     }
 
-    window.goToSlide = function(index) {
-        if(index === currentSlide) return;
+    window.goToSlide = function (index) {
+        if (index === currentSlide) return;
         clearInterval(autoPlayInterval);
         autoPlayInterval = setInterval(() => goToSlide((currentSlide + 1) % heroSlides.length), 6000);
-        
+
         gsap.to(`#slide-${currentSlide}`, { opacity: 0, duration: 1.2, zIndex: 0, ease: "power2.inOut" });
         document.getElementById(`dot-${currentSlide}`).classList.replace('bg-brand-orange', 'bg-white/20');
-        
+
         gsap.fromTo(`#slide-${index}`, { opacity: 0 }, { opacity: 1, duration: 1.2, zIndex: 10, ease: "power2.inOut" });
-        gsap.fromTo(`.slide-text-${index}`, 
-            { y: 60, opacity: 0 }, 
+        gsap.fromTo(`.slide-text-${index}`,
+            { y: 60, opacity: 0 },
             { y: 0, opacity: 1, stagger: 0.15, duration: 1.5, ease: "power3.out", delay: 0.3 }
         );
-        
+
         document.getElementById(`dot-${index}`).classList.replace('bg-white/20', 'bg-brand-orange');
         currentSlide = index;
     }
@@ -250,15 +252,15 @@ document.addEventListener("DOMContentLoaded", () => {
     function renderBentoGrid(products) {
         const gallery = document.getElementById('bento-gallery');
         let html = '';
-        
+
         products.forEach((product, i) => {
             // Asymmetric CSS Grid logic
-            let bentoClass = 'col-span-1 md:col-span-4 min-h-[400px]'; 
+            let bentoClass = 'col-span-1 md:col-span-4 min-h-[400px]';
             if (i % 5 === 0) bentoClass = 'col-span-1 md:col-span-8 min-h-[450px] md:min-h-[550px]';
             if (i % 5 === 1) bentoClass = 'col-span-1 md:col-span-4 row-span-1 md:row-span-2 min-h-[400px] md:min-h-[800px]';
             if (i % 5 === 2) bentoClass = 'col-span-1 md:col-span-4 min-h-[400px]';
             if (i % 5 === 3) bentoClass = 'col-span-1 md:col-span-8 min-h-[450px] md:min-h-[550px]';
-            
+
             const isOOS = product.stock && product.stock.toUpperCase() === 'OOS';
             html += `
                 <div class="${bentoClass} bento-card relative group flex flex-col justify-end overflow-hidden">
@@ -298,13 +300,13 @@ document.addEventListener("DOMContentLoaded", () => {
                                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="rotate-45" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                                 </a>
                                 
-                                <a href="${product.WAlink || 'https://wa.me/918606447311?text=Hello%2C%20I%20would%20like%20to%20know%20more%20details'}" target="_blank" class="relative overflow-hidden h-12 px-5 md:px-6 rounded-[1.2rem] flex justify-center items-center border border-white/10 bg-white/5 backdrop-blur-md transition-all duration-500 hover:shadow-[0_0_25px_rgba(255,61,0,0.4)] hover:border-brand-orange hover:-translate-y-1 group/wa [transform:translateZ(0)]">
+                                <a href="${product.WAlink || 'https://wa.me/918606447311?text=Hello%2C%20I%20would%20like%20to%20know%20more%20details'}" target="_blank" class="flex-1 min-w-0 relative overflow-hidden h-12 px-2 sm:px-5 md:px-6 rounded-[1.2rem] flex justify-center items-center border border-white/10 bg-white/5 backdrop-blur-md transition-all duration-500 hover:shadow-[0_0_25px_rgba(255,61,0,0.4)] hover:border-brand-orange hover:-translate-y-1 group/wa [transform:translateZ(0)]">
                                     <div class="absolute inset-0 bg-brand-orange translate-y-[100%] group-hover/wa:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] rounded-[1.2rem]"></div>
-                                    <div class="relative z-10 flex items-center gap-2 md:gap-2.5 text-white">
-                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover/wa:rotate-[-10deg] group-hover/wa:scale-110 transition-transform duration-500"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
-                                        <div class="relative overflow-hidden h-[1.2em] inline-flex flex-col items-center">
-                                            <span class="font-extrabold text-[10px] md:text-[11px] tracking-[0.25em] uppercase leading-[1.2em] transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] group-hover/wa:-translate-y-full">Order</span>
-                                            <span class="font-extrabold text-[10px] md:text-[11px] tracking-[0.25em] uppercase leading-[1.2em] absolute top-0 left-0 w-full text-center transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] translate-y-full group-hover/wa:translate-y-0 text-[10px] md:text-[11px]">Order</span>
+                                    <div class="relative z-10 flex items-center gap-1.5 md:gap-2.5 text-white w-full justify-center">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 group-hover/wa:rotate-[-10deg] group-hover/wa:scale-110 transition-transform duration-500"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                                        <div class="font-extrabold text-[10px] md:text-[11px] tracking-[0.2em] md:tracking-[0.25em] relative overflow-hidden h-[1.3em] inline-flex flex-col items-center">
+                                            <span class="uppercase leading-[1.3em] transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] group-hover/wa:-translate-y-full">Order</span>
+                                            <span class="uppercase leading-[1.3em] absolute top-0 left-0 w-full text-center transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] translate-y-full group-hover/wa:translate-y-0">Order</span>
                                         </div>
                                     </div>
                                 </a>
@@ -314,9 +316,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 </div>
             `;
         });
-        
+
         gallery.innerHTML = html;
-        
+
         // Stagger entrance on scroll
         gsap.from(".bento-card", {
             scrollTrigger: { trigger: "#bento-gallery", start: "top 85%" },
@@ -326,7 +328,7 @@ document.addEventListener("DOMContentLoaded", () => {
             duration: 1.5,
             ease: "power3.out"
         });
-        
+
         initParallax(); // Re-init parallax for new images
     }
 
@@ -334,14 +336,14 @@ document.addEventListener("DOMContentLoaded", () => {
     function renderMarquee(products) {
         const uniqueBrands = [...new Set(products.map(p => p.brandName))];
         const track = document.getElementById('marquee-track');
-        
+
         // Build the colossal typography string
         const brandString = uniqueBrands.map(b => `
             <span class="text-[5rem] md:text-[8rem] lg:text-[12rem] font-extrabold tracking-tighter text-white/20 md:text-surface-900 mx-8 md:mx-16 uppercase hover:text-brand-orange transition-colors duration-[800ms] select-none">
                 ${b}
             </span>
         `).join('<span class="text-[4rem] md:text-[6rem] font-light text-white/10 md:text-surface-850 mx-4 select-none">×</span>');
-        
+
         // Multiply massive string 4 times for infinite loop
         track.innerHTML = brandString + brandString + brandString + brandString;
     }
@@ -601,13 +603,13 @@ document.addEventListener("DOMContentLoaded", () => {
                                 <a href="${product.instaLink || '#'}" target="_blank" class="w-12 h-12 rounded-[1.2rem] flex justify-center items-center bg-white hover:bg-brand-orange text-black hover:text-white transition-colors duration-300 shadow-[0_0_15px_rgba(255,255,255,0.2)] hover:shadow-[0_0_15px_rgba(255,61,0,0.4)]">
                                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="rotate-45" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                                 </a>
-                                <a href="${product.WAlink || 'https://wa.me/918606447311?text=Hello%2C%20I%20would%20like%20to%20know%20more%20details'}" target="_blank" class="relative overflow-hidden h-12 px-5 md:px-6 rounded-[1.2rem] flex justify-center items-center border border-white/10 bg-white/5 backdrop-blur-md transition-all duration-500 hover:shadow-[0_0_25px_rgba(255,61,0,0.4)] hover:border-brand-orange hover:-translate-y-1 group/wa [transform:translateZ(0)]">
+                                <a href="${product.WAlink || 'https://wa.me/918606447311?text=Hello%2C%20I%20would%20like%20to%20know%20more%20details'}" target="_blank" class="flex-1 min-w-0 relative overflow-hidden h-12 px-2 sm:px-5 md:px-6 rounded-[1.2rem] flex justify-center items-center border border-white/10 bg-white/5 backdrop-blur-md transition-all duration-500 hover:shadow-[0_0_25px_rgba(255,61,0,0.4)] hover:border-brand-orange hover:-translate-y-1 group/wa [transform:translateZ(0)]">
                                     <div class="absolute inset-0 bg-brand-orange translate-y-[100%] group-hover/wa:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] rounded-[1.2rem]"></div>
-                                    <div class="relative z-10 flex items-center gap-2 md:gap-2.5 text-white">
-                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover/wa:rotate-[-10deg] group-hover/wa:scale-110 transition-transform duration-500"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
-                                        <div class="relative overflow-hidden h-[1.2em] inline-flex flex-col items-center">
-                                            <span class="font-extrabold text-[10px] md:text-[11px] tracking-[0.25em] uppercase leading-[1.2em] transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] group-hover/wa:-translate-y-full">Order</span>
-                                            <span class="font-extrabold text-[10px] md:text-[11px] tracking-[0.25em] uppercase leading-[1.2em] absolute top-0 left-0 w-full text-center transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] translate-y-full group-hover/wa:translate-y-0 text-[10px] md:text-[11px]">Order</span>
+                                    <div class="relative z-10 flex items-center gap-1.5 md:gap-2.5 text-white w-full justify-center">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 group-hover/wa:rotate-[-10deg] group-hover/wa:scale-110 transition-transform duration-500"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                                        <div class="font-extrabold text-[10px] md:text-[11px] tracking-[0.2em] md:tracking-[0.25em] relative overflow-hidden h-[1.3em] inline-flex flex-col items-center">
+                                            <span class="uppercase leading-[1.3em] transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] group-hover/wa:-translate-y-full">Order</span>
+                                            <span class="uppercase leading-[1.3em] absolute top-0 left-0 w-full text-center transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] translate-y-full group-hover/wa:translate-y-0">Order</span>
                                         </div>
                                     </div>
                                 </a>
@@ -696,8 +698,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 () => {
                     _filterState.priceMin = 0;
                     _filterState.priceMax = _priceAbsMax;
-                    ['price-min', 'price-min-mobile'].forEach(id => { const el = document.getElementById(id); if(el) el.value = el.min; });
-                    ['price-max', 'price-max-mobile'].forEach(id => { const el = document.getElementById(id); if(el) el.value = el.max; });
+                    ['price-min', 'price-min-mobile'].forEach(id => { const el = document.getElementById(id); if (el) el.value = el.min; });
+                    ['price-max', 'price-max-mobile'].forEach(id => { const el = document.getElementById(id); if (el) el.value = el.max; });
                     updatePriceDisplay();
                     applyFilters();
                 }
@@ -725,17 +727,17 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ---- Global functions for mobile sheet ----
-    window.openMobileFilter = function() {
+    window.openMobileFilter = function () {
         document.getElementById('mobile-filter-sheet').classList.add('open');
         document.body.style.overflow = 'hidden';
     };
 
-    window.closeMobileFilter = function() {
+    window.closeMobileFilter = function () {
         document.getElementById('mobile-filter-sheet').classList.remove('open');
         document.body.style.overflow = '';
     };
 
-    window.applyMobileFilters = function() {
+    window.applyMobileFilters = function () {
         const bmf = document.getElementById('brand-filter-mobile');
         const smf = document.getElementById('sort-filter-mobile');
         const pmMin = document.getElementById('price-min-mobile');
@@ -763,15 +765,15 @@ document.addEventListener("DOMContentLoaded", () => {
         applyFilters();
     };
 
-    window.clearAllFilters = function() {
+    window.clearAllFilters = function () {
         _filterState = { query: '', brand: '', sort: '', priceMin: 0, priceMax: _priceAbsMax };
 
-        ['search-input', 'search-input-mobile'].forEach(id => { const el = document.getElementById(id); if(el) el.value = ''; });
-        ['clear-search-btn', 'clear-search-mobile-btn'].forEach(id => { const el = document.getElementById(id); if(el) el.style.display = 'none'; });
-        ['brand-filter', 'brand-filter-mobile'].forEach(id => { const el = document.getElementById(id); if(el) el.value = ''; });
-        ['sort-filter', 'sort-filter-mobile'].forEach(id => { const el = document.getElementById(id); if(el) el.value = ''; });
-        ['price-min', 'price-min-mobile'].forEach(id => { const el = document.getElementById(id); if(el) el.value = el.min; });
-        ['price-max', 'price-max-mobile'].forEach(id => { const el = document.getElementById(id); if(el) el.value = el.max; });
+        ['search-input', 'search-input-mobile'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+        ['clear-search-btn', 'clear-search-mobile-btn'].forEach(id => { const el = document.getElementById(id); if (el) el.style.display = 'none'; });
+        ['brand-filter', 'brand-filter-mobile'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+        ['sort-filter', 'sort-filter-mobile'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+        ['price-min', 'price-min-mobile'].forEach(id => { const el = document.getElementById(id); if (el) el.value = el.min; });
+        ['price-max', 'price-max-mobile'].forEach(id => { const el = document.getElementById(id); if (el) el.value = el.max; });
 
         updatePriceDisplay();
         applyFilters();
