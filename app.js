@@ -277,9 +277,18 @@ document.addEventListener("DOMContentLoaded", () => {
                     ` : ''}
 
                     <div class="relative z-10 p-8 flex flex-col items-start w-full">
-                        <span class="bg-brand-orange text-white text-[8px] px-3 py-1.5 rounded-full uppercase tracking-[0.2em] font-extrabold mb-4 shadow-[0_0_15px_rgba(255,61,0,0.5)]">
-                            ${product.brandName}
-                        </span>
+                        <div class="flex items-center flex-wrap gap-2 mb-4">
+                            <span class="bg-brand-orange text-white text-[8px] px-3 py-1.5 rounded-full uppercase tracking-[0.2em] font-extrabold shadow-[0_0_15px_rgba(255,61,0,0.5)]">
+                                ${product.brandName}
+                            </span>
+                            ${product.scale ? `
+                            <span class="group relative flex items-center gap-1.5 bg-[#111] border border-white/10 text-white/80 text-[8px] px-3 py-1.5 rounded-full uppercase tracking-[0.2em] font-extrabold shadow-[0_8px_16px_rgba(0,0,0,0.4)] overflow-hidden cursor-default transition-all duration-500 hover:border-white/30 hover:text-white hover:bg-white/10 hover:shadow-[0_0_20px_rgba(255,255,255,0.2)] hover:-translate-y-[2px]" title="Product Scale: ${product.scale}">
+                                <span class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-[150%] skew-x-[-20deg] transition-transform duration-1000 ease-out group-hover:translate-x-[150%]"></span>
+                                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="opacity-60 group-hover:opacity-100 transition-opacity"><rect x="3" y="10" width="18" height="4" rx="1"></rect><line x1="7" y1="10" x2="7" y2="12"></line><line x1="11" y1="10" x2="11" y2="12"></line><line x1="15" y1="10" x2="15" y2="12"></line><line x1="19" y1="10" x2="19" y2="12"></line></svg>
+                                <span>SCALE ${product.scale}</span>
+                            </span>
+                            ` : ''}
+                        </div>
                         
                         <h3 class="text-3xl lg:text-5xl font-extrabold tracking-tighter leading-[0.9] text-white">${product.modelName}</h3>
                         
@@ -586,9 +595,18 @@ document.addEventListener("DOMContentLoaded", () => {
                     ` : ''}
 
                     <div class="relative z-10 p-8 flex flex-col items-start w-full">
-                        <span class="bg-brand-orange text-white text-[8px] px-3 py-1.5 rounded-full uppercase tracking-[0.2em] font-extrabold mb-4 shadow-[0_0_15px_rgba(255,61,0,0.5)]">
-                            ${product.brandName}
-                        </span>
+                        <div class="flex items-center flex-wrap gap-2 mb-4">
+                            <span class="bg-brand-orange text-white text-[8px] px-3 py-1.5 rounded-full uppercase tracking-[0.2em] font-extrabold shadow-[0_0_15px_rgba(255,61,0,0.5)]">
+                                ${product.brandName}
+                            </span>
+                            ${product.scale ? `
+                            <span class="group relative flex items-center gap-1.5 bg-[#111] border border-white/10 text-white/80 text-[8px] px-3 py-1.5 rounded-full uppercase tracking-[0.2em] font-extrabold shadow-[0_8px_16px_rgba(0,0,0,0.4)] overflow-hidden cursor-default transition-all duration-500 hover:border-white/30 hover:text-white hover:bg-white/10 hover:shadow-[0_0_20px_rgba(255,255,255,0.2)] hover:-translate-y-[2px]" title="Product Scale: ${product.scale}">
+                                <span class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-[150%] skew-x-[-20deg] transition-transform duration-1000 ease-out group-hover:translate-x-[150%]"></span>
+                                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="opacity-60 group-hover:opacity-100 transition-opacity"><rect x="3" y="10" width="18" height="4" rx="1"></rect><line x1="7" y1="10" x2="7" y2="12"></line><line x1="11" y1="10" x2="11" y2="12"></line><line x1="15" y1="10" x2="15" y2="12"></line><line x1="19" y1="10" x2="19" y2="12"></line></svg>
+                                <span>SCALE ${product.scale}</span>
+                            </span>
+                            ` : ''}
+                        </div>
                         <h3 class="text-3xl lg:text-5xl font-extrabold tracking-tighter leading-[0.9] text-white">${product.modelName}</h3>
                         <div class="mt-6 w-full flex justify-between items-end
                                     opacity-100 translate-y-0
