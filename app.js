@@ -262,6 +262,8 @@ document.addEventListener("DOMContentLoaded", () => {
             if (i % 5 === 3) bentoClass = 'col-span-1 md:col-span-8 min-h-[450px] md:min-h-[550px]';
 
             const isOOS = product.stock && product.stock.toUpperCase() === 'OOS';
+            const waText = encodeURIComponent(`Hi 👋, I'm interested in your product: *${product.productName}*. Could you please share pricing, availability, and more details?`);
+            const dynamicWALink = `https://wa.me/918606447311?text=${waText}`;
             html += `
                 <div class="${bentoClass} bento-card relative group flex flex-col justify-end overflow-hidden">
                     <img src="${product.ImageURL}" class="absolute inset-0 w-full h-[110%] object-cover parallax-img origin-center grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-[2000ms] ease-out" data-speed="1.05" loading="lazy" onerror="this.src='/image/trx4m.jpg'">
@@ -269,7 +271,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     
                     ${isOOS ? `
                     <div class="absolute top-6 right-6 z-[100]">
-                        <button class="flex items-center justify-center gap-2 bg-brand-orange text-white [text-shadow:0_1px_2px_rgba(0,0,0,0.3)] text-[9px] md:text-[11px] px-4 md:px-5 py-2 md:py-2.5 uppercase tracking-[0.15em] font-extrabold shadow-[0_8px_16px_rgba(255,61,0,0.4)] rounded-full border border-orange-500/50 backdrop-blur-md transition-all duration-300 hover:scale-105 hover:shadow-[0_12px_24px_rgba(255,61,0,0.6)] active:scale-95 cursor-pointer" onclick="window.open('${product.WAlink || product.instaLink || '#'}', '_blank')">
+                        <button class="flex items-center justify-center gap-2 bg-brand-orange text-white [text-shadow:0_1px_2px_rgba(0,0,0,0.3)] text-[9px] md:text-[11px] px-4 md:px-5 py-2 md:py-2.5 uppercase tracking-[0.15em] font-extrabold shadow-[0_8px_16px_rgba(255,61,0,0.4)] rounded-full border border-orange-500/50 backdrop-blur-md transition-all duration-300 hover:scale-105 hover:shadow-[0_12px_24px_rgba(255,61,0,0.6)] active:scale-95 cursor-pointer" onclick="window.open('${dynamicWALink}', '_blank')">
                             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="drop-shadow-sm"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
                             <span>Out of Stock</span>
                         </button>
@@ -309,7 +311,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="rotate-45" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                                 </a>
                                 
-                                <a href="${product.WAlink || 'https://wa.me/918606447311?text=Hello%2C%20I%20would%20like%20to%20know%20more%20details'}" target="_blank" class="flex-1 min-w-0 relative overflow-hidden h-12 px-2 sm:px-5 md:px-6 rounded-[1.2rem] flex justify-center items-center border border-white/10 bg-white/5 backdrop-blur-md transition-all duration-500 hover:shadow-[0_0_25px_rgba(255,61,0,0.4)] hover:border-brand-orange hover:-translate-y-1 group/wa [transform:translateZ(0)]">
+                                <a href="${dynamicWALink}" target="_blank" class="flex-1 min-w-0 relative overflow-hidden h-12 px-2 sm:px-5 md:px-6 rounded-[1.2rem] flex justify-center items-center border border-white/10 bg-white/5 backdrop-blur-md transition-all duration-500 hover:shadow-[0_0_25px_rgba(255,61,0,0.4)] hover:border-brand-orange hover:-translate-y-1 group/wa [transform:translateZ(0)]">
                                     <div class="absolute inset-0 bg-brand-orange translate-y-[100%] group-hover/wa:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] rounded-[1.2rem]"></div>
                                     <div class="relative z-10 flex items-center gap-1.5 md:gap-2.5 text-white w-full justify-center">
                                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 group-hover/wa:rotate-[-10deg] group-hover/wa:scale-110 transition-transform duration-500"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
@@ -580,6 +582,8 @@ document.addEventListener("DOMContentLoaded", () => {
             if (i % 5 === 3) bentoClass = 'col-span-1 md:col-span-8 min-h-[450px] md:min-h-[550px]';
 
             const isOOS = product.stock && product.stock.toUpperCase() === 'OOS';
+            const waText = encodeURIComponent(`Hi 👋, I'm interested in your product: *${product.productName}*. Could you please share pricing, availability, and more details?`);
+            const dynamicWALink = `https://wa.me/918606447311?text=${waText}`;
             html += `
                 <div class="${bentoClass} bento-card relative group flex flex-col justify-end overflow-hidden">
                     <img src="${product.ImageURL}" class="absolute inset-0 w-full h-[110%] object-cover parallax-img origin-center grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-[2000ms] ease-out" data-speed="1.05" loading="lazy" onerror="this.src='/image/trx4m.jpg'">
@@ -587,7 +591,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     
                     ${isOOS ? `
                     <div class="absolute top-6 right-6 z-[100]">
-                        <button class="flex items-center justify-center gap-2 bg-brand-orange text-white [text-shadow:0_1px_2px_rgba(0,0,0,0.3)] text-[9px] md:text-[11px] px-4 md:px-5 py-2 md:py-2.5 uppercase tracking-[0.15em] font-extrabold shadow-[0_8px_16px_rgba(255,61,0,0.4)] rounded-full border border-orange-500/50 backdrop-blur-md transition-all duration-300 hover:scale-105 hover:shadow-[0_12px_24px_rgba(255,61,0,0.6)] active:scale-95 cursor-pointer" onclick="window.open('${product.WAlink || product.instaLink || '#'}', '_blank')">
+                        <button class="flex items-center justify-center gap-2 bg-brand-orange text-white [text-shadow:0_1px_2px_rgba(0,0,0,0.3)] text-[9px] md:text-[11px] px-4 md:px-5 py-2 md:py-2.5 uppercase tracking-[0.15em] font-extrabold shadow-[0_8px_16px_rgba(255,61,0,0.4)] rounded-full border border-orange-500/50 backdrop-blur-md transition-all duration-300 hover:scale-105 hover:shadow-[0_12px_24px_rgba(255,61,0,0.6)] active:scale-95 cursor-pointer" onclick="window.open('${dynamicWALink}', '_blank')">
                             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="drop-shadow-sm"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
                             <span>Out of Stock</span>
                         </button>
@@ -621,7 +625,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                 <a href="${product.instaLink || '#'}" target="_blank" class="w-12 h-12 rounded-[1.2rem] flex justify-center items-center bg-white hover:bg-brand-orange text-black hover:text-white transition-colors duration-300 shadow-[0_0_15px_rgba(255,255,255,0.2)] hover:shadow-[0_0_15px_rgba(255,61,0,0.4)]">
                                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="rotate-45" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                                 </a>
-                                <a href="${product.WAlink || 'https://wa.me/918606447311?text=Hello%2C%20I%20would%20like%20to%20know%20more%20details'}" target="_blank" class="flex-1 min-w-0 relative overflow-hidden h-12 px-2 sm:px-5 md:px-6 rounded-[1.2rem] flex justify-center items-center border border-white/10 bg-white/5 backdrop-blur-md transition-all duration-500 hover:shadow-[0_0_25px_rgba(255,61,0,0.4)] hover:border-brand-orange hover:-translate-y-1 group/wa [transform:translateZ(0)]">
+                                <a href="${dynamicWALink}" target="_blank" class="flex-1 min-w-0 relative overflow-hidden h-12 px-2 sm:px-5 md:px-6 rounded-[1.2rem] flex justify-center items-center border border-white/10 bg-white/5 backdrop-blur-md transition-all duration-500 hover:shadow-[0_0_25px_rgba(255,61,0,0.4)] hover:border-brand-orange hover:-translate-y-1 group/wa [transform:translateZ(0)]">
                                     <div class="absolute inset-0 bg-brand-orange translate-y-[100%] group-hover/wa:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] rounded-[1.2rem]"></div>
                                     <div class="relative z-10 flex items-center gap-1.5 md:gap-2.5 text-white w-full justify-center">
                                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 group-hover/wa:rotate-[-10deg] group-hover/wa:scale-110 transition-transform duration-500"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
