@@ -5,7 +5,7 @@
   <!-- Homepage -->
   <url>
     <loc>https://rcanddiecast.com/</loc>
-    <lastmod>2026-04-04</lastmod>
+    <lastmod>2026-04-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
@@ -17,9 +17,137 @@
   <!-- Blog Listing Page -->
   <url>
     <loc>https://rcanddiecast.com/blog/</loc>
-    <lastmod>2026-04-04</lastmod>
+    <lastmod>2026-04-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+  </url>
+
+  <!-- FAQ Page -->
+  <url>
+    <loc>https://rcanddiecast.com/faq/</loc>
+    <lastmod>2026-04-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Blog Post: What is ESC in RC Cars (FEATURED) -->
+  <url>
+    <loc>https://rcanddiecast.com/blog/what-is-esc-in-rc-cars</loc>
+    <lastmod>2026-04-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <image:image>
+      <image:loc>https://rcanddiecast.com/image/traxxas-xmax.jpg</image:loc>
+      <image:title>What is ESC in RC Cars? The Complete Guide</image:title>
+    </image:image>
+  </url>
+
+  <!-- Blog Post: Brushed vs Brushless Motor -->
+  <url>
+    <loc>https://rcanddiecast.com/blog/brushed-vs-brushless-motor-rc-cars</loc>
+    <lastmod>2026-04-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://rcanddiecast.com/image/MN82-Pro.jpg</image:loc>
+      <image:title>Brushed vs Brushless Motor in RC Cars</image:title>
+    </image:image>
+  </url>
+
+  <!-- Blog Post: What is Diecast Cars -->
+  <url>
+    <loc>https://rcanddiecast.com/blog/what-is-diecast-cars</loc>
+    <lastmod>2026-04-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://rcanddiecast.com/image/brabus-gwagon.jpg</image:loc>
+      <image:title>What is a Diecast Car? Scale, Metal and the Art of the Miniature</image:title>
+    </image:image>
+  </url>
+
+  <!-- Blog Post: Toy Grade vs Hobby Grade -->
+  <url>
+    <loc>https://rcanddiecast.com/blog/toy-grade-vs-hobby-grade-rc-cars</loc>
+    <lastmod>2026-03-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://rcanddiecast.com/image/bronco-wl-toys.jpg</image:loc>
+      <image:title>Toy Grade vs Hobby Grade RC Cars Comparison</image:title>
+    </image:image>
+  </url>
+
+  <!-- Blog Post: RC Car Beginner Mistakes -->
+  <url>
+    <loc>https://rcanddiecast.com/blog/rc-car-beginner-mistakes-to-avoid</loc>
+    <lastmod>2026-03-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://rcanddiecast.com/image/willys-fms.jpg</image:loc>
+      <image:title>RC Car Beginner Mistakes to Avoid in India</image:title>
+    </image:image>
+  </url>
+
+  <!-- Blog Post: LiPo Battery RC Cars -->
+  <url>
+    <loc>https://rcanddiecast.com/blog/what-is-lipo-battery-rc-cars</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://rcanddiecast.com/image/k5-blazer.jpg</image:loc>
+      <image:title>What is LiPo Battery in RC Cars — India Guide</image:title>
+    </image:image>
+  </url>
+
+  <!-- Blog Post: 4WD vs 2WD RC Cars -->
+  <url>
+    <loc>https://rcanddiecast.com/blog/4wd-vs-2wd-rc-cars</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://rcanddiecast.com/image/hb-toys-16-defender.jpg</image:loc>
+      <image:title>4WD vs 2WD RC Cars — Which to Choose in India</image:title>
+    </image:image>
+  </url>
+
+  <!-- Blog Post: RC Transmitter & Receiver Explained -->
+  <url>
+    <loc>https://rcanddiecast.com/blog/rc-car-transmitter-receiver-explained</loc>
+    <lastmod>2026-02-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <image:image>
+      <image:loc>https://rcanddiecast.com/image/MJX-14304.jpg</image:loc>
+      <image:title>RC Car Transmitter and Receiver Explained</image:title>
+    </image:image>
+  </url>
+
+  <!-- Blog Post: Is Buying RC Car Worth It 2026 -->
+  <url>
+    <loc>https://rcanddiecast.com/blog/is-buying-rc-car-worth-it-2026</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <image:image>
+      <image:loc>https://rcanddiecast.com/image/defender.png</image:loc>
+      <image:title>Is Buying an RC Car Worth It in 2026</image:title>
+    </image:image>
+  </url>
+
+  <!-- Blog Post: RC Diecast as Investment India -->
+  <url>
+    <loc>https://rcanddiecast.com/blog/rc-diecast-cars-investment-india</loc>
+    <lastmod>2026-02-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <image:image>
+      <image:loc>https://rcanddiecast.com/image/brabus-gwagon.jpg</image:loc>
+      <image:title>RC and Diecast Cars as Investment India</image:title>
+    </image:image>
   </url>
 
   <!-- Blog Post: Best RC Rock Crawlers India 2025 -->
@@ -27,9 +155,9 @@
     <loc>https://rcanddiecast.com/blog/best-rc-rock-crawlers-india-2025</loc>
     <lastmod>2025-03-15</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.75</priority>
     <image:image>
-      <image:loc>https://rcanddiecast.com/image/itrx4m.jpg</image:loc>
+      <image:loc>https://rcanddiecast.com/image/trx4m.jpg</image:loc>
       <image:title>Best RC Rock Crawlers in India 2025 Buyer's Guide</image:title>
     </image:image>
   </url>
@@ -39,9 +167,9 @@
     <loc>https://rcanddiecast.com/blog/traxxas-trx4m-review-india</loc>
     <lastmod>2025-02-20</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
     <image:image>
-      <image:loc>https://rcanddiecast.com/image/itrx4m.jpg</image:loc>
+      <image:loc>https://rcanddiecast.com/image/trx4m.jpg</image:loc>
       <image:title>Traxxas TRX-4M Review India — Mini RC Rock Crawler</image:title>
     </image:image>
   </url>
