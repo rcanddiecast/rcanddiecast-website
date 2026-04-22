@@ -1,7 +1,7 @@
 [
   {
     "productId": 1,
-    "brandName": "RC Drift Car",
+    "brandName": "L.O.T Cars",
     "productName": "L.O.T Cars Flare 2.0 - RC Drift Car",
     "modelName": "RC Drift Car",
     "scale": "1/18",
@@ -19,7 +19,7 @@
   },
   {
     "productId": 2,
-    "brandName": "Off-Road RC Truck",
+    "brandName": "L.O.T Cars",
     "productName": "L.O.T Cars Knox - Off-Road RC Truck",
     "modelName": "Off-Road RC Truck",
     "scale": "1/18",
@@ -37,7 +37,7 @@
   },
   {
     "productId": 3,
-    "brandName": "RC Drift Car",
+    "brandName": "L.O.T Cars",
     "productName": "L.O.T Cars Shadow - RC Drift Car",
     "modelName": "RC Drift Car",
     "scale": "1/18",
@@ -55,7 +55,7 @@
   },
   {
     "productId": 4,
-    "brandName": "RC Drift Car",
+    "brandName": "L.O.T Cars",
     "productName": "L.O.T Cars Ghost - RC Drift Car",
     "modelName": "RC Drift Car",
     "scale": "1/18",
@@ -73,7 +73,7 @@
   },
   {
     "productId": 5,
-    "brandName": "RC Auto 3 Wheeler",
+    "brandName": "L.O.T Cars",
     "productName": "L.O.T Cars Otto - RC Auto 3 Wheeler",
     "modelName": "RC Auto 3 Wheeler",
     "scale": "1/18",
@@ -91,7 +91,7 @@
   },
   {
     "productId": 6,
-    "brandName": "4x4 High Speed RC Car",
+    "brandName": "L.O.T Cars",
     "productName": "L.O.T Cars Apex - 4x4 High Speed RC Car",
     "modelName": "4x4 High Speed RC Car",
     "scale": "1/18",
@@ -109,7 +109,7 @@
   },
   {
     "productId": 7,
-    "brandName": "Scale Mini RC Car",
+    "brandName": "L.O.T Cars",
     "productName": "L.O.T Cars Dash - 1:64 Scale Mini RC Car",
     "modelName": "Scale Mini RC Car",
     "scale": "1/64",
@@ -128,7 +128,7 @@
   {
     "productId": 8,
     "brandName": "Traxxas",
-    "productName": " Defender 1:18 Scale Crawler Black",
+    "productName": "Defender 1:18 Scale Crawler Black",
     "modelName": "TRX4m Defender",
     "scale": "1/18",
     "productDec": "TRX-4M All-Terrain RC Crawler – Compact Size, Extreme Capability is engineered for enthusiasts who demand unmatched performance, durability, and realism in a mini off-road RC truck. Built to conquer challenging terrains, the TRX-4M features grippy soft-compound tyres, a precision 4-link suspension system, and smooth oil-filled GTM™ shocks that keep all four wheels planted firmly on uneven surfaces for maximum control and stability. With an impressive 45° steering angle, it delivers an ultra-tight turning radius and exceptional maneuverability in confined spaces, powered by a heavy-duty waterproof 2065T steering servo. Designed for both performance and realism, the detailed ABS hard body with clipless mounting offers quick installation and a durable, high-gloss finish that resists wear and damage. Equipped with fully waterproof electronics, this RC crawler lets you drive through wet grass, puddles, and rough outdoor conditions without limits. Under the hood, a powerful Titan® 180 87T motor, shaft-driven 4WD system, steel ladder frame chassis, and electronic hill hold braking ensure reliable crawling performance across any terrain. Paired with the TQ™ 2.4GHz radio system, long-lasting 7.4V 750mAh LiPo battery, and fast USB charger, the TRX-4M delivers a complete ready-to-run experience for beginners and hobbyists alike.\n\nSpecifications: Length: 262 mm (Bronco) / 279 mm (Defender), Width: 124 mm front & rear track, Ground Clearance: 29 mm, Wheelbase: 155 mm, Height: 117 mm (Bronco) / 135 mm (Defender), Weight: approx. 468 g–483 g (without battery), Approach Angle: up to 54°, Breakover Angle: 45°, Departure Angle: up to 48°, Shock Length: 51 mm, Tire Size: 57 × 26 mm, Wheel Size: 26 × 13 mm, Drive System: Shaft-driven 4WD, Differential: Fully locked, Chassis: Steel ladder frame with nylon composite crossmembers.\n\nWhat’s in the box: TRX-4M Ready-To-Race RC Truck, licensed ABS hard body, Titan® 180 87-turn motor, ECM-2.5 Electronic Control Module (ESC + receiver), TQ 2.4GHz transmitter, 7.4V 750mAh 2-cell LiPo battery, 2-amp USB fast charger with iD®, and high-quality maintenance tools.",
@@ -169,7 +169,7 @@
     "scale": "1/24",
     "productDec": "FMS 1/24 Land Rover Discovery Camel Trophy Edition RTR – Classic Adventure, Modern Performance brings the legendary spirit of off-road exploration to life in a compact, high-detail RC crawler. This officially licensed replica captures the iconic first-generation Land Rover Discovery in its signature Camel Trophy sand-yellow livery, delivering exceptional scale realism for both enthusiasts and collectors. Built on the advanced FCX24M chassis, it features a durable non-bearing trapezoidal metal beam, rugged ABS hard body, and a fully simulated interior for an authentic driving experience. Designed for versatility, the two-speed transmission allows smooth switching between crawling and off-road driving, while large-diameter tyres and solid ground clearance ensure confident performance across challenging terrains. A factory-installed roof rack enhances both the rugged look and functional appeal, making it a true expedition-ready model. Powered by a reliable 050 35T brushed motor and a 7.4V 380mAh LiPo battery, this RC crawler offers up to 20 minutes of runtime with a control range of up to 30 meters using the G3 V3 transmitter with R3A receiver. Perfect for those seeking a scale RC crawler with realistic detailing and off-road capability, this model combines heritage design with modern engineering for an immersive adventure experience.\n\nSpecifications: Length: 232 mm, Width: 105 mm, Height: 133 mm, Wheelbase: 134 mm, Tire Size: 48 × 17 mm, Ground Clearance: 28 mm, Approach Angle: 52°, Departure Angle: 55°, Motor: 050 35T brushed motor, Battery: 2S LiPo 7.4V 380mAh, Control Distance: up to 30 m, Runtime: approx. 20 minutes.",
     "ImageURL": "https://rcanddiecast.com/image/fcx24m-land-rover-discovery-camel-trophy-edition-rtr.png",
-    "rate": "22500",
+    "rate": "14000",
     "showProdct": "yes",
     "slider": "yes",
     "stock": "yes",
@@ -398,7 +398,7 @@
   {
     "productId": 23,
     "brandName": "HB TOYS ",
-    "productName": " HB TOYS  R1006",
+    "productName": "HB TOYS  R1006",
     "modelName": " R1006",
     "scale": "1/10",
     "productDec": "High-Performance 4WD RC Off-Road Car – Advanced Control, Rugged Build, and Long-Range Power is engineered for enthusiasts who demand precision, durability, and next-level features in a modern RC vehicle. Equipped with a responsive 2.4GHz full proportional steering system, this RC car delivers smooth and accurate control with a long remote range of up to 100 meters. Powered by a reliable lithium battery, it offers over 30 minutes of runtime after approximately 4 hours of charging, reaching speeds of up to 18 km/h for an exciting driving experience. The robust four-wheel drive (4WD) system, combined with front and rear independent suspension, ensures superior stability and traction across rough terrains. Built with high-grip TPR rubber tyres and an IPX4 splash-proof design, it performs confidently on dirt, gravel, and wet surfaces. Enhanced with LED lighting, breathing light effects, and a stylish black interior finish, it stands out both in performance and appearance. Advanced features like fast/slow speed modes, a remote-controlled electric winch, and optional front and rear electronically controlled differential locks provide added versatility and control for serious off-road adventures. Supporting both 2S and 3S lithium batteries, this CE-certified RC car is perfect for those seeking a feature-rich, long-range 4WD RC off-road vehicle built for performance and reliability.",
@@ -416,7 +416,7 @@
   {
     "productId": 24,
     "brandName": "HB TOYS ",
-    "productName": " HB TOYS  R1011",
+    "productName": "HB TOYS  R1011",
     "modelName": " R1011",
     "scale": "1/10",
     "productDec": "HB Toys R1011 1:10 Scale 4WD RC Off-Road Car – Advanced Technology Meets Rugged Performance is a next-generation upgrade designed for enthusiasts who demand realism, durability, and full control on any terrain. Built as a significant evolution over earlier models, the R1011 introduces front and rear electronically controlled differential locks, allowing superior traction and precision while tackling rocks, mud, and uneven surfaces. Powered by a strong 550 brushed motor and supported by a robust 4WD drivetrain with independent suspension, it delivers stable, smooth, and reliable off-road performance. The newly engineered chassis with alloy gears enhances durability, while the advanced 4-servo control system—handling steering, gear shifting, and both differential locks—offers unmatched driving realism and control. Designed for versatility, it features dual speed modes for both slow crawling and faster driving, along with compatibility for 2S and 3S Li-ion batteries. With a runtime of up to 30 minutes and a control range of approximately 100 meters via a responsive 2.4GHz system, this RC car is built for extended adventures. The aggressive styling is enhanced with breathing lights and Demon Eye angel flow lighting, making it stand out even during night runs. Built with durable ABS, nylon, and alloy materials, along with an IPX4 splashproof design and high-grip TPR rubber tyres, the R1011 is perfect for those seeking a feature-packed, high-performance 4WD RC off-road car with advanced control and realistic driving dynamics.",
@@ -633,7 +633,7 @@
     "productId": 36,
     "brandName": "FMS",
     "productName": "Thunder Storm RC Crawler, 4X4 Off Road RC Rock Crawler",
-    "modelName": "FMS 1/18 Thunder Storm RC Crawler, 4X4 Off Road RC Rock Crawler",
+    "modelName": "Thunder Storm RC Crawler, 4X4 Off Road RC Rock Crawler",
     "scale": "1/18",
     "productDec": "Unleash real off-road excitement with the 1/18 Thunder Storm 4x4 RC Rock Crawler RTR, a compact yet highly capable machine built for serious crawling performance. Designed for both beginners and experienced RC enthusiasts, this model delivers an impressive blend of realistic detailing and rugged durability.\n\nBuilt with a finely crafted hard body shell, this RC crawler features scale-inspired elements like a detailed interior, functional hood, and realistic accessories that elevate its visual appeal. Underneath, the durable chassis is engineered with metal frame rails and a multi-link suspension system, ensuring excellent articulation and stability even on uneven terrain.\n\nPowering this crawler is a high-torque 55T brushed motor combined with a precision gear setup, allowing smooth throttle control and superior climbing ability across rocks, mud, and rough trails. The advanced 4WD system ensures consistent traction, giving you full confidence during challenging off-road sessions.\n\nEquipped with water-resistant electronics, this RC truck is ready to tackle wet and muddy conditions without worry. The included 7.4V LiPo battery delivers up to 30 minutes of runtime, keeping the adventure going longer. A responsive 2.4GHz radio system ensures stable, interference-free control.\n\nTo enhance the experience, the integrated LED lighting system adds a realistic touch, making night driving more exciting and visually striking.\n\nSpecifications:\nScale: 1/18\nLength: 275mm\nWidth: 116mm\nWheelbase: 155mm\nMotor: 55T Brushed\nBattery: 7.4V 380mAh LiPo\nDrive Type: 4WD\nControl System: 2.4GHz\nRuntime: Up to 30 minutes\nPackage Includes:\n1 x 1/18 Thunder Storm RC Crawler\n1 x 2.4GHz Transmitter\n1 x LiPo Battery\n1 x USB Charger\n1 x Instruction Manual\n\nPerfect for rock crawling, trail driving, and backyard adventures, this RC crawler is a must-have for anyone looking to explore the world of off-road RC vehicles with style and performance.",
     "ImageURL": "https://rcanddiecast.com/image/fms-1-18-thunder-storm-rc-crawler-4x4-off-road-rc-rock-crawler.png",
@@ -740,7 +740,7 @@
   {
     "productId": 42,
     "brandName": "Kyosho",
-    "productName": "Kyosho 1:10 Scale 4WD FAZER Mk2 FZ02-L 1957 Chevy® Bel Air Coupe Tropical Turquoise 34433T1C",
+    "productName": "FAZER Mk2 FZ02-L 1957 Chevy® Bel Air Coupe Tropical Turquoise 34433T1C",
     "modelName": "FAZER Mk2 FZ02-L 1957 Chevy® Bel Air Coupe Tropical Turquoise 34433T1C",
     "scale": "1/10",
     "productDec": "Step back into classic American muscle with the Kyosho Chevrolet Bel Air 2-Door RC Touring Car, a perfect blend of vintage styling and modern RC performance. Inspired by the iconic 1950s Bel Air—famous for its bold tail fins and elegant design—this model delivers true scale realism with dynamic driving capability.\n\nCrafted under Kyosho’s “Ultra Scale Body” concept, every detail of the Bel Air is beautifully replicated, from its signature curves to its chrome-inspired accents. Paired with the reliable FAZER Mk2 (FZ02) chassis, this RC car offers a well-balanced and responsive driving experience, ideal for both casual cruising and spirited on-road runs.\n\nThe shaft-driven full-time 4WD system ensures excellent traction and stability, while the symmetrical chassis layout enhances control and cornering precision. Equipped with front and rear gear differentials, oil-filled shocks, and full ball bearings, the car delivers smooth performance with reduced drivetrain loss and improved durability.\n\nBuilt for convenience, the Readyset package comes fully assembled with a factory-finished body, so you can get started quickly with minimal setup. Its lightweight yet rigid construction, reinforced with upgraded materials and stiffeners, ensures long-lasting performance and easy maintenance.\n\nDesigned with flexibility in mind, the chassis supports both 190mm and 200mm body widths, and the wheelbase can be extended for further customization. Whether you’re displaying it or driving it, this model offers a premium RC experience.\n\nKey Features:\nHighly detailed “Ultra Scale” Chevrolet Bel Air body\nFAZER Mk2 (FZ02) shaft-driven 4WD chassis\nFully assembled Readyset for quick start\nOil-filled shocks for smooth handling\nFull ball bearings for efficient drivetrain\nDurable gear differentials (front & rear)\nKS202W steering servo included",
@@ -758,7 +758,7 @@
   {
     "productId": 43,
     "brandName": "Kyosho",
-    "productName": "Kyosho 1:10 Scale 4WD FAZER Mk2 FZ02-L 1971 Mercedes-Benz 300 SEL 6.3 Beige Gray 34436T1",
+    "productName": "FAZER Mk2 FZ02-L 1971 Mercedes-Benz 300 SEL 6.3 Beige Gray 34436T1",
     "modelName": "FAZER Mk2 FZ02-L 1971 Mercedes-Benz 300 SEL 6.3 Beige Gray 34436T1",
     "scale": "1/11",
     "productDec": "Experience timeless luxury and performance with the Kyosho 1971 Mercedes-Benz 300 SEL 6.3 RC Touring Car, a stunning blend of classic automotive heritage and modern RC engineering. Known as the “Super Sedan,” the original car earned its reputation with powerful acceleration and refined styling—now beautifully recreated in this ultra-detailed RC model.\n\nBuilt on a symmetrical chassis platform, this touring car delivers excellent front-to-rear balance for precise handling and responsive control. The shaft-driven full-time 4WD system, combined with front and rear gear differentials, oil-filled shocks, and full ball bearings, ensures smooth operation and long-lasting durability across various surfaces.\n\nThe highlight of this model is its ultra-scale body design, faithfully replicating the iconic Mercedes-Benz look. From the signature chrome grille with the Three-Pointed Star emblem to the detailed twin headlamps and rear light clusters, every element reflects premium craftsmanship. The elegant Beige Gray finish, along with factory-applied decals, gives the model a refined and authentic appearance.\n\nFor enhanced realism, the body supports optional LED light units, allowing you to upgrade it with functional lighting. Vintage-style tires and rally wheels with caps perfectly complement the classic aesthetic, making it ideal for both display and driving.\n\nThe Readyset package comes fully assembled, minimizing setup time so you can get started quickly. Its flexible chassis design supports multiple body sizes and adjustable wheelbase options, making it versatile for customization.\n\nKey Features:\nUltra-scale 1971 Mercedes-Benz 300 SEL 6.3 body\nShaft-driven full-time 4WD (FZ02L chassis)\nBalanced chassis for improved control\nFull ball bearings for reduced drivetrain loss\nOil-filled shocks for smoother handling\nLED-ready light buckets for added realism\nFactory-finished body with premium detailing\nSpecifications:\nLength: 496 mm\nWidth: 206 mm\nHeight: 142 mm\nWheelbase: 274 mm\nWeight: Approx. 1650 g\nMotor: G14L\nGear Ratio: 6.54:1\nRadio System: Syncro KT-231P+\nWhat You’ll Need:",
@@ -776,7 +776,7 @@
   {
     "productId": 44,
     "brandName": "Kyosho",
-    "productName": "Kyosho 1:10 Scale 4WD FAZER Mk2 FZ02-R Series 1971 DATSUN RALLY 34482T1",
+    "productName": "FAZER Mk2 FZ02-R Series 1971 DATSUN RALLY 34482T1",
     "modelName": "FAZER Mk2 FZ02-R Series 1971 DATSUN RALLY 34482T1",
     "scale": "1/10",
     "productDec": "Experience true rally excitement with the Kyosho FAZER Mk2 FZ02-R 1/10 EP Rally Car, engineered to deliver outstanding performance across both tarmac and rough terrain. Designed for versatility and control, this model combines rally-inspired durability with Kyosho’s trusted engineering.\n\nAt the heart of this machine is a shaft-driven 4WD system that ensures stable handling and consistent traction on loose surfaces. The long-stroke rally suspension with oil-filled shocks absorbs bumps effortlessly, while the specially designed front bumper and skid protection add extra durability for off-road challenges. A protective chassis cover keeps internal components safe from dust and debris, making it ideal for real rally conditions.\n\nThe highlight of this model is the ultra-scale 1971 Datsun 240Z Safari Rally body, crafted with impressive attention to detail. Its authentic design captures the spirit of classic rally racing, while optional LED compatibility allows you to enhance realism even further.\n\nThis Readyset package comes fully assembled with a pistol-grip transmitter, making it easy to get started. Simply add your batteries and charger, and you’re ready to hit the road or dirt track. The inclusion of multiple wheel hub offsets allows you to adjust the stance to match different body styles, adding flexibility for customization.\n\nBuilt with sealed gearboxes and front/rear gear differentials, the drivetrain ensures reliable performance even in dusty or rugged environments. Full ball bearings improve efficiency and reduce wear, while hex screws make maintenance quick and hassle-free.\n\nKey Features:\nShaft-driven 4WD for superior control\nLong-stroke rally suspension with oil shocks\nUltra-scale 1971 Datsun 240Z Safari Rally body\nProtective chassis cover for all-terrain driving\nFully assembled Readyset with transmitter\nAdjustable wheel hub offsets for customization\nCompatible with FAZER Mk2 upgrade parts\nSpecifications:\nLength: 473 mm\nWidth: 194 mm\nHeight: 142 mm\nWheelbase: 260 mm\nWeight: 1650 g\nMotor: G14L\nGear Ratio: 6.54:1\nTires: 70 × 28 mm\nRadio System: Syncro KT-231P+",
@@ -794,7 +794,7 @@
   {
     "productId": 45,
     "brandName": "Kyosho",
-    "productName": "Kyosho 1:10 Scale 4WD FAZER Mk2 FZ02-R Series FZ02-R 2002 Subaru Impreza",
+    "productName": "FAZER Mk2 FZ02-R Series FZ02-R 2002 Subaru Impreza",
     "modelName": "FAZER Mk2 FZ02-R Series FZ02-R 2002 Subaru Impreza",
     "scale": "1/10",
     "productDec": "Relive the golden era of rally racing with the Kyosho Fazer Mk2 Subaru Impreza STI WRC 1/10 RTR, a beautifully crafted RC model inspired by Subaru’s legendary dominance in the 2002 World Rally Championship. Driven by icons like Petter Solberg and Tommi Mäkinen, the Impreza WRC became a symbol of precision, power, and rally excellence—and this model captures that spirit perfectly.\n\nBuilt on the proven Fazer Mk2 chassis, this Ready-to-Run RC car offers a perfect balance of performance and control. The shaft-driven 4WD system delivers excellent traction on both smooth and loose surfaces, while the integrated slipper clutch helps manage power efficiently across the drivetrain for smoother acceleration and improved handling.\n\nDesigned for durability and consistency, the model features front and rear gear differentials along with full ball bearings that reduce friction and enhance overall efficiency. Whether you're racing on asphalt or tackling light off-road terrain, this setup ensures reliable and responsive performance.\n\nThe attention to detail in the body design truly stands out. The Subaru Impreza STI WRC shell is recreated with high accuracy, reflecting the iconic rally livery and aggressive stance that made it a fan favorite worldwide. It’s not just an RC car—it’s a collector’s piece with real driving capability.\n\nFlexibility is another strong point of the Fazer Mk2 platform. It supports both 190mm and 200mm touring bodies, while adjustable wheel offsets allow you to fine-tune the stance. With optional parts, the wheelbase can also be extended, giving you more room for customization and upgrades.\n\nKey Features:\nOfficially inspired Subaru Impreza STI WRC design\nShaft-driven 4WD for stable rally performance\nSlipper clutch for smooth power distribution\nFull ball bearings for efficient drivetrain\nAdjustable wheel offsets for customization\nCompatible with multiple touring body sizes",
@@ -812,7 +812,7 @@
   {
     "productId": 46,
     "brandName": "FMS",
-    "productName": "FMS 1:18 FCX18 Toyota Land Cruiser 80 V2 RTR RC Crawler",
+    "productName": "FCX18 Toyota Land Cruiser 80 V2 RTR RC Crawler",
     "modelName": "FCX18 Toyota Land Cruiser 80 V2 RTR RC Crawler",
     "scale": "1/18",
     "productDec": "Take on any terrain with confidence using this 1/18 Scale RC Rock Crawler, designed for balanced performance, durability, and realistic off-road capability. Compact in size yet powerful in function, it’s perfect for both beginners and hobbyists looking for long runtime and reliable control.\n\nBuilt with an optimized chassis layout, this crawler offers excellent stability thanks to its well-proportioned wheelbase and ground clearance. The high approach and departure angles allow it to easily tackle obstacles like rocks, slopes, and uneven trails without getting stuck.\n\nPowered by a reliable 180 brushed motor, it delivers smooth and controlled crawling performance—ideal for technical driving rather than high-speed runs. The included 7.4V 900mAh LiPo battery provides an impressive runtime of up to 45 minutes, ensuring longer sessions without frequent recharging.\n\nFor added realism and functionality, the model features an advanced LED lighting system with 12 lamp beads and multiple control modes, making night driving more immersive and visually striking.\n\nThe responsive MG41-BS transmitter, paired with the R4A1 receiver, ensures stable control within a range of approximately 30 meters, making it suitable for indoor and outdoor adventures.\n\nKey Highlights:\nCompact 1/18 scale with realistic crawler design\nHigh ground clearance for obstacle handling\nLong runtime up to 45 minutes\nMulti-mode LED lighting system\nStable remote control performance\nSpecifications:\nScale: 1/18\nDimensions: 282 × 126 × 136 mm\nWheelbase: 160 mm\nGround Clearance: 35 mm\nApproach Angle: 61°\nDeparture Angle: 35°\nMotor: 180 Brushed\nBattery: 7.4V 900mAh LiPo\nTires: 56 × 19.2 mm\nControl Range: ~30 meters",
