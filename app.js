@@ -102,7 +102,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const resp = await fetch(API_URL, { signal: controller.signal });
             clearTimeout(fetchTimeout);
-            const data = await resp.json();
+            const rawData = await resp.json();
+
+            // ── Normalise rate: products.json stores rate as string (e.g. "2,199.00" or "25500").
+            //    Strip commas and parse to float once here so every filter/sort/display is numeric. ──
+            const data = rawData.map(p => ({
+                ...p,
+                rate: parseFloat(String(p.rate).replace(/,/g, '')) || 0
+            }));
 
             // ── Layer 1: OOS rule — optionally show them but label them OOS ──
             const products = data;
