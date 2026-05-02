@@ -30,6 +30,14 @@
     <priority>0.7</priority>
   </url>
 
+  <!-- Shipping Policy Page -->
+  <url>
+    <loc>https://rcanddiecast.com/shipping-policy/</loc>
+    <lastmod>2026-05-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
   <!-- Blog Post: What is ESC in RC Cars (FEATURED) -->
   <url>
     <loc>https://rcanddiecast.com/blog/what-is-esc-in-rc-cars</loc>
